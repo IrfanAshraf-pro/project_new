@@ -1,44 +1,84 @@
-import { ToastContainer } from "react-toastify";
-import { Login } from "./features/Pages";
-// import { useEffect } from "react";
-// import { themeChange } from "theme-change";
-
+// import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
+import React, { lazy, useEffect } from "react";
+import { themeChange } from "theme-change";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 // importing toast styles
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
+
+// Importing pages
+const Layout = lazy(() => import("./features/Containers/Layout"));
+const Login = lazy(() => import("./features/Pages/Login"));
 function App() {
-  // const themeValues = ["customTheme","cupcake","dark","dracula","night","synthwave","aqua","luxury","lofi"];
-  // useEffect(() => {
-  //   themeChange(false);
-  // });
+  const { user } = useSelector((state) => state.auth);
+  const themeValues = [
+    "customTheme",
+    "cupcake",
+    "dark",
+    "dracula",
+    "night",
+    "synthwave",
+    "aqua",
+    "luxury",
+    "lofi",
+  ];
+  useEffect(() => {
+    themeChange(false);
+  });
   return (
     <div className="relative">
-      {/* <select className="text-primary bg-red-300" data-choose-theme>
-        <option value="">Default Value</option>
-        {themeValues.map((value) => (
-          <option
-            className="text-primary"
-            key={value.toLocaleLowerCase()}
-            value={value.toLocaleLowerCase()}
-          >
-            {value}
-          </option>
-        ))}
-      </select> */}
-      <Login />
-      <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-      />
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+
+          {/* Place new routes over this */}
+          <Route path="/app/*" element={<Layout />} />
+
+          <Route
+            path="*"
+            element={
+              <Navigate to={user.email ? "/app/welcome" : "/login"} replace />
+            }
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
 
 export default App;
+// {/* <select className="text-primary bg-red-300" data-choose-theme>
+//   <option value="">Default Value</option>
+//   {themeValues.map((value) => (
+//     <option
+//       className="text-primary"
+//       key={value.toLocaleLowerCase()}
+//       value={value.toLocaleLowerCase()}
+//     >
+//       {value}
+//     </option>
+//   ))}
+// </select> */}
+//
+{
+  /* <Login /> */
+}
+{
+  /* <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      /> */
+}

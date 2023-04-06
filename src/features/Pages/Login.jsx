@@ -38,6 +38,7 @@ const Login = () => {
     data && setTimeout(()=>setIsLoading(false),500)
     if(typeof data==='object'){
     console.log(data);
+    window.location.href = '/app/welcome'
     }
     else{
       toast.warning(data,{
