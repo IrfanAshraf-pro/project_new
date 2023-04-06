@@ -1,12 +1,12 @@
 import { Login } from "./features/Pages";
-import { useEffect } from "react";
-import { themeChange } from "theme-change";
+// import { useEffect } from "react";
+// import { themeChange } from "theme-change";
 
 function App() {
-  const themeValues = ["customTheme","cupcake","dark","dracula","night","synthwave","aqua","luxury","lofi"];
-  useEffect(() => {
-    themeChange(false);
-  });
+  // const themeValues = ["customTheme","cupcake","dark","dracula","night","synthwave","aqua","luxury","lofi"];
+  // useEffect(() => {
+  //   themeChange(false);
+  // });
   return (
     <div>
       {/* <select className="text-primary bg-red-300" data-choose-theme>
