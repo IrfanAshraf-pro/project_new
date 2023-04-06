@@ -1,40 +1,72 @@
+import { useFormik } from "formik";
+import * as Yup from "yup"
 import React from "react";
+import {toast} from 'react-toastify'
+// importing background image for login page
 import Background from "../../assests/bg-login.png";
-
+var backgroundStyles = {
+  backgroundImage: `url(${Background})`,
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+};
 const Login = () => {
-  var backgroundStyles = {
-    backgroundImage: `url(${Background})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-  };
+  const formik=useFormik({
+    initialValues:{
+      email:"",
+      password:""
+    },
+    validationSchema:Yup.object({
+      email:Yup.string().email("Invalid email address").required("Email is Required"),
+      password:Yup.string().min(4,"Password must be atleast 4 characters").required("Password is Required")
+    }),
+    onSubmit:(values)=>{
+      submitHandler(values)
+    }
+  })
+  const submitHandler=(values)=>{
+    toast.success(`Email ${values.email} password is ${values.password}`,{
+      draggable: true,
+      theme:"colored"
+    })
+  }
   return (
     <div className="h-screen w-full flex items-center justify-center" style={backgroundStyles}>
-      <div className="card text-center bg-base-100 p-3 py-6 max-w-md bg-opacity-90">
+      <div className="card text-center bg-base-100 p-3 py-6 max-w-md bg-opacity-90 cshadow">
         <div className="font-bold font-uppercase text-accent text-4xl md:text-5xl mx-auto mt-4">
           Welcome to House of Tutors
         </div>
-        <form className="my-6">
+        <form className="my-6" onSubmit={formik.handleSubmit}>
           <div className="form-control w-full max-w-xs mx-auto">
             <input
               type="text"
               name="email"
               placeholder="Enter your Email"
               className="input w-full max-w-xs input-accent text-gray-600"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
             <label className="label">
-              <span className="label-text text-error">Bottom Left label</span>
+              <span className="label-text text-error">
+                {formik.touched.email && formik.errors.email? formik.errors.email:""}
+              </span>
             </label>
           </div>
           <div className="form-control w-full max-w-xs mx-auto my-2">
             <input
-              type="text"
+              type="password"
               name="password"
               placeholder="Enter your Password"
               className="input w-full max-w-xs input-accent text-gray-600"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
             <label className="label">
-              <span className="label-text text-error">Bottom Left label</span>
+            <span className="label-text text-error">
+                {formik.touched.password && formik.errors.password? formik.errors.password:""}
+              </span>
             </label>
           </div>
           <button className="btn btn-wide btn-accent text-primary text-lg" type="submit">Login</button>
