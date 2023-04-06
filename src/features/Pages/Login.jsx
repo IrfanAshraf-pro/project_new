@@ -1,9 +1,16 @@
 import { useFormik } from "formik";
 import * as Yup from "yup"
-import React from "react";
+import React,{useState} from "react";
 import {toast} from 'react-toastify'
+
 // importing background image for login page
 import Background from "../../assests/bg-login.png";
+
+// importing Repositories
+import { RepositoryFactory } from "../Repository/RepositoryFactory";
+import { Loader } from "../Components";
+var login = RepositoryFactory.get("login");
+
 var backgroundStyles = {
   backgroundImage: `url(${Background})`,
   backgroundPosition: "center",
@@ -11,6 +18,7 @@ var backgroundStyles = {
   backgroundRepeat: "no-repeat",
 };
 const Login = () => {
+  const [isLoading,setIsLoading]=useState(false)
   const formik=useFormik({
     initialValues:{
       email:"",
@@ -24,13 +32,23 @@ const Login = () => {
       submitHandler(values)
     }
   })
-  const submitHandler=(values)=>{
-    toast.success(`Email ${values.email} password is ${values.password}`,{
-      draggable: true,
-      theme:"colored"
-    })
+  const submitHandler=async(values)=>{
+    setIsLoading(true)
+    let {data}=await login.loginUser(values.email,values.password)
+    data && setTimeout(()=>setIsLoading(false),500)
+    if(typeof data==='object'){
+    console.log(data);
+    }
+    else{
+      toast.warning(data,{
+        theme:"colored"
+      })
+    }
+    
   }
   return (
+    <>
+    {isLoading && <Loader/>}
     <div className="h-screen w-full flex items-center justify-center" style={backgroundStyles}>
       <div className="card text-center bg-base-100 p-3 py-6 max-w-md bg-opacity-90 cshadow">
         <div className="font-bold font-uppercase text-accent text-4xl md:text-5xl mx-auto mt-4">
@@ -79,6 +97,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

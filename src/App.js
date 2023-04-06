@@ -11,7 +11,7 @@ function App() {
   //   themeChange(false);
   // });
   return (
-    <>
+    <div className="relative">
       {/* <select className="text-primary bg-red-300" data-choose-theme>
         <option value="">Default Value</option>
         {themeValues.map((value) => (
@@ -37,7 +37,7 @@ function App() {
       pauseOnHover
       theme="light"
       />
-    </>
+    </div>
   );
 }
 
