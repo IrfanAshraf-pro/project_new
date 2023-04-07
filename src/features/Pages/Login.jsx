@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import React,{useState} from "react";
 import {toast} from 'react-toastify'
-
+import { useNavigate,NavLink } from "react-router-dom";
 // importing background image for login page
 import Background from "../../assests/bg-login.png";
 
@@ -19,6 +19,7 @@ var backgroundStyles = {
 };
 const Login = () => {
   const [isLoading,setIsLoading]=useState(false)
+  const navigate=useNavigate()
   const formik=useFormik({
     initialValues:{
       email:"",
@@ -38,7 +39,7 @@ const Login = () => {
     data && setTimeout(()=>setIsLoading(false),500)
     if(typeof data==='object'){
     console.log(data);
-    window.location.href = '/app/welcome'
+    navigate('/app/welcome')
     }
     else{
       toast.warning(data,{
@@ -90,14 +91,15 @@ const Login = () => {
           </div>
           <button className="btn btn-wide btn-accent text-primary text-lg" type="submit">Login</button>
           <div className="w-full max-w-xs mx-auto mt-4 text-secondary text-lg md:text-xl">
-            Already have an account? 
-            <span className="ml-2 text-accent font-bold text-xl md:text-2xl">
-              SignUp
+            Don't have an account? 
+            <span className="ml-2 text-accent font-bold text-xl md:text-2xl hover:underline">
+             <NavLink to='/signup'>SignUp</NavLink>
             </span>
           </div>
         </form>
       </div>
     </div>
+    
     </>
   );
 };
