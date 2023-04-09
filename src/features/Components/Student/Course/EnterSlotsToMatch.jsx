@@ -1,5 +1,9 @@
 import React,{useState} from "react";
-const EnterSlotsToMatch = ({noOfSlots,setnoOfSlots,handleSlotSubmit}) => {
+const EnterSlotsToMatch = ({noOfSlots,setnoOfSlots,handleSlotSubmit,setShowTutorModal}) => {
+  const onClick=()=>{
+    handleSlotSubmit()
+    setShowTutorModal(true)
+  }
   
   return (
     <div>
@@ -44,9 +48,17 @@ const EnterSlotsToMatch = ({noOfSlots,setnoOfSlots,handleSlotSubmit}) => {
               >
                 5
               </option>
+              <option
+                value={10}
+                className="p-1 py-2 bg-gray-100 hover:bg-gray-300"
+              >
+                10
+              </option>
             </select>
            
-            <label htmlFor="slotsModal" type="submit" className="btn btn-accent mt-2 group-hover:bg-base-100 group-hover:text-accent btn-sm md:btn-md" onClick={handleSlotSubmit}>Find Tutor</label>
+            <label htmlFor="slotsModal" type="submit" className="btn btn-accent mt-2 group btn-sm md:btn-md" onClick={onClick}>
+            Find Tutor
+            </label>
           </div>
         </label>
       </label>

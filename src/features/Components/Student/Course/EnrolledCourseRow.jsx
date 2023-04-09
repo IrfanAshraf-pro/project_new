@@ -1,12 +1,16 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import EnterSlotsToMatch from "./EnterSlotsToMatch";
 
-const EnrolledCourseRow = ({ course,handleSlotRequest }) => {
-  const [noOfSlots, setnoOfSlots] = useState(1)
-  const handleSlotSubmit=()=>{
+const EnrolledCourseRow = ({
+  course,
+  handleSlotRequest,
+  setShowTutorModal,
+}) => {
+  const [noOfSlots, setnoOfSlots] = useState(1);
+  const handleSlotSubmit = () => {
     console.log(noOfSlots);
-    handleSlotRequest(noOfSlots,course.courseid)
-  }
+    handleSlotRequest(noOfSlots, course.courseid);
+  };
 
   return (
     <>
@@ -23,7 +27,13 @@ const EnrolledCourseRow = ({ course,handleSlotRequest }) => {
           </label>
         </div>
       </div>
-      <EnterSlotsToMatch course={course} noOfSlots={noOfSlots} setnoOfSlots={setnoOfSlots } handleSlotSubmit={handleSlotSubmit}/>
+      <EnterSlotsToMatch
+        course={course}
+        noOfSlots={noOfSlots}
+        setnoOfSlots={setnoOfSlots}
+        handleSlotSubmit={handleSlotSubmit}
+        setShowTutorModal={setShowTutorModal}
+      />
     </>
   );
 };

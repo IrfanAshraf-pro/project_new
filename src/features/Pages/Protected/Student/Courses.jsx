@@ -9,16 +9,21 @@ import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
 import {
   AlreadyEnlisted,
   EnlistedSuccessfully,
+  FindTutorNoSchedule,
+  FindTutorNotAvailable,
   StudentDoesNotExist,
 } from "../../../Utils/MatchTypes";
 import { toast } from "react-toastify";
+import TutorsModal from "../../../Components/Student/Course/TutorsModal";
 var course = RepositoryFactory.get("course");
 const Courses = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [tutors, setTutors] = useState([])
   const [isLoading, setIsLoading] = useState(false);
+  const [showTutorModal, setShowTutorModal] = useState(false)
   // getting student enrolled courses
   const getEnrolledCourses = async () => {
     setIsLoading(true);
@@ -59,6 +64,22 @@ const Courses = () => {
   // getting slots entered by user
   const handleSlotRequest=async(slot,courseid)=>{
       let {data}=await course.findTutor(user.email,courseid,slot)
+      if(typeof data=='object' && data.length>0){
+        setTutors(data)
+      }else if(typeof data=='object' && data.length===0){
+        toast.info(FindTutorNotAvailable,{
+          theme:"colored"
+        })
+      }
+      else if(data.match(FindTutorNotAvailable)){
+        toast.info(data,{
+          theme:"colored"
+        })
+      }else if(data.match(FindTutorNoSchedule)){
+        toast.warning(data,{
+          theme:'colored'
+        })
+      }
       console.log('tutors are :',data);
   }
   useEffect(() => {
@@ -89,10 +110,12 @@ const Courses = () => {
               key={course.courseid}
               course={course}
               handleSlotRequest={handleSlotRequest}
+              setShowTutorModal={setShowTutorModal}
             ></EnrolledCourseRow>
           ))}
         </div>
       </div>
+      <TutorsModal showTutorModal={showTutorModal} setShowTutorModal={setShowTutorModal} tutors={tutors}/>
     </>
   );
 };
