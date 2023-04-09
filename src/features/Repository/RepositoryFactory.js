@@ -1,7 +1,9 @@
 import LoginRepository from "./LoginRepository";
+import CoursesRepository from "./CoursesRepository";
 
 const repositories={
-    login:LoginRepository
+    login:LoginRepository,
+    course:CoursesRepository
 }
 
 export const RepositoryFactory={

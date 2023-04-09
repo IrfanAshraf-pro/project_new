@@ -30,6 +30,21 @@ const routes = [
         path:'/app/profile',
         icon:<BoltIcon className={iconClasses}/>,
         name:'Profile'
+    },
+    {
+      path:'/app/schedule',
+      icon:<DocumentDuplicateIcon className={iconClasses}/>,
+      name:'Schedule',
+    },
+    {
+      path:'/app/studentcourses',
+      icon:<Cog6ToothIcon className={iconClasses}/>,
+      name:'Courses',
+    },
+    {
+      path:'/app/studentClasses',
+      icon:<WalletIcon className={iconClasses}/>,
+      name:'Today Classes'
     }
 ]
 
