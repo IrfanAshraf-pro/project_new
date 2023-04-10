@@ -72,7 +72,7 @@ module.exports = {
       "dark","dracula","night","synthwave","aqua","luxury","lofi","cupcake"
     ],
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),require('@tailwindcss/forms')],
 };
 
 // require("@tailwindcss/forms")

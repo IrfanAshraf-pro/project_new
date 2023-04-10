@@ -38,7 +38,7 @@ function RightSidebar(){
                             {/* Loading drawer body according to different drawer type */}
                             {
                                 {
-                                        [RIGHT_DRAWER_TYPES.NOTIFICATION] : <NotificationBodyRightDrawer {...extraObject} closeRightDrawer={close}/>,
+                                        [RIGHT_DRAWER_TYPES.NOTIFICATION] : <NotificationBodyRightDrawer  closeRightDrawer={close}/>,
                                         [RIGHT_DRAWER_TYPES.DEFAULT] : <div></div>
                                 }[bodyType]
                             }

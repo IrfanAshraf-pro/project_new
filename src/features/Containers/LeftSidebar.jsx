@@ -1,10 +1,21 @@
+import React, {useState, useEffect } from 'react';
 import routes from '../Routes/StudentRoutes'
+import tutorRoutes from '../Routes/TutorRoutes';
 import { NavLink,  Routes, Link , useLocation} from 'react-router-dom'
 import SidebarSubmenu from './SidebarSubmenu';
+import {useSelector} from 'react-redux'
 
 function LeftSidebar(){
+    const {role}=useSelector(state=>state.auth)
     const location = useLocation();
-
+    const [Routes,setRoutes]=useState(routes)
+    useEffect(()=>{
+        if(role==="Student"){
+            setRoutes(routes)
+        }else if(role==="Tutor"){
+            setRoutes(tutorRoutes)
+        }
+    },[])
     return(
         <div className="drawer-side ">
             <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label> 
@@ -13,7 +24,7 @@ function LeftSidebar(){
                     
                     <Link to={'/app/welcome'}><img className="mask mask-squircle w-10" src="/logo192.png" alt="DashWind Logo"/>House of Tutor</Link> </li>
                 {
-                    routes.map((route, k) => {
+                    Routes.map((route, k) => {
                         return(
                             <li className="" key={k}>
                                 {

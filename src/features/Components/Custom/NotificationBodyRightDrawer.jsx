@@ -1,15 +1,22 @@
-function NotificationBodyRightDrawer(){
-    return(
-        <>
-             {
-                [...Array(15)].map((_, i) => {
-                    return <div key={i} className={"grid mt-3 card bg-base-200 rounded-box p-3" + (i < 5 ? " bg-blue-100" : "")}>
-                            {i % 2 === 0 ? `Your sales has increased by 30% yesterday` : `Total likes for instagram post - New launch this week,  has crossed 100k `}
-                        </div> 
-                })
-            }
-        </>
-    )
+import { useSelector } from "react-redux";
+import NotificationRow from "./NotificationRow";
+function NotificationBodyRightDrawer() {
+  const { notifications,notificationlength,isTutor } = useSelector((state) => state.notification);
+  const {role}=useSelector(state=>state.auth)
+  return (
+    <div className="">
+      <p>hello</p>
+      {
+        isTutor ?
+        (
+          notificationlength>0 ? notifications.map((notification,index) => (
+               <NotificationRow notification={notification} key={index}/>
+             )):<p>No Notifications</p>
+        ):
+        <p>No notifications</p>
+      }
+    </div>
+  );
 }
 
-export default NotificationBodyRightDrawer
+export default NotificationBodyRightDrawer;

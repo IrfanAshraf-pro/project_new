@@ -11,6 +11,9 @@ import Schedule from '../Pages/Protected/Schedule'
 import Courses from '../Pages/Protected/Student/Courses'
 import TodayClasses from '../Pages/Protected/Student/TodayClasses'
 
+// Tutoa imports
+import TutorTodayClasses from '../Pages/Protected/Tutor/TutorTodayClasses'
+import TutorCourses from '../Pages/Protected/Tutor/TutorCourses'
 
 
 const routes = [
@@ -38,8 +41,17 @@ const routes = [
     path:'/studentClasses',//url
     component:TodayClasses
   },
+  // tutor routes
   {
-    path: '/404',
+    path:'/tutorClasses',
+    component:TutorTodayClasses
+  },
+  {
+    path:'/tutorcourses',
+    component:TutorCourses
+  },
+  {
+    path: '/*',
     component: Page404,
   },
   

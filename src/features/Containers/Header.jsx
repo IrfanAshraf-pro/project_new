@@ -11,7 +11,9 @@ import { NavLink, Routes, Link, useNavigate } from "react-router-dom";
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { noOfNotifications, pageTitle } = useSelector((state) => state.header);
+  const { pageTitle } = useSelector((state) => state.header);
+  const { notificationlength } = useSelector((state) => state.notification);
+
   const [currentTheme, setCurrentTheme] = useState(
     localStorage.getItem("theme")
   );
@@ -96,9 +98,9 @@ function Header() {
           >
             <div className="indicator">
               <BellIcon className="h-6 w-6" />
-              {noOfNotifications > 0 ? (
+              {notificationlength > 0 ? (
                 <span className="indicator-item badge badge-secondary badge-sm">
-                  {noOfNotifications}
+                  {notificationlength}
                 </span>
               ) : null}
             </div>

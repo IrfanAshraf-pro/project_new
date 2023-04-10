@@ -1,8 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    modal:false,
-    notifications:[]
+    isTutor:false,
+    notifications:[],
+    notificationlength:0
 }
 
 const notificationSlice = createSlice({
@@ -14,9 +15,16 @@ const notificationSlice = createSlice({
         },
         setNotifications:(state,action)=>{
             state.notifications=action.payload.notifications
+            state.notificationlength=action.payload.notifications.length
+        },
+        setIsTutor:(state)=>{
+            state.isTutor=false
+        },
+        setTutor:(state)=>{
+            state.isTutor=true
         }
     }
 })
 
 export default notificationSlice.reducer
-export const {setModal,setNotifications}=notificationSlice.actions
+export const {setModal,setNotifications,setIsTutor,setTutor}=notificationSlice.actions

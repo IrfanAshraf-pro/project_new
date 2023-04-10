@@ -1,7 +1,13 @@
-import React from "react";
+import React,{useEffect} from "react";
+import TutorModalRow from "./TutorModalRow";
 
-const TutorsModal = ({ tutors, showTutorModal, setShowTutorModal }) => {
-  console.log("tutor modal", showTutorModal);
+const TutorsModal = ({ tutors, showTutorModal, setShowTutorModal,selectedCourse }) => {
+  useEffect(() => {
+    return () => {
+        setShowTutorModal(false)
+    }
+  }, [])
+  
   return (
     <div>
       <input
@@ -12,24 +18,24 @@ const TutorsModal = ({ tutors, showTutorModal, setShowTutorModal }) => {
         className="modal-toggle"
       />
       {/* <input type="checkbox" id="tutorsModal" className="modal-toggle" /> */}
-      <label
+      <div
         className="modal modal-bottom sm:modal-middle"
-        htmlFor="tutorsModal"
       >
-        <div className="modal-box">
+        <div className="modal-box relative">
+        <label htmlFor="tutorsModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
           <h3 className="font-bold text-lg">
             Tutors Matched
           </h3>
-          <div className="my-4">
-
+          <div className="my-3 flex flex-col items-center h-72 md:h-60 overflow-y-scroll p-2 gap-2 md:px-4">
+            {
+                tutors.map(tutor=>(
+                    <TutorModalRow tutor={tutor} selectedCourse={selectedCourse} key={tutor.email} setShowTutorModal={setShowTutorModal}/>
+                ))
+            }
           </div>
-          <div className="modal-action">
-            <label htmlFor="tutorsModal" className="btn">
-              Yay!
-            </label>
-          </div>
+          
         </div>
-      </label>
+      </div>
     </div>
   );
 };

@@ -2,33 +2,49 @@ import PageContent from "./PageContent";
 import LeftSidebar from "./LeftSidebar";
 import { useSelector, useDispatch } from "react-redux";
 import RightSidebar from "./RightSidebar";
-import { useEffect } from "react";
-import { removeNotificationMessage } from "../../app/Slices/Dashboard/HeaderSlice";
-import { toast,ToastContainer } from "react-toastify";
+import { Suspense, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import ModalLayout from "./ModalLayout";
+import {
+  setNotifications,
+  setIsTutor,
+  setTutor,
+} from "../../app/Slices/NotificationSlice";
+import { RepositoryFactory } from "../Repository/RepositoryFactory";
+import SuspenseContent from "./SuspenseContent";
+
+const tutorapi = RepositoryFactory.get("tutor");
 
 function Layout() {
   const dispatch = useDispatch();
-  const { newNotificationMessage, newNotificationStatus } = useSelector(
-    (state) => state.header
-  );
+  const { role, user } = useSelector((state) => state.auth);
+  let interval = "";
+  // getting notifications
+  const gettingNotifications = async () => {
+    const { data } = await tutorapi.GetStudentRequests(user.email);
+    dispatch(setNotifications({ notifications: data }));
+    console.log("new notifications are :", data);
+  };
+  // const gettingTutorNotifications = () => {
+  //   notificationInterval=setInterval(gettingNotifications, 5000);
+  //   dispatch(setTutor())
+  // };
+  const dispatchNotTutor = () => {
+    dispatch(setIsTutor());
+  };
 
   useEffect(() => {
-    if (newNotificationMessage !== "") {
-      if (newNotificationStatus === 1)
-        toast.success(newNotificationMessage, {
-          theme: "colored",
-        });
-      if (newNotificationStatus === 0)
-        toast.error(newNotificationMessage, {
-          theme: "colored",
-        });
-      dispatch(removeNotificationMessage());
+    if (role === "Tutor") {
+      interval = setInterval(gettingNotifications, 5000);
+      dispatch(setTutor());
+    } else {
+      dispatchNotTutor();
     }
-  }, [newNotificationMessage]);
+    return () => clearInterval(interval);
+  }, [role, user.email]);
 
   return (
-    <>
+    <Suspense fallback={SuspenseContent}>
       {/* Left drawer - containing page content and side bar (always open) */}
       <div className="drawer drawer-mobile">
         <input
@@ -59,7 +75,7 @@ function Layout() {
       />
       {/* Modal layout container */}
       <ModalLayout />
-    </>
+    </Suspense>
   );
 }
 

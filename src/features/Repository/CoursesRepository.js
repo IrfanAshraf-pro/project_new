@@ -5,6 +5,8 @@ const studentEnlisted="student/GetStudentEnlistedCourses"
 const tutorEnlisted="tutor/GetTutorEnlistedCourses"
 const studentAddCourses="student/StudentCourseEnlist"
 const findTutor='student/FindTutor'
+const GetCourseGroup="tutor/GetCourseGroup"
+const SaveCourceGroup="tutor/SaveCourseGroup"
 export default {
     studentEnrolledCourses(email){
         const url=`${studentEnlisted}?semail=${email}`
@@ -16,13 +18,33 @@ export default {
     },
     studentAddCourse(email,courseid){
         const url=`${studentAddCourses}?semail=${email}&cid=${courseid}`
-        console.log(url);
         return Repository.post(url)
     },
     findTutor(email,courseid,noOfSlots){
         const url=`${findTutor}?semail=${email}&cid=${courseid}&noOfSlots=${noOfSlots}`
-        console.log(url);
         return Repository.get(url)
+    },
+    // tutor functions
+    tutorAllCourses(email){
+        const url=`${allcoursesTutor}?email=${email}`
+        return Repository.get(url)
+    },
+    tutorEnrolledCourses(email){
+        const url=`${tutorEnlisted}?email=${email}`
+        return Repository.get(url)
+    },
+    getCourseGroup(email,course){
+        const url=`${GetCourseGroup}?email=${email}&coursename=${course.coursename}&courseid=${course.courseid}`
+        return Repository.get(url)
+    },
+    saveCourseGroup(coursegroup){
+        let data=''
+        coursegroup.map(async(item)=>{
+            const url = `${SaveCourceGroup}`
+            console.log('saving course',url);
+            data=Repository.post(url,item)
+        })
+        return data
     }
 }
 // if (role === 'Student') {
