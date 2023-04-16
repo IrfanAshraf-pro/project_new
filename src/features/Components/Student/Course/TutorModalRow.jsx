@@ -80,6 +80,14 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
       );
     }
   };
+  // const splitCourseGroupe(group){
+  //   const slotString = group.substring(
+  //     0,
+  //     group.length - 1
+  //   );
+  //   const groupArr = slotString.split(",");
+  //   return groupArr
+  // }
 
   return (
     <div className="bg-neutral p-2 rounded-md w-full">
@@ -92,23 +100,33 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
         </span>
       </h5>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-1 md:gap-2 w-[90%] overflow-x-hidden">
-        {slotsShow.map((item, index) => (
-          <label
-            key={index}
-            className="text-secondary flex  items-center justify-start w-[600px]"
-          >
-            <input
-              type="checkbox"
-              id={index}
-              name={index}
-              value={slotsValue[index]}
-              // checked={isChecked}
-              onChange={handleCheckBox}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500 mr-1"
-            />
-            {item}
-          </label>
-        ))}
+        <div className="col">
+          {slotsShow.map((item, index) => (
+            <label
+              key={index}
+              className="text-secondary flex  items-center justify-start w-[600px]"
+            >
+              <input
+                type="checkbox"
+                id={index}
+                name={index}
+                value={slotsValue[index]}
+                // checked={isChecked}
+                onChange={handleCheckBox}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500 mr-1"
+              />
+              {item}
+            </label>
+          ))}
+        </div>
+        <div className="col grid sm:grid-cols-1 md:grid-cols-2 gap-1 md:gap-2">
+          {
+            tutor.coursegroup.map(item=>(
+              
+              <p className="text-base font-bold" key={item}>{item}</p>
+            ))
+          }
+        </div>
       </div>
       <button
         className="btn btn-accent mt-2 group btn-sm md:btn-md"

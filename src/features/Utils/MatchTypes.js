@@ -18,3 +18,8 @@ export const RequestAcceptedSuccessfully="Request Accepted Successfully"
 export const NoRequests="No Requests"
 export const RequestRejectedSuccessfully="Request Rejected Successfully"
 export const NoCourseEnlisted="No Course Enlisted"
+
+// Today classes
+export const NoClasses="No Classes Today"
+export const ClassTaken="Class Taken Successfully"
+export const NoCourseEnrolled="No Course Enrolled"

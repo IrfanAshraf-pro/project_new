@@ -69,6 +69,7 @@ const ScheduleMain = () => {
   // setting page title
   useEffect(() => {
     dispatch(setPageTitle({ title: "Schedule" }));
+    console.log(schedulee,'is schedule');
   }, []);
   return (
     <div className="flex flex-col ">

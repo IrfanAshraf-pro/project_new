@@ -12,9 +12,12 @@ import {
 } from "../../app/Slices/NotificationSlice";
 import { RepositoryFactory } from "../Repository/RepositoryFactory";
 import SuspenseContent from "./SuspenseContent";
+import { ScheduleNotSet } from "../Utils/MatchTypes";
+import { setSchedule } from "../../app/Slices/ScheduleSlice";
+import { toast } from "react-toastify";
 
 const tutorapi = RepositoryFactory.get("tutor");
-
+const schedule=RepositoryFactory.get("schedule");
 function Layout() {
   const dispatch = useDispatch();
   const { role, user } = useSelector((state) => state.auth);
@@ -23,17 +26,43 @@ function Layout() {
   const gettingNotifications = async () => {
     const { data } = await tutorapi.GetStudentRequests(user.email);
     dispatch(setNotifications({ notifications: data }));
-    console.log("new notifications are :", data);
   };
   // const gettingTutorNotifications = () => {
   //   notificationInterval=setInterval(gettingNotifications, 5000);
   //   dispatch(setTutor())
   // };
+
+  
+  //   getting schedule of logged in user
+  const getUserSchedule=async()=>{
+    if(role==="Student"){
+        const {data}=await schedule.getStudentSchedule(user.email)
+        console.log(data);
+        dispatchingSchedule(data)
+        // alert(data)
+    }else{
+        const {data}=await schedule.getTutorSchedule(user.email)
+        console.log(data);
+        dispatchingSchedule(data)
+        // alert(data)
+    }
+}
+const dispatchingSchedule=(data)=>{
+    if(data.length>100){
+        dispatch(setSchedule({ schedule: data }))
+    }else if(data.match(ScheduleNotSet)){
+        toast.warning(data,{
+            theme:'colored'
+        })
+    }
+}
+
   const dispatchNotTutor = () => {
     dispatch(setIsTutor());
   };
 
   useEffect(() => {
+    getUserSchedule()
     if (role === "Tutor") {
       interval = setInterval(gettingNotifications, 5000);
       dispatch(setTutor());

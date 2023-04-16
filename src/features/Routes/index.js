@@ -18,21 +18,22 @@ import TutorCourses from '../Pages/Protected/Tutor/TutorCourses'
 
 const routes = [
   {
+    path:'/schedule',//the url
+    component:Schedule,//view rendered
+  },
+  {
     path: '/dashboard', // the url
     component: Dashboard, // view rendered
   },
-  {
-    path: '/welcome', // the url
-    component: Welcome, // view rendered
-  },
+  // {
+  //   path: '/welcome', // the url
+  //   component: Welcome, // view rendered
+  // },
   {
     path:'/profile', //the url
     component:Profile , //view rendered
   },
-  {
-    path:'/schedule',//the url
-    component:Schedule,//view rendered
-  },
+  
   {
     path:'/studentcourses',//url
     component:Courses //view rendered

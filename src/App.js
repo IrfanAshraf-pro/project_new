@@ -43,7 +43,7 @@ function App() {
           <Route
             path="*"
             element={
-              <Navigate to={user.email ? "/app/welcome" : "/login"} replace />
+              <Navigate to={user.email ? "/app/schedule" : "/login"} replace />
             }
           />
         </Routes>
