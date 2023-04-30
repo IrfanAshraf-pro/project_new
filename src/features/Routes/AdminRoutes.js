@@ -20,7 +20,7 @@ import DocumentDuplicateIcon from '@heroicons/react/24/outline/DocumentDuplicate
 
 const iconClasses = `h-6 w-6`
 const submenuIconClasses = `h-5 w-5`
-const routes = [
+const adminroutes = [
     // {
     //   path: '/app/dashboard',
     //   icon: <Squares2X2Icon className={iconClasses}/>, 
@@ -32,25 +32,15 @@ const routes = [
         name:'Profile'
     },
     {
-      path:'/app/schedule',
-      icon:<DocumentDuplicateIcon className={iconClasses}/>,
-      name:'Schedule',
+        path:'/app/admincourses',
+        icon:<DocumentDuplicateIcon className={iconClasses}/>,
+        name:'Courses'
     },
     {
-      path:'/app/studentcourses',
-      icon:<Cog6ToothIcon className={iconClasses}/>,
-      name:'Courses',
+        path:'/app/admingroupsetting',
+        icon:<KeyIcon className={iconClasses}/>,
+        name:'Course Groups'
     },
-    {
-      path:'/app/studentClasses',
-      icon:<WalletIcon className={iconClasses}/>,
-      name:'Today Classes'
-    },
-    {
-      path:'/app/studentLearning',
-      icon:<WalletIcon className={iconClasses}/>,
-      name:'Learning'
-    }
 ]
 
-export default routes
+export default adminroutes

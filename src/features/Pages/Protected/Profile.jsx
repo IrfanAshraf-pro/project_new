@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { setPageTitle } from "../../../app/Slices/Dashboard/HeaderSlice";
+import ProfileImg from '../../../assests/pp.jpeg'
 const Profile = () => {
   const dispatch = useDispatch();
   const {user}=useSelector(state=>state.auth)
@@ -19,7 +20,7 @@ const Profile = () => {
         <div className="relative w-64 ">
           <img 
             className="w-64 h-64 rounded-full absolute group ring ring-3 p-1 ring-accent"
-            src="https://images.pexels.com/photos/2690323/pexels-photo-2690323.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            src={ProfileImg}
             alt=""
           />
           <div className="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500">

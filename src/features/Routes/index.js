@@ -10,12 +10,14 @@ import Schedule from '../Pages/Protected/Schedule'
 // student imports
 import Courses from '../Pages/Protected/Student/Courses'
 import TodayClasses from '../Pages/Protected/Student/TodayClasses'
-
-// Tutoa imports
+import Learning from '../Pages/Protected/Student/Learning'
+// Tutor imports
 import TutorTodayClasses from '../Pages/Protected/Tutor/TutorTodayClasses'
 import TutorCourses from '../Pages/Protected/Tutor/TutorCourses'
 
-
+// ADMIN IMPORTS
+import CoursesAdmin from '../Pages/Protected/Admin/Courses' 
+import CourseGroup from '../Pages/Protected/Admin/CourseGroup'
 const routes = [
   {
     path:'/schedule',//the url
@@ -42,6 +44,10 @@ const routes = [
     path:'/studentClasses',//url
     component:TodayClasses
   },
+  {
+    path:'/studentLearning',//url
+    component:Learning
+  },
   // tutor routes
   {
     path:'/tutorClasses',
@@ -50,6 +56,15 @@ const routes = [
   {
     path:'/tutorcourses',
     component:TutorCourses
+  },
+  // Admin routes
+  {
+    path:'/admincourses',
+    component:CoursesAdmin
+  },
+  {
+    path:'/admingroupsetting',
+    component:CourseGroup
   },
   {
     path: '/*',

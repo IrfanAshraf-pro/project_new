@@ -33,10 +33,10 @@ const TodayClasses = () => {
           <p>Course</p>
           <p>Student</p>
           <p>Slot</p>
-          <p className="hidden md:block">Take</p>
-          <p className="hidden md:block">Reschedule</p>
+          <p className="hidden md:block">{"   "}</p>
+          <p className="hidden md:block">{"      "}</p>
         </div>
-        <div className="flex flex-col h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral">
+        <div className="flex flex-col  w-full h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral">
           {classes.map((item, index) => (
             <TodaysClassesrow classes={item} key={index}/>
           ))}

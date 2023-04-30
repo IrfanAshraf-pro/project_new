@@ -102,7 +102,7 @@ const Courses = () => {
           <LoaderDashboard />
         </div>
       )}
-      <div className="overflow-hidden flex flex-col h-full p-2 md:p-4  w-full sm:w-[90%] md:w-[80%] mx-auto ">
+      <div className="overflow-hidden flex flex-col h-full p-2 md:p-4 mt-4 md:mt-2  w-full sm:w-[90%] md:w-[80%] mx-auto ">
         <div className="items-end text-end">
           <label
             htmlFor="studentallcourses"
@@ -114,7 +114,7 @@ const Courses = () => {
         </div>
         {
           enrolledCourses.length>0?(
-            <div className="flex flex-col h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral">
+            <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral">
           {enrolledCourses.map((course) => (
             <div key={course.courseid}>
             <EnrolledCourseRow

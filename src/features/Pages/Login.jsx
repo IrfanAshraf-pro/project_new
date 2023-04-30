@@ -47,7 +47,7 @@ const Login = () => {
     if (typeof data === "object") {
       dispatch(setRole({ item: data.Role }));
       dispatch(setUser({ user: data.data }));
-      navigate("/app/schedule");
+      navigate("/app/profile");
     } else {
       toast.warning(data, {
         theme: "colored",

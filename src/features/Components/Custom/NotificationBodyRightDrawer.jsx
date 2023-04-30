@@ -5,7 +5,6 @@ function NotificationBodyRightDrawer() {
   const {role}=useSelector(state=>state.auth)
   return (
     <div className="">
-      <p>hello</p>
       {
         isTutor ?
         (
