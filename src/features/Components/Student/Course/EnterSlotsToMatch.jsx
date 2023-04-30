@@ -16,7 +16,7 @@ const EnterSlotsToMatch = ({
         <label className="modal-box relative" htmlFor="slotsModal">
           <h3 className="text-lg font-bold">Enter No of slots to be mathced</h3>
           <p>
-            {course.coursename} / {course.courseid}
+            {course.coursename} 
           </p>
 
           <div className="form-control w-full max-w-xs mx-auto my-2">

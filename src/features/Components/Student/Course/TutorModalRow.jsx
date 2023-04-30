@@ -13,6 +13,7 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
   const [slotsValue, setSlotsValue] = useState([]);
   const [slotsShow, setSlotsShow] = useState([]);
   const [selectedValues, setSelectedValues] = useState({});
+  const [cgroup, setCGroup] = useState([]);
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     // dividing slots to array and mapping on state
@@ -26,6 +27,7 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
     const slot = tutor.slotMatched.substring(0, tutor.slotMatched.length - 1);
     const slotShow = slotsToStringSlot(slot);
     setSlotsShow(slotShow);
+    //
     return () => {
       setSlotsValue([]);
       setSlotsShow([]);
@@ -80,14 +82,17 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
       );
     }
   };
-  // const splitCourseGroupe(group){
-  //   const slotString = group.substring(
-  //     0,
-  //     group.length - 1
-  //   );
-  //   const groupArr = slotString.split(",");
-  //   return groupArr
-  // }
+  const splitCourseGroupe = (group) => {
+    const slotString = group.split(",");
+    console.log(slotString);
+    return (
+      <p
+        className="text-base font-semibold"
+        key={group}
+      >{`${slotString[0]} - ${slotString[1]}`}</p>
+    );
+    // return groupArr;
+  };
 
   return (
     <div className="bg-neutral p-2 rounded-md w-full">
@@ -99,7 +104,7 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
           {tutor.cgpa}/-
         </span>
       </h5>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-1 md:gap-2 w-[90%] overflow-x-hidden">
+      <div className="grid grid-cols-2  gap-3 md:gap-4  justify-between overflow-x-hidden">
         <div className="col">
           {slotsShow.map((item, index) => (
             <label
@@ -119,13 +124,8 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
             </label>
           ))}
         </div>
-        <div className="col grid sm:grid-cols-1 md:grid-cols-2 gap-1 md:gap-2">
-          {
-            tutor.coursegroup.map(item=>(
-              
-              <p className="text-base font-bold" key={item}>{item}</p>
-            ))
-          }
+        <div className="col grid grid-cols-2 justify-items-center gap-1 md:gap-2 bg-primary py-2 rounded-md shadow-md">
+          {tutor.coursegroup.map((item) => splitCourseGroupe(item))}
         </div>
       </div>
       <button

@@ -16,6 +16,7 @@ import {
 const scheduleRepo=RepositoryFactory.get('schedule')
 const ScheduleMain = () => {
   const { schedule } = useSelector((state) => state.schedule);
+  console.log('Schedule from store is ',schedule);
   const {role,user}=useSelector(state=>state.auth)
   const dispatch = useDispatch();
   const [schedulee, setSchedulee] = useState(SplitingSchedule(schedule));

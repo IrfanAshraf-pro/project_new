@@ -30,7 +30,7 @@ const ScheduleCheckBox = ({
       defaultChecked={value !== 0 && 'checked'}
       type="checkbox"
       disabled={value>1? true:false}
-      className={`w-4 h-4  ${value===1?"text-accent":"text-secondary"} border-0 rounded focus:ring-0`}
+      className={`w-4 h-4  ${value===1?"text-green-500":"text-red-700"} border-0 rounded focus:ring-0`}
     />
     </>
   );
