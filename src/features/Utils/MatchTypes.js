@@ -23,3 +23,11 @@ export const NoCourseEnlisted="No Course Enlisted"
 export const NoClasses="No Classes Today"
 export const ClassTaken="Class Taken Successfully"
 export const NoCourseEnrolled="No Course Enrolled"
+
+// Admin add course
+export const CourseInsertedSuccessfully="Course Inserted Successfully"
+export const CourseAlreadyExists="Already Exist"
+
+// Admin Course groups
+export const CourseGroupUpdatedSuccessfully="Course Group Successfully updated"
+export const CourseGroupAdded="Course Group Added"

@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, NavLink } from "react-router-dom";
 // importing background image for login page
-import Background from "../../assests/bg-login.png";
+import Background from "../../../assests/bg-login.png";
 
 // importing Repositories
-import { RepositoryFactory } from "../Repository/RepositoryFactory";
-import { Loader } from "../Components";
+import { RepositoryFactory } from "../../Repository/RepositoryFactory";
+import { Loader } from "../../Components";
 import { useDispatch } from "react-redux";
-import { setRole, setUser } from "../../app/Slices/AuthSlice";
+import { setRole, setUser } from "../../../app/Slices/AuthSlice";
 var login = RepositoryFactory.get("login");
 
 var backgroundStyles = {
@@ -19,22 +19,18 @@ var backgroundStyles = {
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
 };
-const Login = () => {
+const ParentLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      cnic: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is Required"),
-      password: Yup.string()
-        .min(4, "Password must be atleast 4 characters")
-        .required("Password is Required"),
+      cnic: Yup.string()
+        .max(13,"Invalid cnic address").min(13,"Invalid Cnic")
+        .required("cnic is Required"),
     }),
     onSubmit: (values) => {
       submitHandler(values);
@@ -42,12 +38,13 @@ const Login = () => {
   });
   const submitHandler = async (values) => {
     setIsLoading(true);
-    let { data } = await login.loginUser(values.email, values.password);
+    console.log(values);
+    let { data } = await login.LoginParent(values.cnic);
     data && setTimeout(() => setIsLoading(false), 500);
     if (typeof data === "object") {
-      dispatch(setRole({ item: data.Role }));
-      dispatch(setUser({ user: data.data }));
-      navigate("/app/profile");
+        dispatch(setRole({ item: data.Role }));
+        dispatch(setUser({ user: data.data }));
+      navigate("/app/parentsfee");
     } else {
       toast.warning(data, {
         theme: "colored",
@@ -69,35 +66,17 @@ const Login = () => {
             <div className="form-control w-full max-w-xs mx-auto">
               <input
                 type="text"
-                name="email"
-                placeholder="Enter your Email"
+                name="cnic"
+                placeholder="Enter your cnic"
                 className="input w-full max-w-xs input-accent text-gray-600"
-                value={formik.values.email}
+                value={formik.values.cnic}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               <label className="label">
                 <span className="label-text text-error">
-                  {formik.touched.email && formik.errors.email
-                    ? formik.errors.email
-                    : ""}
-                </span>
-              </label>
-            </div>
-            <div className="form-control w-full max-w-xs mx-auto my-2">
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter your Password"
-                className="input w-full max-w-xs input-accent text-gray-600"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              <label className="label">
-                <span className="label-text text-error">
-                  {formik.touched.password && formik.errors.password
-                    ? formik.errors.password
+                  {formik.touched.cnic && formik.errors.cnic
+                    ? formik.errors.cnic
                     : ""}
                 </span>
               </label>
@@ -109,19 +88,8 @@ const Login = () => {
               Login
             </button>
             <div className="w-full max-w-xs mx-auto mt-4 text-secondary text-lg md:text-xl">
-              Don't have an account?
               <span className="ml-2 text-accent font-bold text-xl md:text-2xl hover:underline">
-                <NavLink to="/signup">SignUp</NavLink>
-              </span>
-            </div>
-            <div className="w-full max-w-xs mx-auto mt-4 text-secondary text-lg md:text-xl">
-              Are you a 
-              <span className="ml-2 text-accent font-bold text-xl md:text-2xl hover:underline">
-                <NavLink to="/parentLogin">Parent </NavLink>
-              </span>
-              or
-              <span className="ml-2 text-accent font-bold text-xl md:text-2xl hover:underline">
-                <NavLink to="/signup">Visitor</NavLink>
+                <NavLink to="/login">Back to Main Login</NavLink>
               </span>
             </div>
           </form>
@@ -131,4 +99,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ParentLogin;

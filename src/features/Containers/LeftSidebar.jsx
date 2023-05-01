@@ -5,6 +5,7 @@ import { NavLink,  Routes, Link , useLocation} from 'react-router-dom'
 import SidebarSubmenu from './SidebarSubmenu';
 import {useSelector} from 'react-redux'
 import adminroutes from '../Routes/AdminRoutes';
+import parentRoutes from '../Routes/ParentsRoutes';
 
 function LeftSidebar(){
     const {role}=useSelector(state=>state.auth)
@@ -17,6 +18,8 @@ function LeftSidebar(){
             setRoutes(tutorRoutes)
         }else if(role==="Admin"){
             setRoutes(adminroutes)
+        }else if(role==="Parent"){
+            setRoutes(parentRoutes)
         }
     },[])
     return(

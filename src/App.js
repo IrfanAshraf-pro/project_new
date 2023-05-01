@@ -11,6 +11,7 @@ import {
 // importing toast styles
 import "react-toastify/dist/ReactToastify.css";
 import Signup from "./features/Pages/Signup/Signup";
+import ParentLogin from "./features/Pages/Protected/ParentLogin";
 
 // Importing pages
 const Layout = lazy(() => import("./features/Containers/Layout"));
@@ -36,6 +37,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/parentLogin" element={<ParentLogin />} />
+
           <Route path='/signup' element={<Signup/>}/>
           {/* Place new routes over this */}
           <Route path="/app/*" element={<Layout />} />

@@ -18,6 +18,7 @@ import TutorCourses from '../Pages/Protected/Tutor/TutorCourses'
 // ADMIN IMPORTS
 import CoursesAdmin from '../Pages/Protected/Admin/Courses' 
 import CourseGroup from '../Pages/Protected/Admin/CourseGroup'
+import ParentsFee from '../Pages/Protected/Parents/ParentsFee'
 const routes = [
   {
     path:'/schedule',//the url
@@ -66,11 +67,15 @@ const routes = [
     path:'/admingroupsetting',
     component:CourseGroup
   },
+  // Parents Routes
+  {
+    path:'/parentsfee',
+    component:ParentsFee
+  },
   {
     path: '/*',
     component: Page404,
-  },
-  
+  }
 ]
 
 export default routes

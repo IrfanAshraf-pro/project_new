@@ -40,7 +40,7 @@ function Layout() {
         console.log(data);
         dispatchingSchedule(data)
         // alert(data)
-    }else{
+    }else if(role==="Tutor"){
         const {data}=await schedule.getTutorSchedule(user.email)
         console.log(data);
         dispatchingSchedule(data)
