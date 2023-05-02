@@ -13,6 +13,8 @@ const getAdminAllCourses = "admin/GetCourses";
 const getAllCourseGroup = "admin/GetAllCourseGroup";
 const AdminSaveCourseGroup = "admin/SaveCourseGroup";
 const GetCoursesForGroup="admin/GetCoursesForGroup"
+const GetStudentLearning="student/GetStudentLearningCourses"
+const GetTeachingStudents="tutor/GetTeachingStudents"
 export default {
   studentEnrolledCourses(email) {
     const url = `${studentEnlisted}?semail=${email}`;
@@ -29,6 +31,10 @@ export default {
   findTutor(email, courseid, noOfSlots) {
     const url = `${findTutor}?semail=${email}&cid=${courseid}&noOfSlots=${noOfSlots}`;
     return Repository.get(url);
+  },
+  getStudentLearning(semail){
+    const url=`${GetStudentLearning}?semail=${semail}`
+    return Repository.get(url)
   },
   // tutor functions
   tutorAllCourses(email) {
@@ -51,6 +57,10 @@ export default {
       data = Repository.post(url, item);
     });
     return data;
+  },
+  getTeachingStudents(temail){
+    const url=`${GetTeachingStudents}?temail=${temail}`
+    return Repository.get(url)
   },
   // Admin functions
   addNewCourse(course) {

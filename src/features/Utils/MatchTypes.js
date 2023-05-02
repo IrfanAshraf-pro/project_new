@@ -2,6 +2,8 @@
 export const EnlistedSuccessfully="Course Enlisted Successfully"
 export const AlreadyEnlisted="Course Already Enlisted"
 export const StudentDoesNotExist="Student doesnot exist"
+// student learning
+
 // find tutor
 export const FindTutorNotAvailable="No tutor available"
 export const FindTutorNoSchedule="Schedule not set"
