@@ -3,13 +3,14 @@ import CoursesRepository from "./CoursesRepository";
 import ScheduleRepository from "./ScheduleRepository";
 import TutorRepository from "./TutorRepository";
 import TodaysClasses from "./TodaysClasses";
-
+import FeeRepository from "./FeeRepository";
 const repositories={
     login:LoginRepository,
     course:CoursesRepository,
     schedule:ScheduleRepository,
     tutor:TutorRepository,
-    todayclasses:TodaysClasses
+    todayclasses:TodaysClasses,
+    fee:FeeRepository
 }
 
 export const RepositoryFactory={

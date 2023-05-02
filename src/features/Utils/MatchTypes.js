@@ -31,3 +31,6 @@ export const CourseAlreadyExists="Already Exist"
 // Admin Course groups
 export const CourseGroupUpdatedSuccessfully="Course Group Successfully updated"
 export const CourseGroupAdded="Course Group Added"
+
+// Parent fee
+export const StudentNotEnrolled="Student Has Not Enrolled Any course"
