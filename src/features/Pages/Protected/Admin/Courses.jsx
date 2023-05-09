@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import AddCourse from "../../../Components/Admin/courses/AddCourse";
 import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
 import Loader from "../../../Components/Custom/LoaderDashboard";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../../app/Slices/Dashboard/HeaderSlice";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-
+  const dispatch=useDispatch()
   const courserepo = RepositoryFactory.get("course");
 
   const getAllCourses = async () => {
@@ -24,6 +26,7 @@ const Courses = () => {
     };
   }, []);
   useEffect(() => {
+    dispatch(setPageTitle({ title: "Courses" }));
     isLoading && getAllCourses();
   }, [isLoading]);
   return (

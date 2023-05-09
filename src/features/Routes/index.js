@@ -20,6 +20,8 @@ import CoursesAdmin from '../Pages/Protected/Admin/Courses'
 import CourseGroup from '../Pages/Protected/Admin/CourseGroup'
 import ParentsFee from '../Pages/Protected/Parents/ParentsFee'
 import Teaching from '../Pages/Protected/Tutor/Teaching'
+import StudentFee from '../Pages/Protected/Student/StudentFee'
+import Scheduling from '../Pages/Protected/Tutor/Scheduling'
 const routes = [
   {
     path:'/schedule',//the url
@@ -50,6 +52,10 @@ const routes = [
     path:'/studentLearning',//url
     component:Learning
   },
+  {
+    path:'/studentfee',
+    component:StudentFee
+  },
   // tutor routes
   {
     path:'/tutorClasses',
@@ -62,6 +68,10 @@ const routes = [
   {
     path:'/teaching',
     component:Teaching
+  },
+  {
+    path:'/tutorscheduling',
+    component:Scheduling
   },
   // Admin routes
   {

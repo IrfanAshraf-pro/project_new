@@ -50,6 +50,11 @@ const routes = [
       path:'/app/studentLearning',
       icon:<WalletIcon className={iconClasses}/>,
       name:'Learning'
+    },
+    {
+      path:'/app/studentfee',
+      icon:<WalletIcon className={iconClasses}/>,
+      name:'Fee'
     }
 ]
 

@@ -50,6 +50,11 @@ const tutorRoutes = [
       path:'/app/teaching',
       icon:<WalletIcon className={iconClasses}/>,
       name:'Teaching'
+    },
+    {
+      path:'/app/tutorscheduling',
+      icon:<WalletIcon className={iconClasses}/>,
+      name:'Rescheduling'
     }
 ]
 

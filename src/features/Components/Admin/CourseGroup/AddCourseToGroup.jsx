@@ -35,7 +35,7 @@ const AddCourseToGroup = ({ selectedGroup, addCourseToGroup }) => {
         htmlFor="addcoursetogroup"
       >
         <label class="modal-box relative" htmlFor="">
-          <h3 className="font-bold text-lg text-start">Courses in Group are</h3>
+          <h3 className="font-bold text-lg text-start">Courses are :</h3>
           <div className=" flex flex-col gap-3 ">
             {isLoaded &&
               courses?.map((course) => (

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { ClassTaken, NoClasses, NoCourseEnrolled } from "../../../Utils/MatchTypes";
 import { toast } from "react-toastify";
 import { TodaysClassesrow } from "../../../Components/Tutor";
+import {setPageTitle} from '../../../../app/Slices/Dashboard/HeaderSlice'
 let todayclasses = RepositoryFactory.get("todayclasses");
 
 const TutorTodayClasses = () => {
   const [classes, setClasses] = useState([]);
   const { user } = useSelector((state) => state.auth);
+  const dispatch=useDispatch()
   // calling get today classes
   const callingTodayClasses = async () => {
     const { data } = await todayclasses.todayClassesTutor(user.email);
@@ -35,6 +37,7 @@ const TutorTodayClasses = () => {
     }
   };
   useEffect(() => {
+    dispatch(setPageTitle({ title: "Today's Classes" }));
     callingTodayClasses();
   }, []);
   return (

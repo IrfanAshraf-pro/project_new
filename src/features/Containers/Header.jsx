@@ -5,7 +5,7 @@ import BellIcon from "@heroicons/react/24/outline/BellIcon";
 import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
 import { openRightDrawer } from "../../app/Slices/Dashboard/RightDrawerSlice";
 import { RIGHT_DRAWER_TYPES } from "../Utils/GlobalUtilConstant";
-import ProfileImg from '../../assests/pp.jpeg'
+import ProfileImg from '../../assests/saud.jpeg'
 import { NavLink, Routes, Link, useNavigate } from "react-router-dom";
 
 function Header() {
@@ -65,7 +65,6 @@ function Header() {
         <div className="order-last">
           {/* Multiple theme selection, uncomment this if you want to enable multiple themes selection, 
                 also includes corporate and retro themes in tailwind.config file */}
-{/* 
           <select
             className="select mr-4 border-2 border-accent"
             data-choose-theme
@@ -82,7 +81,7 @@ function Header() {
             <option value="aqua">Aqua</option>
             <option value="luxury">Luxury</option>
             <option value="lofi">Lofi</option>
-          </select> */}
+          </select> 
 
           {/* Light and dark theme selection toogle **/}
           {/* <label className="swap ">

@@ -15,7 +15,7 @@ const TodaysClassesrow = ({classes}) => {
         <button
           className="btn btn-accent group-hover:bg-primary group-hover:text-accent cursor-pointer group-hover:hover:bg-secondary group-hover:hover:text-primary w-5/12 md:w-6/12 md:ml-1 mt-2 group btn-sm md:btn-md"
         >
-          Cancel
+          Reschedule
         </button>
       </div>
     </div>

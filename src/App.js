@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 // importing toast styles
 import "react-toastify/dist/ReactToastify.css";
+// Datepicker
+import "react-datepicker/dist/react-datepicker.css";
 import Signup from "./features/Pages/Signup/Signup";
 import ParentLogin from "./features/Pages/Protected/ParentLogin";
 

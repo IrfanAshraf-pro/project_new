@@ -19,6 +19,7 @@ export default function Details() {
   return (
     <div className="flex flex-col gap-2 px-2">
       <div className="form-control w-full max-w-xs mx-auto">
+        <span className="label-text text-start mb-1">Enter your Name</span>
         <input
           type="text"
           name="name"
@@ -35,6 +36,8 @@ export default function Details() {
             </label>
       </div>
       <div className="form-control w-full max-w-xs mx-auto">
+      <span className="label-text text-start mb-1">Enter your Email</span>
+
         <input
           type="text"
           name="email"
@@ -51,6 +54,7 @@ export default function Details() {
             </label>
       </div>
       <div className="form-control w-full max-w-xs mx-auto">
+      <span className="label-text text-start mb-1">Enter your Password</span>
         <input
           type="password"
           name="password"

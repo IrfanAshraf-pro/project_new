@@ -8,12 +8,16 @@ import {
   CourseGroupAdded,
   CourseGroupUpdatedSuccessfully,
 } from "../../../Utils/MatchTypes";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../../app/Slices/Dashboard/HeaderSlice";
 const CourseGroup = () => {
   const [selectedGroup, setSelectedGroup] = useState({});
   const [groups, setGroups] = useState([]);
   const [isShown, setIsShown] = useState(false);
   const [groupNameShow, setGroupNameShow] = useState(false);
 
+  const dispatch=useDispatch()
+  
   const courserepo = RepositoryFactory.get("course");
   // getting all groups
   const getAllGroups = async () => {
@@ -24,6 +28,8 @@ const CourseGroup = () => {
     setIsShown(false);
   };
   useEffect(() => {
+    dispatch(setPageTitle({ title: "Course Groups" }));
+    
     getAllGroups();
     return () => {};
   }, []);

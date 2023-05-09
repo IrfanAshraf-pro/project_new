@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import {toast} from 'react-toastify'
+import { setPageTitle } from "../../../../app/Slices/Dashboard/HeaderSlice";
 import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
 import { NoCourseEnrolled } from "../../../Utils/MatchTypes";
 const Teaching = () => {
@@ -10,6 +11,8 @@ const Teaching = () => {
     const courserepo = RepositoryFactory.get("course");
     // getting user data
     const { user } = useSelector((state) => state.auth);
+    const dispatch=useDispatch()
+
     const gettingCourses = async () => {
       let { data } = await courserepo.getTeachingStudents(user.email);
       if (typeof data === "object") {
@@ -23,6 +26,7 @@ const Teaching = () => {
       }
     };
     useEffect(() => {
+    dispatch(setPageTitle({ title: "Teaching" }));
       gettingCourses();
     }, []);
   

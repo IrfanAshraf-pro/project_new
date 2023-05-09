@@ -5,6 +5,7 @@ export default function AcademicDetails() {
   return (
     <div className="flex flex-col gap-3">
       <div className="form-control w-full max-w-xs mx-auto">
+      <span className="label-text text-start mb-1">Enter your Semester</span>
         <input
           type="number"
           name="semester"
@@ -23,6 +24,8 @@ export default function AcademicDetails() {
         </label>
       </div>
       <div className="form-control w-full max-w-xs mx-auto">
+      <span className="label-text text-start mb-1">Enter your CGPA</span>
+
         <input
           type="number"
           name="cgpa"

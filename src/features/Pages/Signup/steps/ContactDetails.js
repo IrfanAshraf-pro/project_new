@@ -6,6 +6,7 @@ export default function ContactDetails() {
   return (
     <div className="flex flex-col gap-3">
       <div className="form-control w-full max-w-xs mx-auto">
+      <span className="label-text text-start mb-1">Enter your Contact No</span>
         <input
           type="number"
           name="contact"

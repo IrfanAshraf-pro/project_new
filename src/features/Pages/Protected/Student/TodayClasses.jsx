@@ -24,7 +24,7 @@ const TodayClasses = () => {
   };
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Schedule"}))
+        dispatch(setPageTitle({ title : "Today's Classes"}))
         callingTodayClasses();
       }, [])
     return (

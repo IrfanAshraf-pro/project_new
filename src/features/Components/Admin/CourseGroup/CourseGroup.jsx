@@ -34,7 +34,7 @@ const CourseGroupModal = ({ AddGroup,groupNameShow,setGroupNameShow }) => {
         htmlFor="admincoursegroup"
       >
         <label htmlFor="" className="modal-box ">
-          <h3 className="font-bold text-lg text-center mb-4">
+          <h3 className="font-bold text-lg text-center mb-6">
             Enter Name of Group
           </h3>
           <form
@@ -46,9 +46,9 @@ const CourseGroupModal = ({ AddGroup,groupNameShow,setGroupNameShow }) => {
               placeholder="Enter Group name"
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className="input w-full max-w-xs mx-auto input-accent text-gray-600"
+              className="input mb-2 w-full max-w-xs mx-auto input-accent text-gray-600"
             />
-            <button className="btn  md:btn-md  btn-accent hover:btn-primary">
+            <button className="btn max-w-xs w-full mx-auto mb-4  md:btn-md  btn-accent hover:btn-primary">
               Submit
             </button>
           </form>
