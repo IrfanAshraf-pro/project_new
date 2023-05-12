@@ -13,22 +13,25 @@ const Scheduling = () => {
   const [selected,setSelected]=useState({})
   const [isReschedule, setIsReschedule]=useState(false)
   const [isPreschedule, setIsPreschedule] = useState(false)
+  const [tdata,setTdata]=useState({
+    date:'',
+    day:'',
+  })
   const { user } = useSelector((state) => state.auth);
   // repository
   const repo = RepositoryFactory.get("reschedule");
   const onClick = () => {
-    const date =
-      startDate.getMonth() +
-      1 +
-      "/" +
-      startDate.getDate() +
-      "/" +
-      startDate.getFullYear();
-    gettingClasses(date, startDate.getDay());
+    const dateJoined =(startDate.getMonth() + 1 )+ "/" + startDate.getDate() + "/" + startDate.getFullYear();
+    gettingClasses(dateJoined, startDate.getDay());
   };
   const gettingClasses = async (date, dayc) => {
     let day = getDayCustom(dayc);
     console.log("getting data");
+    let dataSet={
+      day,date
+    }
+    setTdata(dataSet)
+    setClasses([])
     const { data } = await repo.getClassesToReschedule(user.email, date, day);
     if (typeof data === "object") {
       setClasses(data);
@@ -56,6 +59,7 @@ const Scheduling = () => {
         return "Sunday";
     }
   };
+  console.log(classes);
   return (
     <>
     <div className="w-full flex flex-col items-center justify-center">
@@ -81,7 +85,7 @@ const Scheduling = () => {
       )}
     </div>
     <RescheduleModal selected={selected} setIsReschedule={setIsReschedule} setIsPreschedule={setIsPreschedule}/>
-    <RescheduleInfoModal isReschedule={isReschedule} setIsReschedule={setIsReschedule}/>
+    <RescheduleInfoModal isReschedule={isReschedule} setIsReschedule={setIsReschedule} selected={selected} tdata={tdata}/>
     <PreScheduleModal isPreschedule={isPreschedule} setIsPreschedule={setIsPreschedule}/>
     </>
   );

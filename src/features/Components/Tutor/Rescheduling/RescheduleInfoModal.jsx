@@ -1,92 +1,63 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-const RescheduleInfoModal = ({ isReschedule, setIsReschedule }) => {
+import { useSelector } from "react-redux";
+import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
+import { toast } from "react-toastify";
+import RescheduleInfoRow from "./RescheduleInfoRow";
+import { useEffect } from "react";
+const RescheduleInfoModal = ({
+  isReschedule,
+  setIsReschedule,
+  selected,
+  tdata,
+}) => {
   const [date, setDate] = useState(new Date());
-  const [selectedSlot, setSelectedSlot] = useState(0);
-  const searchClasses=()=>{
-
-  }
-  //    get both classes from db tutors and student's then populate them in options on button click
-  const options = [
-    {
-      time: "08:00-9:00 AM",
-      value: 1,
-    },
-    {
-      time: "09:00-10:00 AM",
-      value: 2,
-    },
-    {
-      time: "10:00-11:00 AM",
-      value: 3,
-    },
-    {
-      time: "11:00-12:00 AM",
-      value: 4,
-    },
-    {
-      time: "12:00-01:00 PM",
-      value: 5,
-    },
-    {
-      time: "01:00-02:00 PM",
-      value: 6,
-    },
-    {
-      time: "02:00-03:00 PM",
-      value: 7,
-    },
-    {
-      time: "03:00-04:00 PM",
-      value: 8,
-    },
-    {
-      time: "04:00-05:00 PM",
-      value: 9,
-    },
-    {
-      time: "05:00-06:00 PM",
-      value: 10,
-    },
-    {
-      time: "06:00-07:00 PM",
-      value: 11,
-    },
-    {
-      time: "07:00-08:00 PM",
-      value: 12,
-    },
-    {
-      time: "08:00-09:00 PM",
-      value: 13,
-    },
-    {
-      time: "09:00-10:00 PM",
-      value: 14,
-    },
-    {
-      time: "10:00-11:00 PM",
-      value: 15,
-    },
-    {
-      time: "11:00-12:00 PM",
-      value: 16,
-    },
-  ];
-
-  const handleChange = (event) => {
-    setSelectedSlot(event.target.value);
-  };
-  const rescheduleClass = () => {
+  const [selectedSlot, setSelectedSlot] = useState({});
+  const [classes, setClasses] = useState([]);
+  const reschedulerepo = RepositoryFactory.get("reschedule");
+  const { user } = useSelector((state) => state.auth);
+  // getting free classes
+  const searchClasses = async () => {
+    setClasses([]);
     const dateJoined =
       date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
     const day = getDayCustom(date.getDay());
-    if (selectedSlot > 0) {
-      console.log(
-        `date is ${dateJoined} and day is ${day} and slot is ${selectedSlot}`
-      );
+    const { data } = await reschedulerepo.getFreeClassesToRescheduleTo(
+      user.email,
+      selected.email,
+      dateJoined,
+      day,
+      selected.coursename
+    );
+    if (data.length > 0) {
+      setClasses(data);
     } else {
-      console.log("select a slot");
+      toast.info(data, {
+        theme: "colored",
+      });
+    }
+  };
+  //    get both classes from db tutors and student's then populate them in options on button click
+
+  const rescheduleClass = async () => {
+    const dateJoined =(date.getMonth() + 1 )+ "/" + date.getDate() + "/" + date.getFullYear();
+    const day = getDayCustom(date.getDay());
+    let reschedule = {
+      semail: selected.email,
+      temail: user.email,
+      coursename: selected.coursename,
+      slotno: selected.slotno,
+      date: tdata.date,
+      day: tdata.day,
+      tday: day,
+      tdate: dateJoined,
+      tslotno: selectedSlot.slotno,
+    };
+    const { data } = await reschedulerepo.rescheduleClass(reschedule);
+    if (data) {
+      toast.success(data, {
+        theme: "colored",
+      });
     }
   };
   const getDayCustom = (day) => {
@@ -107,6 +78,12 @@ const RescheduleInfoModal = ({ isReschedule, setIsReschedule }) => {
         return "Sunday";
     }
   };
+  useEffect(() => {
+    return () => {
+      setSelectedSlot({});
+      setClasses([]);
+    };
+  }, []);
   return (
     <div>
       <input
@@ -133,25 +110,22 @@ const RescheduleInfoModal = ({ isReschedule, setIsReschedule }) => {
               Search Classes
             </button>
           </div>
-          <div className="my-4 w-full max-w-lg">
-            <select
-              className="select-accent rounded-md w-full"
-              value={selectedSlot}
-              onChange={handleChange}
-            >
-              <option disabled selected value={0}>
-                Select a slot to Reschedule
-              </option>
-              {options.map((item) => (
-                <option value={item.value} key={item.value}>
-                  {item.time}
-                </option>
-              ))}
-            </select>
+          <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral w-full md:max-w-lg">
+            {classes.length > 0 ? (
+              classes.map((classs) => (
+                <RescheduleInfoRow
+                  item={classs}
+                  setSelectedSlot={setSelectedSlot}
+                  selectedSlot={selectedSlot}
+                />
+              ))
+            ) : (
+              <p className="font-bold text-lg">No Free Slot</p>
+            )}
           </div>
           <div className="mt-2 flex items-center justify-end mb-16 md:mb-2">
             <label
-            htmlFor="rescheduleinfomodal"
+              htmlFor="rescheduleinfomodal"
               className="btn btn-accent hover:btn-primary text-white hover:text-accent"
               onClick={rescheduleClass}
             >

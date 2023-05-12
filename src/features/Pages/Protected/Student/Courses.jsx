@@ -87,6 +87,10 @@ const Courses = () => {
         toast.warning(data,{
           theme:'colored'
         })
+      }else{
+        toast.info(data,{
+          theme:'colored'
+        })
       }
   }
   useEffect(() => {

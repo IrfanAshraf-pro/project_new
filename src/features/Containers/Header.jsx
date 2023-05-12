@@ -73,6 +73,7 @@ function Header() {
               Theme
             </option>
             <option value="customTheme">Default</option>
+            <option value="darkcustom">Custom Dark</option>
             <option value="dark">Dark</option>
             <option value="cupcake">Cupcake</option>
             <option value="dracula">Dracula</option>

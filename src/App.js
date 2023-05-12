@@ -22,6 +22,7 @@ function App() {
   const { user } = useSelector((state) => state.auth);
   const themeValues = [
     "customTheme",
+    "darkcustom",
     "cupcake",
     "dark",
     "dracula",

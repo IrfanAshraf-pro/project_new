@@ -24,6 +24,7 @@ const ShowCourseGroup = ({ selectedGroup, handleCourseDelete,isShown,setIsShown 
   //   setCourses(selectedGroup.subjectGroup);
   // }, [selectedGroup]);
 
+  console.log(selectedGroup);
   return (
     <>
       <input

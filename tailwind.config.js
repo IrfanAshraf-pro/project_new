@@ -68,6 +68,25 @@ module.exports = {
 
           error: "#F2212C",
         },
+        darkcustom: {
+          secondary: "#C4E70F",
+
+          primary: "#0A2DEC",
+
+          accent: "#F8E4FF",
+
+          neutral: "#001540",
+
+          "base-100": "#3D35BC",
+
+          info: "#42BEEB",
+
+          success: "#158447",
+
+          warning: "#9D5707",
+
+          error: "#F2212C",
+        },
       },
       "dark","dracula","night","synthwave","aqua","luxury","lofi","cupcake"
     ],

@@ -25,6 +25,7 @@ export const NoCourseEnlisted="No Course Enlisted"
 export const NoClasses="No Classes Today"
 export const ClassTaken="Class Taken Successfully"
 export const NoCourseEnrolled="No Course Enrolled"
+export const TimeNotMatched="Class cannot be taken before its time"
 
 // Admin add course
 export const CourseInsertedSuccessfully="Course Inserted Successfully"

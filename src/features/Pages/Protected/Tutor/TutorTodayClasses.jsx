@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
 import { useSelector,useDispatch } from "react-redux";
-import { ClassTaken, NoClasses, NoCourseEnrolled } from "../../../Utils/MatchTypes";
+import { ClassTaken, NoClasses, NoCourseEnrolled, TimeNotMatched } from "../../../Utils/MatchTypes";
 import { toast } from "react-toastify";
 import { TodaysClassesrow } from "../../../Components/Tutor";
 import {setPageTitle} from '../../../../app/Slices/Dashboard/HeaderSlice'
@@ -25,7 +25,9 @@ const TutorTodayClasses = () => {
   };
   // calling take class
   const takeClass = async (classs) => {
-    const {data}=todayclasses.takeTodayClass(user.email,classs.coursename,classs.name,classs.slot.toString())
+    console.log('taking class ',classs);
+    const {data}= await todayclasses.takeTodayClass(user.email,classs.coursename,classs.name,classs.slot.toString(),classs.isReschedule)
+    console.log('todays classses take responsee data is ',data);
     if(data.match(ClassTaken)){
       toast.success(data,{
         theme:'colored'
@@ -34,6 +36,12 @@ const TutorTodayClasses = () => {
       toast.info(data,{
         theme:'colored'
       })
+    }else if(data.match(TimeNotMatched)){
+      toast.info(data,{
+        theme:'colored'
+      })
+    }else{
+      console.log(data);
     }
   };
   useEffect(() => {
