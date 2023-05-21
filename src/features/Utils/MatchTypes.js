@@ -12,6 +12,10 @@ export const ScheduleNotSet="Schedule not set"
 export const ScheduleSetSuccessfully="Schedule Set successfully"
 export const ScheduleUpdatedSuccessfully="Schedule Updated successfully"
 
+// Reschedule
+export const RescheduleSuccessful="Class is Rescheduled"
+export const PrescheduleSuccessful="Class is Prescheduled"
+
 // Requesting Tutor
 export const RequestSentSuccessfully="Request sent Successfully"
 export const TutorAlreadyRequested="Already Requested"

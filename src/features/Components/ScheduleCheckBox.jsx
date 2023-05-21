@@ -34,12 +34,12 @@ const ScheduleCheckBox = ({
         disabled={value > 1 ? true : false}
         className={`w-4 h-4  ${
           value === 1
-            ? "text-rose-700"
+            ? "text-green-700"
             : value === 2
-            ? "text-purple-700"
+            ? "text-red-700"
             : value === 3
             ? "text-yellow-700"
-            : "text-green-700"
+            : "text-purple-700"
         } border-0 rounded focus:ring-0`}
       />
     </>

@@ -5,11 +5,14 @@ import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
 import { toast } from "react-toastify";
 import RescheduleInfoRow from "./RescheduleInfoRow";
 import { useEffect } from "react";
+import { dateChecker } from "../../../Utils/DateFunctions";
+import { RescheduleSuccessful } from "../../../Utils/MatchTypes";
 const RescheduleInfoModal = ({
   isReschedule,
   setIsReschedule,
   selected,
   tdata,
+  setIsDone
 }) => {
   const [date, setDate] = useState(new Date());
   const [selectedSlot, setSelectedSlot] = useState({});
@@ -19,8 +22,7 @@ const RescheduleInfoModal = ({
   // getting free classes
   const searchClasses = async () => {
     setClasses([]);
-    const dateJoined =
-      date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+    let dateJoined=dateChecker(date)
     const day = getDayCustom(date.getDay());
     const { data } = await reschedulerepo.getFreeClassesToRescheduleTo(
       user.email,
@@ -31,6 +33,26 @@ const RescheduleInfoModal = ({
     );
     if (data.length > 0) {
       setClasses(data);
+      console.log('Searched Classes are :',data);
+
+    } else {
+      toast.info(data, {
+        theme: "colored",
+      });
+    }
+  };
+  const SuggestedClasses = async () => {
+    console.log("inside sugested classs");
+    const { data } = await reschedulerepo.getSuggestedClasesForRescheduling(
+      user.email,
+      selected.email,
+      tdata.date,
+      tdata.day,
+      selected.coursename
+    );
+    if (data) {
+      console.log('suggested reschedule classes are :',data);
+      setClasses(data);
     } else {
       toast.info(data, {
         theme: "colored",
@@ -40,8 +62,8 @@ const RescheduleInfoModal = ({
   //    get both classes from db tutors and student's then populate them in options on button click
 
   const rescheduleClass = async () => {
-    const dateJoined =(date.getMonth() + 1 )+ "/" + date.getDate() + "/" + date.getFullYear();
-    const day = getDayCustom(date.getDay());
+    // let dateJoined=dateChecker(date)
+    // const day = getDayCustom(date.getDay());
     let reschedule = {
       semail: selected.email,
       temail: user.email,
@@ -49,15 +71,19 @@ const RescheduleInfoModal = ({
       slotno: selected.slotno,
       date: tdata.date,
       day: tdata.day,
-      tday: day,
-      tdate: dateJoined,
+      tday: selectedSlot.ClassDay,
+      tdate: selectedSlot.classDate,
       tslotno: selectedSlot.slotno,
     };
+    console.log('reschedule object is :',reschedule);
     const { data } = await reschedulerepo.rescheduleClass(reschedule);
-    if (data) {
-      toast.success(data, {
-        theme: "colored",
-      });
+    if (data.match(RescheduleSuccessful)) {
+      toast.success(data,{
+        theme:'colored'
+      })
+      setIsDone(true)
+    }else{
+      console.log('reschedule ',data);
     }
   };
   const getDayCustom = (day) => {
@@ -78,6 +104,12 @@ const RescheduleInfoModal = ({
         return "Sunday";
     }
   };
+  useEffect(() => {
+    if (isReschedule) {
+      SuggestedClasses();
+    }
+  }, [isReschedule]);
+
   useEffect(() => {
     return () => {
       setSelectedSlot({});
