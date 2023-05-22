@@ -32,18 +32,19 @@ const ScheduleCheckBox = ({
         defaultChecked={value !== 0 && "checked"}
         type="checkbox"
         disabled={value > 1 ? true : false}
-        className={`w-4 h-4  ${
+        className={`w-4 h-4 cursor-pointer ${
           value === 1
-            ? "text-green-700"
+            ? "text-green-700 "
             : value === 2
-            ? "text-red-700"
+            ? "text-red-700 opacity-70 cursor-default"
             : value === 3
-            ? "text-yellow-700"
-            : "text-purple-700"
-        } border-0 rounded focus:ring-0`}
+            ? "text-yellow-700 opacity-70 cursor-default"
+            : "text-purple-700 opacity-70 cursor-default"
+        } border-0 rounded focus:ring-0 `}
       />
     </>
   );
 };
 
 export default ScheduleCheckBox;
+ 

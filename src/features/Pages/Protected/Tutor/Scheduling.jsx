@@ -22,7 +22,7 @@ const Scheduling = () => {
   const { user } = useSelector((state) => state.auth);
   // repository
   const repo = RepositoryFactory.get("reschedule");
-  const onClick = () => {
+  const onClick = () => { 
     let date=dateChecker(startDate)
     gettingClasses(date, startDate.getDay());
   };
@@ -88,14 +88,14 @@ const Scheduling = () => {
   return (
     <>
       <div className="w-full flex flex-col items-center justify-center">
-        <div className="mt-8 space-x-4 flex items-center">
+        <div className="mt-8 space-x-4 flex items-center justify-center flex-col sm:flex-row gap-3">
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            className="mx-auto w-56 text-white bg-accent"
+            className="mx-auto w-64 text-white bg-accent ml-6 md:ml-0"
           />
           <button
-            className="btn btn-primary hover:btn-accent text-accent hover:text-white"
+            className="btn btn-primary w-full md:w-52 hover:btn-accent text-accent hover:text-white"
             onClick={onClick}
           >
             Search Classes

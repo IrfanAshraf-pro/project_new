@@ -1,4 +1,3 @@
-import XMarkIcon  from '@heroicons/react/24/solid/XMarkIcon'
 import { useDispatch, useSelector } from 'react-redux'
 import NotificationBodyRightDrawer from '../Components/Custom/NotificationBodyRightDrawer'
 import { closeRightDrawer } from '../../app/Slices/Dashboard/RightDrawerSlice'
@@ -26,7 +25,7 @@ function RightSidebar(){
                         {/* Header */}
                         <div className="navbar   flex pl-4 pr-4   shadow-md ">
                             <button className="float-left btn btn-circle btn-outline btn-sm" onClick={() => close()}>
-                            <XMarkIcon className="h-5 w-5"/>
+                            <p className="h-5 w-5">X</p>
                             </button>
                             <span className="ml-2 font-bold text-xl">{header}</span>
                         </div>

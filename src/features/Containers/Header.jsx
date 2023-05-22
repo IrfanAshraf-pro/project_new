@@ -1,8 +1,9 @@
 import { themeChange } from "theme-change";
 import React, { Suspense, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import BellIcon from "@heroicons/react/24/outline/BellIcon";
-import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
+import {BsBellFill} from 'react-icons/bs'
+import{FaBars} from 'react-icons/fa'
+
 import { openRightDrawer } from "../../app/Slices/Dashboard/RightDrawerSlice";
 import { RIGHT_DRAWER_TYPES } from "../Utils/GlobalUtilConstant";
 import ProfileImg from '../../assests/saud.jpeg'
@@ -57,7 +58,7 @@ function Header() {
             htmlFor="left-sidebar-drawer"
             className="btn btn-primary drawer-button lg:hidden"
           >
-            <Bars3Icon className="h-5 inline-block w-5" />
+            <FaBars className="h-5 inline-block w-5" />
           </label>
           <h1 className="text-2xl font-semibold ml-2">{pageTitle}</h1>
         </div>
@@ -97,7 +98,7 @@ function Header() {
             onClick={() => openNotification()}
           >
             <div className="indicator">
-              <BellIcon className="h-6 w-6" />
+              <BsBellFill className="h-6 w-6" />
               {notificationlength > 0 ? (
                 <span className="indicator-item badge badge-secondary badge-sm">
                   {notificationlength}

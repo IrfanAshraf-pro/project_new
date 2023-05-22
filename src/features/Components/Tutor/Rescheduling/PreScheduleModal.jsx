@@ -145,6 +145,7 @@ const PreScheduleModal = ({
                   item={classs}
                   setSelectedSlot={setSelectedSlot}
                   selectedSlot={selectedSlot}
+                  key={classs.slot}
                 />
               ))
             ) : (

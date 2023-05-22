@@ -22,6 +22,9 @@ import ParentsFee from '../Pages/Protected/Parents/ParentsFee'
 import Teaching from '../Pages/Protected/Tutor/Teaching'
 import StudentFee from '../Pages/Protected/Student/StudentFee'
 import Scheduling from '../Pages/Protected/Tutor/Scheduling'
+import FeeGroups from '../Pages/Protected/Admin/FeeGroups'
+import ScheduleOptions from '../Pages/Protected/Tutor/ScheduleOptions'
+import MultipleScheduling from '../Pages/Protected/Tutor/MultipleScheduling'
 const routes = [
   {
     path:'/schedule',//the url
@@ -70,7 +73,15 @@ const routes = [
     component:Teaching
   },
   {
-    path:'/tutorscheduling',
+    path:'/tutorschedulingoptions',
+    component:ScheduleOptions
+  },
+  {
+    path:'/tutorschedulingoptions/tutormultirescheduling',
+    component:MultipleScheduling
+  },
+  {
+    path:'/tutorschedulingoptions/tutorscheduling',
     component:Scheduling
   },
   // Admin routes
@@ -81,6 +92,10 @@ const routes = [
   {
     path:'/admingroupsetting',
     component:CourseGroup
+  },
+  {
+    path:'/adminFeeGroups',
+    component:FeeGroups
   },
   // Parents Routes
   {

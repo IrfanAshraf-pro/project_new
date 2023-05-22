@@ -8,6 +8,7 @@ import { setPageTitle } from "../../../../app/Slices/Dashboard/HeaderSlice";
 const StudentFee = () => {
   const [fee, setFee] = useState([]);
   const [selectedTutor, setSelectedTutor] = useState({});
+  const [totalFee, settotalFee] = useState(0)
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const feerepo = RepositoryFactory.get("fee");
@@ -15,6 +16,7 @@ const StudentFee = () => {
     let { data } = await feerepo.GetStudentFeeDetails(user.email);
     if (typeof data === "object") {
       setFee(data);
+      calculatingTotalFee()
     } else if (data.match(StudentNotEnrolled)) {
       toast.info(data, {
         theme: "colored",
@@ -24,6 +26,13 @@ const StudentFee = () => {
     }
     console.log("details are ", data);
   };
+  const calculatingTotalFee=()=>{
+    totalFee = fee.reduce(function (accumulator, item) {
+			return accumulator + item.totalFee;
+		}, 0);
+    console.log(totalFee);
+    settotalFee(totalFee)
+  }
   useEffect(() => {
     dispatch(setPageTitle({ title: "Fee Details" }));
     gettingFeeDetails();
@@ -53,7 +62,7 @@ const StudentFee = () => {
           </div>
           <div className="flex mt-4 justify-between bg-accent p-2 px-4 rounded-md ">
             <span className="font-bold text-lg text-white">Totol Fee</span>
-            <span className="font-semibold text-lg text-white">600</span>
+            <span className="font-semibold text-lg text-white">{totalFee}</span>
           </div>
         </div>
       </div>

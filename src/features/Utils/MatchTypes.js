@@ -2,6 +2,12 @@
 export const EnlistedSuccessfully="Course Enlisted Successfully"
 export const AlreadyEnlisted="Course Already Enlisted"
 export const StudentDoesNotExist="Student doesnot exist"
+// Finishing Course
+export const finishSuccessful="Course Finished Please Rate Tutor"
+export const finsihError="No Course Enrolled To Finish"
+// Rating tutor
+export const tutorRated="Tutor Rated"
+export const courseNotFound="Course Not Found"
 // student learning
 
 // find tutor
@@ -39,5 +45,8 @@ export const CourseAlreadyExists="Already Exist"
 export const CourseGroupUpdatedSuccessfully="Course Group Successfully updated"
 export const CourseGroupAdded="Course Group Added"
 
+// Admin Fee Group
+export const FeeGroupAdded="Fee Group Added Successfully"
+export const FeeGroupUpdated="Fee Group Updated Successfully"
 // Parent fee
 export const StudentNotEnrolled="Student Has Not Enrolled Any course"

@@ -1,35 +1,34 @@
-import React from "react";
+import React,{useState} from "react";
 import Rating from "react-rating";
-import GreyStar from '../../../assests/star-grey.png'
-import RedStar from '../../../assests/star-red.png'
-import YellowStar from '../../../assests/star-yellow.png'
-
-const RateTutorModal = ({ selectedCourse }) => {
+import { FaStar } from 'react-icons/fa';
+const RateTutorModal = ({ selectedCourse,RatingTutor }) => {
+  const [rating, setRating] = useState(0)
+  const handleRatingChange = (value) => {
+    setRating(value)
+  };
+  const rateTutor=()=>{
+    RatingTutor(selectedCourse,rating)
+  }
   return (
     <>
       <input type="checkbox" id="ratetutor" className="modal-toggle" />
-      <label className="modal modal-bottom sm:modal-middle" htmlFor="ratetutor">
-        <div className="modal-box ">
-          <h3 className="font-bold text-lg text-start ">Rate Tutor</h3>
-          <p className="mb-4 text-base text-start font-semibold">{selectedCourse.coursename}</p>
-          <div className=" flex flex-col gap-3 mb-4">
-            <div>
+      <label className="modal" htmlFor="ratetutor">
+        <div className="modal-box max-w-sm">
+          <h3 className="font-bold text-xl text-center">Rate Tutor</h3>
+          <div className=" flex  gap-8 my-4 container mx-auto items-center justify-center">
+          <p className="text-base text-start font-semibold">
+            {selectedCourse.coursename}
+          </p>
               <Rating
-                placeholderRating={0}
+                initialRating={0}
                 fractions={2}
-                emptySymbol={
-                  <img src={GreyStar} className="icon" />
-                }
-                placeholderSymbol={
-                  <img src={RedStar} className="icon " />
-                }
-                fullSymbol={
-                  <img src={YellowStar} className="icon " />
-                }
-                
+                emptySymbol={<FaStar size={24} color="#ddd" />}
+                fullSymbol={<FaStar size={24} color="#ffc107 " />}
+                onChange={handleRatingChange}
               />
-            </div>
-            <button className="btn btn-accent mb-4">Rate Tutor</button>
+          </div>
+          <div className="w-full flex justify-center items-center">
+          <label htmlFor="ratetutor" className="btn btn-accent mb-2 btn-wide" onClick={rateTutor}>Rate Tutor</label>
           </div>
         </div>
       </label>

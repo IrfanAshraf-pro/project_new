@@ -1,7 +1,6 @@
-import ChevronDownIcon from  '@heroicons/react/24/outline/ChevronDownIcon'
 import {useEffect, useState} from 'react'
 import { Link, useLocation } from 'react-router-dom'
-
+import {AiOutlineArrowDown} from 'react-icons/ai'
 
 function SidebarSubmenu({submenu, name, icon}){
     const location = useLocation()
@@ -19,7 +18,7 @@ function SidebarSubmenu({submenu, name, icon}){
             {/** Route header */}
             <div className='w-full' onClick={() => setIsExpanded(!isExpanded)}>
                 {icon} {name} 
-                <ChevronDownIcon className={'w-5 h-5 mt-1 float-right delay-400 duration-500 transition-all  ' + (isExpanded ? 'rotate-180' : '')}/>
+                <AiOutlineArrowDown className={'w-5 h-5 mt-1 float-right delay-400 duration-500 transition-all  ' + (isExpanded ? 'rotate-180' : '')}/>
             </div>
 
             {/** Submenu list */}

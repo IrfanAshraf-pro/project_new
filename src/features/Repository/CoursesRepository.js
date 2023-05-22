@@ -5,6 +5,8 @@ const allcoursesTutor = "tutor/GetCoursesList";
 const studentEnlisted = "student/GetStudentEnlistedCourses";
 const tutorEnlisted = "tutor/GetTutorEnlistedCourses";
 const studentAddCourses = "student/StudentCourseEnlist";
+const studentFinishCourse="student/FinishCourse"
+const rateTutor="student/RateTutor"
 const findTutor = "student/FindTutor";
 const GetCourseGroup = "tutor/GetCourseGroup";
 const SaveCourceGroup = "tutor/SaveCourseGroup";
@@ -35,6 +37,16 @@ export default {
   getStudentLearning(semail){
     const url=`${GetStudentLearning}?semail=${semail}`
     return Repository.get(url)
+  },
+  // Student Finish Course
+  finishCourse(course){
+    const url=`${studentFinishCourse}`
+    console.log('Finishing course url',url);
+    return Repository.post(url,course)
+  },
+  RateTutor(tutoremail,studentemail,courseid,rating){
+    const url=`${rateTutor}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&rating=${rating}`
+    return Repository.post(url)
   },
   // tutor functions
   tutorAllCourses(email) {

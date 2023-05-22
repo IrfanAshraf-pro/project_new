@@ -26,7 +26,7 @@ const TutorTodayClasses = () => {
   // calling take class
   const takeClass = async (classs) => {
     console.log('taking class ',classs);
-    const {data}= await todayclasses.takeTodayClass(user.email,classs.coursename,classs.name,classs.slot.toString(),classs.isReschedule,classs.isPreSchedule)
+    const {data}= await todayclasses.takeTodayClass(user.email,classs.coursename,classs.name,classs.slot.toString(),classs.isReschedule,classs.isPreSchedule,classs.classDate)
     console.log('todays classses take responsee data is ',data);
     if(data.match(ClassTaken)){
       toast.success(data,{

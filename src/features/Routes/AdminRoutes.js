@@ -1,23 +1,7 @@
-import BellIcon from '@heroicons/react/24/outline/BellIcon'
-import DocumentTextIcon from '@heroicons/react/24/outline/DocumentTextIcon'
-import Squares2X2Icon from '@heroicons/react/24/outline/Squares2X2Icon'
-import TableCellsIcon from '@heroicons/react/24/outline/TableCellsIcon'
-import WalletIcon from '@heroicons/react/24/outline/WalletIcon'
-import CodeBracketSquareIcon from '@heroicons/react/24/outline/CodeBracketSquareIcon'
-import DocumentIcon from '@heroicons/react/24/outline/DocumentIcon'
-import ExclamationTriangleIcon from '@heroicons/react/24/outline/ExclamationTriangleIcon'
-import ShieldCheckIcon from '@heroicons/react/24/outline/ShieldCheckIcon'
-import ArrowRightOnRectangleIcon from '@heroicons/react/24/outline/ArrowRightOnRectangleIcon'
-import UserIcon from '@heroicons/react/24/outline/UserIcon'
-import Cog6ToothIcon from '@heroicons/react/24/outline/Cog6ToothIcon'
-import BoltIcon from '@heroicons/react/24/outline/BoltIcon'
-import ChartBarIcon from '@heroicons/react/24/outline/ChartBarIcon'
-import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon'
-import InboxArrowDownIcon from '@heroicons/react/24/outline/InboxArrowDownIcon'
-import UsersIcon from '@heroicons/react/24/outline/UsersIcon'
-import KeyIcon from '@heroicons/react/24/outline/KeyIcon'
-import DocumentDuplicateIcon from '@heroicons/react/24/outline/DocumentDuplicateIcon'
-
+import {BsFillPersonFill} from 'react-icons/bs'
+import {BiBookAlt} from 'react-icons/bi'
+import {AiFillSetting} from 'react-icons/ai'
+import {GiMoneyStack } from 'react-icons/gi'
 const iconClasses = `h-6 w-6`
 const submenuIconClasses = `h-5 w-5`
 const adminroutes = [
@@ -28,19 +12,25 @@ const adminroutes = [
     // },
     {
         path:'/app/profile',
-        icon:<BoltIcon className={iconClasses}/>,
+        icon:<BsFillPersonFill className={iconClasses}/>,
         name:'Profile'
     },
     {
         path:'/app/admincourses',
-        icon:<DocumentDuplicateIcon className={iconClasses}/>,
+        icon:<BiBookAlt className={iconClasses}/>,
         name:'Courses'
     },
     {
         path:'/app/admingroupsetting',
-        icon:<KeyIcon className={iconClasses}/>,
+        icon:<AiFillSetting className={iconClasses}/>,
         name:'Course Groups'
     },
+    {
+        path:'/app/adminFeeGroups',
+        icon:<GiMoneyStack className={iconClasses}/>,
+        name:'Fee Structure'
+    },
+    
 ]
 
 export default adminroutes

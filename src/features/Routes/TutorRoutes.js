@@ -1,23 +1,9 @@
-import BellIcon from '@heroicons/react/24/outline/BellIcon'
-import DocumentTextIcon from '@heroicons/react/24/outline/DocumentTextIcon'
-import Squares2X2Icon from '@heroicons/react/24/outline/Squares2X2Icon'
-import TableCellsIcon from '@heroicons/react/24/outline/TableCellsIcon'
-import WalletIcon from '@heroicons/react/24/outline/WalletIcon'
-import CodeBracketSquareIcon from '@heroicons/react/24/outline/CodeBracketSquareIcon'
-import DocumentIcon from '@heroicons/react/24/outline/DocumentIcon'
-import ExclamationTriangleIcon from '@heroicons/react/24/outline/ExclamationTriangleIcon'
-import ShieldCheckIcon from '@heroicons/react/24/outline/ShieldCheckIcon'
-import ArrowRightOnRectangleIcon from '@heroicons/react/24/outline/ArrowRightOnRectangleIcon'
-import UserIcon from '@heroicons/react/24/outline/UserIcon'
-import Cog6ToothIcon from '@heroicons/react/24/outline/Cog6ToothIcon'
-import BoltIcon from '@heroicons/react/24/outline/BoltIcon'
-import ChartBarIcon from '@heroicons/react/24/outline/ChartBarIcon'
-import InformationCircleIcon from '@heroicons/react/24/outline/InformationCircleIcon'
-import InboxArrowDownIcon from '@heroicons/react/24/outline/InboxArrowDownIcon'
-import UsersIcon from '@heroicons/react/24/outline/UsersIcon'
-import KeyIcon from '@heroicons/react/24/outline/KeyIcon'
-import DocumentDuplicateIcon from '@heroicons/react/24/outline/DocumentDuplicateIcon'
-
+import {BsFillPersonFill} from 'react-icons/bs'
+import {AiFillSchedule} from 'react-icons/ai'
+import {BiBookAlt} from 'react-icons/bi'
+import {SiGoogleclassroom} from 'react-icons/si'
+import {GiTeacher} from 'react-icons/gi'
+import {GrSchedules} from 'react-icons/gr'
 const iconClasses = `h-6 w-6`
 const submenuIconClasses = `h-5 w-5`
 const tutorRoutes = [
@@ -28,34 +14,42 @@ const tutorRoutes = [
     // },
     {
         path:'/app/profile',
-        icon:<BoltIcon className={iconClasses}/>,
+        icon:<BsFillPersonFill className={iconClasses}/>,
         name:'Profile'
     },
     {
       path:'/app/schedule',
-      icon:<DocumentDuplicateIcon className={iconClasses}/>,
+      icon:<AiFillSchedule className={iconClasses}/>,
       name:'Schedule',
     },
     {
       path:'/app/tutorcourses',
-      icon:<Cog6ToothIcon className={iconClasses}/>,
+      icon:<BiBookAlt className={iconClasses}/>,
       name:'Courses',
     },
     {
       path:'/app/tutorClasses',
-      icon:<WalletIcon className={iconClasses}/>,
+      icon:<SiGoogleclassroom className={iconClasses}/>,
       name:'Today Classes'
     },
     {
       path:'/app/teaching',
-      icon:<WalletIcon className={iconClasses}/>,
+      icon:<GiTeacher className={iconClasses}/>,
       name:'Teaching'
     },
     {
-      path:'/app/tutorscheduling',
-      icon:<WalletIcon className={iconClasses}/>,
+      path:'/app/tutorschedulingoptions',
+      icon:<GrSchedules className={iconClasses}/>,
       name:'Rescheduling'
-    }
+    },
 ]
 
+// {
+//   path:'/tutorschedulingoptions',
+//   component:ScheduleOptions
+// },
+// {
+//   path:'/tutormultirescheduling',
+//   component:MultipleScheduling
+// },
 export default tutorRoutes
