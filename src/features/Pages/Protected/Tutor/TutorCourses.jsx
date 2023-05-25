@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import LoaderDashboard from "../../../Components/Custom/LoaderDashboard";
 // repository
 import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
+import EmptyImg from "../../../../assests/empty.png";
+
 var course = RepositoryFactory.get("course");
 const TutorCourses = () => {
   const { user } = useSelector((state) => state.auth);
@@ -77,13 +79,30 @@ const TutorCourses = () => {
           </label>
           <AddCourseModal courses={courses} courseGroup={courseGroup} />
         </div>
-        <div className="flex flex-col h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral">
-          {enrolledCourses.map((course) => (
-            <div key={course.courseid}>
-              <EnrolledCourseRow coursee={course} />
-            </div>
-          ))}
-        </div>
+        {enrolledCourses.length > 0 ? (
+          <div
+            className={`${
+              enrolledCourses.length > 3
+                ? "h-2/3 md:h-68 overflow-y-scroll "
+                : ""
+            } flex flex-col gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral`}
+          >
+            {enrolledCourses.map((course) => (
+              <div key={course.courseid}>
+                <EnrolledCourseRow coursee={course} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col md:max-w-xl mx-auto">
+            <img
+              src={EmptyImg}
+              alt="no course enrolled"
+              className="w-60 md:w-72"
+            />
+            <p className="text-center font-bold text-2xl">No course Enrolled</p>
+          </div>
+        )}
       </div>
       <CourseGroupModal
         group={group}

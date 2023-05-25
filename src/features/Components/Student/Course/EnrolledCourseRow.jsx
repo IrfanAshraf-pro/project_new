@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import EnterSlotsToMatch from "./EnterSlotsToMatch";
 
-const EnrolledCourseRow = ({
-  coursee,
-  setEnrolledCourseSelected
-}) => {
-
-const onClick=()=>{
-  setEnrolledCourseSelected(coursee)
-}
+const EnrolledCourseRow = ({ coursee, setEnrolledCourseSelected }) => {
+  const onClick = () => {
+    setEnrolledCourseSelected(coursee);
+  };
   return (
     <>
       <div className="group">
@@ -17,23 +13,22 @@ const onClick=()=>{
             {coursee.coursename}
           </span>
           <div>
-          <label
-            htmlFor="slotsModal"
-            className="btn btn-accent group-hover:bg-base-100 group-hover:text-accent btn-sm md:btn-md"
-            onClick={onClick}
-          >
-            Find Tutor
-          </label>
-          <button
-            className="btn btn-accent group-hover:bg-base-100 ml-1 group-hover:text-accent btn-sm md:btn-md"
-            onClick={onClick}
-          >
-            Find Best Tutor
-          </button>
+            <label
+              htmlFor="slotsModal"
+              className="btn btn-accent group-hover:bg-base-100 group-hover:text-accent hover:bg-secondary btn-sm md:btn-md"
+              onClick={onClick}
+            >
+              Find Tutor
+            </label>
+            <button
+              className="btn btn-accent group-hover:bg-base-100 ml-1   group-hover:text-accent btn-sm md:btn-md "
+              onClick={onClick}
+            >
+              Find Best Tutor
+            </button>
           </div>
         </div>
       </div>
-
     </>
   );
 };

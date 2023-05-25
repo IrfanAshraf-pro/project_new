@@ -92,9 +92,6 @@ const ScheduleMain = () => {
               <p className="text-xs xl:w-7/12 md:text-sm lg:text-base">
                 {slot.time}
               </p>
-              <p className="text-xs xl:w-5/12 md:text-sm lg:text-base">
-                {slot.stamp}
-              </p>
             </div>
           ))}
         </div>

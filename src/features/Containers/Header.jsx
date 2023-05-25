@@ -66,7 +66,7 @@ function Header() {
         <div className="order-last">
           {/* Multiple theme selection, uncomment this if you want to enable multiple themes selection, 
                 also includes corporate and retro themes in tailwind.config file */}
-          <select
+          {/* <select
             className="select mr-4 border-2 border-accent"
             data-choose-theme
           >
@@ -83,7 +83,7 @@ function Header() {
             <option value="aqua">Aqua</option>
             <option value="luxury">Luxury</option>
             <option value="lofi">Lofi</option>
-          </select> 
+          </select>  */}
 
           {/* Light and dark theme selection toogle **/}
           {/* <label className="swap ">

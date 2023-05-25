@@ -11,7 +11,16 @@ const dateChecker=(startDate)=>{
     const dateJoin=month+"/"+day+"/"+year
     return dateJoin
 }
-
+const calculateDateBetween=(startDate,endDate)=>{
+    let startmonth=startDate.getMonth()+1
+    let startday=startDate.getDate()
+    let startyear=startDate.getFullYear()
+    //enddate data
+    let endmonth=startDate.getMonth()+1
+    let endday=startDate.getDate()
+    let endyear=startDate.getFullYear()
+    
+}
 export{
     dateChecker
 }

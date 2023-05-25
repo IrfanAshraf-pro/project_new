@@ -51,13 +51,12 @@ const ScheduleRow = ({ schedule, handleScheduleUpdate }) => {
   return (
     <div className="flex items-start justify-between w-full py-1 lg:pr-2">
       {iteratingOverRow()}
-      
-      <ScheduleCheckBox
+      {/* <ScheduleCheckBox
         item={all}
         setRow={setRow}
         isAll={true}
         setAllValues={setAllValues}
-      />
+      /> */}
     </div>
   );
 };

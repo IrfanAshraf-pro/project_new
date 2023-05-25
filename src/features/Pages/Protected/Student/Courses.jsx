@@ -16,17 +16,18 @@ import {
 import { toast } from "react-toastify";
 import TutorsModal from "../../../Components/Student/Course/TutorsModal";
 import EnterSlotsToMatch from "../../../Components/Student/Course/EnterSlotsToMatch";
+import EmptyImg from "../../../../assests/empty.png";
 var course = RepositoryFactory.get("course");
 const Courses = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [tutors, setTutors] = useState([])
+  const [tutors, setTutors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showTutorModal, setShowTutorModal] = useState(false)
-  const [selectedCourse, setSelectedCourse] = useState({})
-  const [enrolledCourseSelected,setEnrolledCourseSelected]=useState({})
+  const [showTutorModal, setShowTutorModal] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState({});
+  const [enrolledCourseSelected, setEnrolledCourseSelected] = useState({});
   // for Enter no of slots modal
   const [noOfSlots, setnoOfSlots] = useState(1);
 
@@ -66,33 +67,32 @@ const Courses = () => {
     setIsLoading(false);
   };
   // getting slots entered by user
-  const handleSlotRequest=async(slot,courses)=>{
-      setTutors([])
-      // setSelectedCourse([])
-      let {data}=await course.findTutor(user.email,courses.courseid,slot)
-      if(typeof data=='object' && data.length>0){
-        setTutors(data)
-        setSelectedCourse(courses)
-        setShowTutorModal(true)
-      }else if(typeof data=='object' && data.length===0){
-        toast.info(FindTutorNotAvailable,{
-          theme:"colored"
-        })
-      }
-      else if(data.match(FindTutorNotAvailable)){
-        toast.info(data,{
-          theme:"colored"
-        })
-      }else if(data.match(FindTutorNoSchedule)){
-        toast.warning(data,{
-          theme:'colored'
-        })
-      }else{
-        toast.info(data,{
-          theme:'colored'
-        })
-      }
-  }
+  const handleSlotRequest = async (slot, courses) => {
+    setTutors([]);
+    // setSelectedCourse([])
+    let { data } = await course.findTutor(user.email, courses.courseid, slot);
+    if (typeof data == "object" && data.length > 0) {
+      setTutors(data);
+      setSelectedCourse(courses);
+      setShowTutorModal(true);
+    } else if (typeof data == "object" && data.length === 0) {
+      toast.info(FindTutorNotAvailable, {
+        theme: "colored",
+      });
+    } else if (data.match(FindTutorNotAvailable)) {
+      toast.info(data, {
+        theme: "colored",
+      });
+    } else if (data.match(FindTutorNoSchedule)) {
+      toast.warning(data, {
+        theme: "colored",
+      });
+    } else {
+      toast.info(data, {
+        theme: "colored",
+      });
+    }
+  };
   useEffect(() => {
     dispatch(setPageTitle({ title: "Courses" }));
     getEnrolledCourses();
@@ -116,22 +116,35 @@ const Courses = () => {
           </label>
           <CourseModal courses={courses} addCourse={addCourse} />
         </div>
-        {
-          enrolledCourses.length>0?(
-            <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral">
-          {enrolledCourses.map((course) => (
-            <div key={course.courseid}>
-            <EnrolledCourseRow
-              coursee={course}
-              // handleSlotRequest={handleSlotRequest}
-              // setShowTutorModal={setShowTutorModal}
-              setEnrolledCourseSelected={setEnrolledCourseSelected}
-            ></EnrolledCourseRow>
-            </div>
-          ))}
-        </div>
-          ):<p>Please Enlist some courses</p>
-        }
+        {enrolledCourses.length > 0 ? (
+          <div
+            className={`${
+              enrolledCourses.length > 3
+                ? "h-2/3 md:h-68 overflow-y-scroll "
+                : ""
+            } flex flex-col gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral`}
+          >
+            {enrolledCourses.map((course) => (
+              <div key={course.courseid}>
+                <EnrolledCourseRow
+                  coursee={course}
+                  // handleSlotRequest={handleSlotRequest}
+                  // setShowTutorModal={setShowTutorModal}
+                  setEnrolledCourseSelected={setEnrolledCourseSelected}
+                ></EnrolledCourseRow>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col md:max-w-xl mx-auto">
+            <img
+              src={EmptyImg}
+              alt="no course enrolled"
+              className="w-60 md:w-72"
+            />
+            <p className="text-center font-bold text-2xl">No course Enrolled</p>
+          </div>
+        )}
       </div>
       <EnterSlotsToMatch
         course={enrolledCourseSelected}
@@ -139,7 +152,12 @@ const Courses = () => {
         setnoOfSlots={setnoOfSlots}
         handleSlotRequest={handleSlotRequest}
       />
-      <TutorsModal showTutorModal={showTutorModal} setShowTutorModal={setShowTutorModal} tutors={tutors} selectedCourse={selectedCourse}/>
+      <TutorsModal
+        showTutorModal={showTutorModal}
+        setShowTutorModal={setShowTutorModal}
+        tutors={tutors}
+        selectedCourse={selectedCourse}
+      />
     </>
   );
 };

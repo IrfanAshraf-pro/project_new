@@ -212,71 +212,56 @@ const SplitingSchedule = (schedule) => {
   })
   return st
   }
-  const days = ["Mon", "Tue", "Wed", "Thu", "Frid", "Sat", "Sun", "All"];
+  // "All"
+  const days = ["Mon", "Tue", "Wed", "Thu", "Frid", "Sat", "Sun", ];
   const timeslots = [
     {
       time: "08:00-9:00",
-      stamp: "AM",
     },
     {
       time: "09:00-10:00",
-      stamp: "AM",
     },
     {
       time: "10:00-11:00",
-      stamp: "AM",
     },
     {
       time: "11:00-12:00",
-      stamp: "AM",
     },
     {
-      time: "12:00-01:00",
-      stamp: "PM",
+      time: "12:00-13:00",
     },
     {
-      time: "01:00-02:00",
-      stamp: "PM",
+      time: "13:00-14:00",
     },
     {
-      time: "02:00-03:00",
-      stamp: "PM",
+      time: "14:00-15:00",
     },
     {
-      time: "03:00-04:00",
-      stamp: "PM",
+      time: "15:00-16:00",
     },
     {
-      time: "04:00-05:00",
-      stamp: "PM",
+      time: "16:00-17:00",
     },
     {
-      time: "05:00-06:00",
-      stamp: "PM",
+      time: "17:00-18:00",
     },
     {
-      time: "06:00-07:00",
-      stamp: "PM",
+      time: "18:00-19:00",
     },
     {
-      time: "07:00-08:00",
-      stamp: "PM",
+      time: "19:00-20:00",
     },
     {
-      time: "08:00-09:00",
-      stamp: "PM",
+      time: "20:00-21:00",
     },
     {
-      time: "09:00-10:00",
-      stamp: "PM",
+      time: "21:00-22:00",
     },
     {
-      time: "10:00-11:00",
-      stamp: "PM",
+      time: "22:00-23:00",
     },
     {
-      time: "11:00-12:00",
-      stamp: "PM",
+      time: "23:00-00:00",
     },
   ];
   

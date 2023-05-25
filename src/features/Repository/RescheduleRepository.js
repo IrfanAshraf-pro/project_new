@@ -2,8 +2,11 @@ import Repository from "./Repository";
 const GetClassesToReschedule="tutor/GetTutorClassesForRescheduling"
 const GetFreeClassesToRescheduleTo="tutor/GetClassesToRescheduleTo"
 const GetSuggestedClassesToRescheduleTo="tutor/GetSuggestedClassesToRescheduleTo"
+const GetSuggestedClassesToRescheduleToMultiple="tutor/GetSuggestedClassesToRescheduleToMultiple"
 const rescheduleUrl="tutor/reschedule"
 const Preschedule="tutor/PreSchedule"
+// multiple
+const GetTutorClassesForReschedulingMultiple="tutor/GetTutorClassesForReschedulingMultiple"
 export default{
     getClassesToReschedule(email,date,day){
         const url=`${GetClassesToReschedule}?email=${email}&date=${date}&day=${day}`
@@ -27,6 +30,14 @@ export default{
     getSuggestedClasesForRescheduling(temail,semail,date,day,coursename){
         const url=`${GetSuggestedClassesToRescheduleTo}?temail=${temail}&semail=${semail}&date=${date}&day=${day}&coursename=${coursename}`
         return Repository.get(url)
-
+    },
+    // Multiple Rescheduling
+    getClassesForMultipleRescheduling(email,startDate,startDay,endDate,endDay){
+        const url=`${GetTutorClassesForReschedulingMultiple}?email=${email}&startDate=${startDate}&startDay=${startDay}&endDate=${endDate}&endDay=${endDay}`
+        return Repository.get(url)
+    },
+    getMultipleSuggestedClasses(temail,semail,startDate,startDay,endDate,endDay,classDate,coursename){
+        const url=`${GetSuggestedClassesToRescheduleToMultiple}?temail=${temail}&semail=${semail}&startDate=${startDate}&startDay=${startDay}&endDate=${endDate}&endDay=${endDay}&classDate=${classDate}&coursename=${coursename}`
+        return Repository.get(url)
     }
 }
