@@ -28,6 +28,7 @@ const Courses = () => {
   const [showTutorModal, setShowTutorModal] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState({});
   const [enrolledCourseSelected, setEnrolledCourseSelected] = useState({});
+  const [showSlotModal, setShowSlotModal] = useState(false);
   // for Enter no of slots modal
   const [noOfSlots, setnoOfSlots] = useState(1);
 
@@ -128,8 +129,8 @@ const Courses = () => {
               <div key={course.courseid}>
                 <EnrolledCourseRow
                   coursee={course}
-                  // handleSlotRequest={handleSlotRequest}
-                  // setShowTutorModal={setShowTutorModal}
+                  showSlotModal={showSlotModal}
+                  setShowSlotModal={setShowSlotModal}
                   setEnrolledCourseSelected={setEnrolledCourseSelected}
                 ></EnrolledCourseRow>
               </div>
@@ -151,6 +152,8 @@ const Courses = () => {
         noOfSlots={noOfSlots}
         setnoOfSlots={setnoOfSlots}
         handleSlotRequest={handleSlotRequest}
+        showSlotModal={showSlotModal}
+        setShowSlotModal={setShowSlotModal}
       />
       <TutorsModal
         showTutorModal={showTutorModal}

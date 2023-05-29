@@ -7,6 +7,8 @@ import{FaBars} from 'react-icons/fa'
 import { openRightDrawer } from "../../app/Slices/Dashboard/RightDrawerSlice";
 import { RIGHT_DRAWER_TYPES } from "../Utils/GlobalUtilConstant";
 import ProfileImg from '../../assests/saud.jpeg'
+import Avatar from '../../assests/avatar.jpg'
+
 import { NavLink, Routes, Link, useNavigate } from "react-router-dom";
 
 function Header() {
@@ -111,7 +113,7 @@ function Header() {
           <div className="dropdown dropdown-end ml-4">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={ProfileImg} alt="profile" />
+                <img src={Avatar} alt="profile" />
               </div>
             </label>
             <ul

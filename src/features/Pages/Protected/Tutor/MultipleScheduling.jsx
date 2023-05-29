@@ -153,11 +153,6 @@ const MultipleScheduling = () => {
             >
               Search Classes
             </button>
-            {classes.length > 0 && (
-              <button className="btn btn-primary w-64 max-w-sm hover:btn-accent text-accent hover:text-white">
-                Auto Reschedule
-              </button>
-            )}
           </div>
         </div>
         <div className="overflow-hidden flex flex-col h-full p-2 md:p-4   w-full sm:w-[90%] md:w-[80%] mx-auto ">

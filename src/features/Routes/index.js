@@ -37,10 +37,10 @@ const routes = [
     path: '/dashboard', // the url
     component: Dashboard, // view rendered
   },
-  // {
-  //   path: '/welcome', // the url
-  //   component: Welcome, // view rendered
-  // },
+  {
+    path: '/welcome', // the url
+    component: Welcome, // view rendered
+  },
   {
     path:'/profile', //the url
     component:Profile , //view rendered

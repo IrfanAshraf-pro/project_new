@@ -123,7 +123,7 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
           {tutor.name}
         </span>
         <span className="text-lg font-semibold text-secondary">
-          {tutor.cgpa} / <RatingComponent rating={tutor.rating} />
+          {tutor.grade} / <RatingComponent rating={tutor.rating} />
         </span>
       </h5>
       <div className="grid grid-cols-2  gap-3 md:gap-4  justify-between overflow-x-hidden">

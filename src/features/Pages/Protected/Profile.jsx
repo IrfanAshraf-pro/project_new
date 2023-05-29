@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {FiSettings} from 'react-icons/fi'
 import { setPageTitle } from "../../../app/Slices/Dashboard/HeaderSlice";
 import ProfileImg from "../../../assests/saud.jpeg";
+import Avatar from '../../../assests/avatar.jpg'
 const Profile = () => {
   const dispatch = useDispatch();
   const { user, role } = useSelector((state) => state.auth);
@@ -18,7 +19,7 @@ const Profile = () => {
         <div className="relative w-64 ">
           <img
             className="w-64 h-64 rounded-full absolute group ring ring-3 p-1 ring-accent"
-            src={ProfileImg}
+            src={Avatar}
             alt=""
           />
           <div className="w-64 h-64 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500">
