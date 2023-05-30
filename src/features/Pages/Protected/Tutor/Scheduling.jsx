@@ -8,13 +8,15 @@ import RescheduleModal from "../../../Components/Tutor/Rescheduling/RescheduleMo
 import RescheduleInfoModal from "../../../Components/Tutor/Rescheduling/RescheduleInfoModal";
 import PreScheduleModal from "../../../Components/Tutor/Rescheduling/PreScheduleModal";
 import { dateChecker } from "../../../Utils/DateFunctions";
+import EmptyImg from "../../../../assests/noClass.svg";
+
 const Scheduling = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [classes, setClasses] = useState([]);
   const [selected, setSelected] = useState({});
   const [isReschedule, setIsReschedule] = useState(false);
   const [isPreschedule, setIsPreschedule] = useState(false);
-  const [isDone, setIsDone] = useState(false)
+  const [isDone, setIsDone] = useState(false);
   const [tdata, setTdata] = useState({
     date: "",
     day: "",
@@ -22,11 +24,13 @@ const Scheduling = () => {
   const { user } = useSelector((state) => state.auth);
   // repository
   const repo = RepositoryFactory.get("reschedule");
-  const onClick = () => { 
-    let date=dateChecker(startDate)
+  const onClick = () => {
+    let date = dateChecker(startDate);
+    console.log("date selected is", date);
     gettingClasses(date, startDate.getDay());
   };
   const gettingClasses = async (date, dayc) => {
+    setSelected({})
     let day = getDayCustom(dayc);
     console.log("getting data");
     let dataSet = {
@@ -38,7 +42,7 @@ const Scheduling = () => {
     const { data } = await repo.getClassesToReschedule(user.email, date, day);
     if (typeof data === "object") {
       setClasses(data);
-      console.log('getting classes are ',data);
+      console.log("getting classes are ", data);
     } else {
       toast.info(data, {
         theme: "colored",
@@ -65,25 +69,24 @@ const Scheduling = () => {
   };
 
   useEffect(() => {
-    if(isDone){
-      setClasses([])
-      setSelected({})
-      setIsReschedule(false)
-      setIsPreschedule(false)
-      setIsDone(false)
-      setTdata({})
+    if (isDone) {
+      setClasses([]);
+      setSelected({});
+      setIsReschedule(false);
+      setIsPreschedule(false);
+      setIsDone(false);
+      setTdata({});
     }
-  
+
     return () => {
-      setClasses([])
-      setSelected({})
-      setIsReschedule(false)
-      setIsPreschedule(false)
-      setIsDone(false)
-      setTdata({})
-    }
-  }, [isDone])
-  
+      setClasses([]);
+      setSelected({});
+      setIsReschedule(false);
+      setIsPreschedule(false);
+      setIsDone(false);
+      setTdata({});
+    };
+  }, [isDone]);
 
   return (
     <>
@@ -101,9 +104,10 @@ const Scheduling = () => {
             Search Classes
           </button>
         </div>
-        {classes.length > 0 && (
+        {classes.length > 0? (
           <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral w-full md:max-w-lg">
-            {classes.map((classitem) => (
+            {
+            classes.map((classitem) => (
               <ReschedulingRow
                 item={classitem}
                 key={classitem.slotno}
@@ -111,10 +115,19 @@ const Scheduling = () => {
               />
             ))}
           </div>
-        )}
+        ):
+        (<div className="flex flex-col md:max-w-xl mx-auto">
+        <img
+          src={EmptyImg}
+          alt="no class"
+          className="w-64 md:w-72"
+        />
+        <p className="text-center font-semibold text-2xl">No Class</p>
+      </div>)}
       </div>
       <RescheduleModal
         selected={selected}
+        startDate={startDate}
         setIsReschedule={setIsReschedule}
         setIsPreschedule={setIsPreschedule}
       />

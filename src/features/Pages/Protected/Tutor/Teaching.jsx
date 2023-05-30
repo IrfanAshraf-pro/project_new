@@ -38,7 +38,7 @@ const Teaching = () => {
           <div className="flex justify-between items-center  bg-base-100 px-4 py-2 rounded-md group-hover:bg-accent" 
           key={course.studentemail}>
             <span className="text-secondary group-hover:text-primary">
-              {course.studentemail}
+              {course.studentname}
             </span>
             <span className="text-secondary group-hover:text-primary">
               {course.coursename}

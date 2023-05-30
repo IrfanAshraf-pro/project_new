@@ -25,6 +25,7 @@ import Scheduling from '../Pages/Protected/Tutor/Scheduling'
 import FeeGroups from '../Pages/Protected/Admin/FeeGroups'
 import ScheduleOptions from '../Pages/Protected/Tutor/ScheduleOptions'
 import MultipleScheduling from '../Pages/Protected/Tutor/MultipleScheduling'
+import TutorFee from '../Pages/Protected/Tutor/TutorFee'
 const routes = [
   {
     path:'/schedule',//the url
@@ -83,6 +84,10 @@ const routes = [
   {
     path:'/tutorschedulingoptions/tutorscheduling',
     component:Scheduling
+  },
+  {
+    path:'/tutorfee',
+    component:TutorFee
   },
   // Admin routes
   {

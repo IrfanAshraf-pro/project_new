@@ -60,6 +60,10 @@ const ScheduleMain = () => {
     console.log("combined schedule is ", newScheduleCombined);
     dispatch(setSchedule({ schedule: newScheduleCombined }));
   };
+  useEffect(()=>{
+    console.log('inside checking of change schedule');
+    setSchedulee(SplitingSchedule(schedule))
+  },[schedule])
   // dispatching schedule when component is unmounted
   useEffect(() => {
     return () => {

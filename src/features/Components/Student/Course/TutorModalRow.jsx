@@ -7,6 +7,9 @@ import {
   RequestSentSuccessfully,
   TutorAlreadyRequested,
 } from "../../../Utils/MatchTypes";
+import Rating from "react-rating";
+import { FaStar } from "react-icons/fa";
+import {FiStar} from 'react-icons/fi'
 
 var tutorapi = RepositoryFactory.get("tutor");
 const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
@@ -93,15 +96,34 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
     );
     // return groupArr;
   };
+  const RatingComponent = ({ rating }) => {
+    return rating === "NA" ? (
+      <Rating
+        initialRating={0}
+        fractions={2}
+        emptySymbol={<FiStar size={16} color="#111" />}
+        fullSymbol={<FaStar size={16} color="#ffc107 " />}
+        readonly
+      />
+    ) : (
+      <Rating
+        initialRating={rating}
+        fractions={2}
+        emptySymbol={<FiStar size={16} color="#111" />}
+        fullSymbol={<FaStar size={16} color="#ffc107 " />}
+        readonly
+      />
+    );
+  };
 
   return (
     <div className="bg-neutral p-2 rounded-md w-full">
-      <h5 className="flex justify-between items-center w-full">
-        <span className="font-bold text-base capitalize text-secondary">
+      <h5 className="flex justify-between items-center w-full px-3">
+        <span className="font-semibold text-base capitalize text-secondary">
           {tutor.name}
         </span>
-        <span className="text-sm font-normal text-secondary">
-          {tutor.cgpa}/-
+        <span className="text-lg font-semibold text-secondary">
+          {tutor.cgpa} / <RatingComponent rating={tutor.rating} />
         </span>
       </h5>
       <div className="grid grid-cols-2  gap-3 md:gap-4  justify-between overflow-x-hidden">

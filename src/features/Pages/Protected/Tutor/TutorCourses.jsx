@@ -11,7 +11,6 @@ import LoaderDashboard from "../../../Components/Custom/LoaderDashboard";
 // repository
 import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
 import EmptyImg from "../../../../assests/empty.png";
-
 var course = RepositoryFactory.get("course");
 const TutorCourses = () => {
   const { user } = useSelector((state) => state.auth);
@@ -98,7 +97,7 @@ const TutorCourses = () => {
             <img
               src={EmptyImg}
               alt="no course enrolled"
-              className="w-60 md:w-72"
+              className="w-64 md:w-72"
             />
             <p className="text-center font-bold text-2xl">No course Enrolled</p>
           </div>

@@ -9,11 +9,7 @@ const Profile = () => {
   useEffect(() => {
     dispatch(setPageTitle({ title: "Profile" }));
   }, []);
-  const toastmaker = () => {
-    toast.success("Yohoo done", {
-      theme: "colored",
-    });
-  };
+
   return (
     <div className="py-6 relative">
       <div className="mx-auto w-64 text-center ">

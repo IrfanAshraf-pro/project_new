@@ -5,6 +5,7 @@ import TutorRepository from "./TutorRepository";
 import TodaysClasses from "./TodaysClasses";
 import FeeRepository from "./FeeRepository";
 import RescheduleRepository from "./RescheduleRepository";
+import NotificationRepository from "./NotificationRepository";
 const repositories={
     login:LoginRepository,
     course:CoursesRepository,
@@ -12,7 +13,8 @@ const repositories={
     tutor:TutorRepository,
     todayclasses:TodaysClasses,
     fee:FeeRepository,
-    reschedule:RescheduleRepository
+    reschedule:RescheduleRepository,
+    notification:NotificationRepository
 }
 
 export const RepositoryFactory={
