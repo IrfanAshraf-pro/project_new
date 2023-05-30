@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { Link } from 'react-router-dom'
+
+import { useDispatch, useSelector } from "react-redux";
+import {FiSettings} from 'react-icons/fi'
 import { setPageTitle } from "../../../app/Slices/Dashboard/HeaderSlice";
-import ProfileImg from '../../../assests/saud.jpeg'
+import ProfileImg from "../../../assests/saud.jpeg";
 const Profile = () => {
   const dispatch = useDispatch();
-  const {user}=useSelector(state=>state.auth)
+  const { user, role } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(setPageTitle({ title: "Profile" }));
   }, []);
@@ -14,7 +16,7 @@ const Profile = () => {
     <div className="py-6 relative">
       <div className="mx-auto w-64 text-center ">
         <div className="relative w-64 ">
-          <img 
+          <img
             className="w-64 h-64 rounded-full absolute group ring ring-3 p-1 ring-accent"
             src={ProfileImg}
             alt=""
@@ -29,9 +31,15 @@ const Profile = () => {
         </div>
       </div>
       <div className="absolute top-80 right-0 left-0 w-[90%] max-w-md mx-auto text-white rounded-md cshadow bg-accent p-4 px-6 flex  justify-between hover:bg-neutral hover:text-accent">
-          <span className="capitalize">{user.name}</span>
-          <span >{user.email}</span>
-        </div>
+        <span className="capitalize">{user.name}</span>
+        <span>{user.email}</span>
+      </div>
+      {role === "Student" && (
+        <Link to={'studentsettings'} className="absolute top-96 right-0 left-0 w-[90%] max-w-md mx-auto text-white rounded-md cshadow bg-accent p-4 px-6 flex items-center justify-between hover:bg-neutral hover:text-accent">
+          <span className="capitalize">Settings</span>
+          <span><FiSettings size={18}/></span>
+        </Link>
+      )}
     </div>
   );
 };

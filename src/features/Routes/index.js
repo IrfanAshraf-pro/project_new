@@ -26,6 +26,7 @@ import FeeGroups from '../Pages/Protected/Admin/FeeGroups'
 import ScheduleOptions from '../Pages/Protected/Tutor/ScheduleOptions'
 import MultipleScheduling from '../Pages/Protected/Tutor/MultipleScheduling'
 import TutorFee from '../Pages/Protected/Tutor/TutorFee'
+import Settings from '../Pages/Protected/Student/Settings'
 const routes = [
   {
     path:'/schedule',//the url
@@ -59,6 +60,10 @@ const routes = [
   {
     path:'/studentfee',
     component:StudentFee
+  },
+  {
+    path:'/profile/studentsettings',
+    component:Settings
   },
   // tutor routes
   {

@@ -26,6 +26,11 @@ export const PrescheduleSuccessful = "Class is Prescheduled";
 export const RequestSentSuccessfully = "Request sent Successfully";
 export const TutorAlreadyRequested = "Already Requested";
 
+// Student settings
+export const settingUpdated="Setting update Successfully"
+export const settingDoesnotExist="Setting Doesnot Exist"
+export const settingStudentNotExist="Student Doesnot Exist"
+
 //Notifcation
 export const ReplyToNotification = "Please reply to the notification";
 export const NotifcationRead = "Notification Read";

@@ -67,6 +67,7 @@ module.exports = {
           warning: "#9D5707",
 
           error: "#F2212C",
+          
         },
         darkcustom: {
           secondary: "#C4E70F",
