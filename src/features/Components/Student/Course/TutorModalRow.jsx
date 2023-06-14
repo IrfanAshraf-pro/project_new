@@ -6,7 +6,12 @@ import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
 import {
   RequestSentSuccessfully,
   TutorAlreadyRequested,
+  tutorRated,
 } from "../../../Utils/MatchTypes";
+import Rating from "react-rating";
+import { FaStar } from "react-icons/fa";
+import { FiStar } from "react-icons/fi";
+import { array } from "yup";
 
 var tutorapi = RepositoryFactory.get("tutor");
 const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
@@ -55,11 +60,32 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
       console.log(
         `user email ${user.email} tutor email ${tutor.email} course id is ${selectedCourse.courseid} values ${valuesString}`
       );
+      let enrolledDate=""
+      if (tutor?.message?.length > 0) {
+        var selectedValuesArr = Object.values(selectedValues);
+        console.log(selectedValuesArr);
+        let arrDb = tutor.message.map((item) => item.slot);
+        console.log(arrDb);
+        let isMatched=false;
+        for (let i = 0; i < arrDb.length; i++) {
+          tutor.message.forEach(item => {
+            if((+item.slot)===arrDb[i]){
+              isMatched=true
+              enrolledDate=item.date
+            }
+          });
+        }
+        
+      }else{
+        console.log('No tutor message');
+      }
+
       const { data } = await tutorapi.requestingTutor(
         user.email,
         tutor.email,
         selectedCourse.courseid,
-        valuesString
+        valuesString,
+        enrolledDate
       );
       if (data.match(RequestSentSuccessfully)) {
         setShowTutorModal(false);
@@ -84,7 +110,6 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
   };
   const splitCourseGroupe = (group) => {
     const slotString = group.split(",");
-    console.log(slotString);
     return (
       <p
         className="text-base font-semibold"
@@ -93,17 +118,43 @@ const TutorModalRow = ({ tutor, selectedCourse, setShowTutorModal }) => {
     );
     // return groupArr;
   };
+  const RatingComponent = ({ rating }) => {
+    return rating === "NA" ? (
+      <Rating
+        initialRating={0}
+        fractions={2}
+        emptySymbol={<FiStar size={16} color="#000" />}
+        fullSymbol={<FaStar size={16} color="#ffc107 " />}
+        readonly
+      />
+    ) : (
+      <Rating
+        initialRating={rating}
+        fractions={2}
+        emptySymbol={<FiStar size={16} color="#111" />}
+        fullSymbol={<FaStar size={16} color="#ffc107 " />}
+        readonly
+      />
+    );
+  };
 
   return (
     <div className="bg-neutral p-2 rounded-md w-full">
-      <h5 className="flex justify-between items-center w-full">
-        <span className="font-bold text-base capitalize text-secondary">
+      <h5 className="flex justify-between items-center w-full px-3">
+        <span className="font-semibold text-base capitalize text-secondary">
           {tutor.name}
         </span>
-        <span className="text-sm font-normal text-secondary">
-          {tutor.cgpa}/-
+        <span className="text-lg font-semibold text-secondary">
+          {tutor.grade} / <RatingComponent rating={tutor.rating}/> ({tutor.ratingCount})
         </span>
       </h5>
+      {tutor?.message?.length > 0 && (
+        <div>
+          {tutor.message.map((item, index) => (
+            <p className="text-error font-thin text-base">{item.message}</p>
+          ))}
+        </div>
+      )}
       <div className="grid grid-cols-2  gap-3 md:gap-4  justify-between overflow-x-hidden">
         <div className="col">
           {slotsShow.map((item, index) => (

@@ -5,6 +5,8 @@ import { setPageTitle } from '../../../../app/Slices/Dashboard/HeaderSlice'
 import {TodaysClassesrow} from '../../../Components/Student'
 import { toast } from "react-toastify";
 import {  NoClasses } from "../../../Utils/MatchTypes";
+import EmptyImg from "../../../../assests/noClass.svg";
+
 let todayclasses = RepositoryFactory.get("todayclasses");
 const TodayClasses = () => {
     const dispatch = useDispatch()
@@ -24,12 +26,15 @@ const TodayClasses = () => {
   };
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Schedule"}))
+        dispatch(setPageTitle({ title : "Today's Classes"}))
         callingTodayClasses();
       }, [])
     return (
       <div className="overflow-hidden flex flex-col h-full p-2 md:p-4  w-full sm:w-[90%] md:w-[70%] mx-auto">
-        <div className="flex items-center justify-between w-[95%] mx-auto p-2 rounded-md bg-secondary text-white">
+        {
+          classes.length>0?(
+            <>
+            <div className="flex items-center justify-between w-[95%] mx-auto p-2 rounded-md bg-secondary text-white">
           <p>Course</p>
           <p>Student</p>
           <p>Slot</p>
@@ -41,6 +46,15 @@ const TodayClasses = () => {
             <TodaysClassesrow classes={item} key={index}/>
           ))}
         </div>
+        </>
+          ):(
+            <div className="flex flex-col md:max-w-xl mx-auto">
+            <img src={EmptyImg} alt="no class" className="w-64 md:w-72" />
+            <p className="text-center font-semibold text-2xl">No Class Today</p>
+          </div>
+          )
+        }
+       
       </div>
   )
 }

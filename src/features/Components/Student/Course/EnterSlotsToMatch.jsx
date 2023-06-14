@@ -4,20 +4,26 @@ const EnterSlotsToMatch = ({
   setnoOfSlots,
   handleSlotRequest,
   course,
+  showSlotModal,
+  setShowSlotModal,
 }) => {
   const onClick = () => {
-    handleSlotRequest(noOfSlots,course)
+    handleSlotRequest(noOfSlots, course);
   };
   return (
     <div>
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="slotsModal" className="modal-toggle" />
+      <input
+        checked={showSlotModal | false}
+        onChange={setShowSlotModal}
+        type="checkbox"
+        id="slotsModal"
+        className="modal-toggle"
+      />
       <label htmlFor="slotsModal" className="modal cursor-pointer">
         <label className="modal-box relative" htmlFor="slotsModal">
           <h3 className="text-lg font-bold">Enter No of slots to be mathced</h3>
-          <p>
-            {course.coursename} 
-          </p>
+          <p>{course.coursename}</p>
 
           <div className="form-control w-full max-w-xs mx-auto my-2">
             <select

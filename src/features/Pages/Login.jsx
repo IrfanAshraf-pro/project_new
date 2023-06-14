@@ -114,6 +114,16 @@ const Login = () => {
                 <NavLink to="/signup">SignUp</NavLink>
               </span>
             </div>
+            <div className="w-full max-w-xs mx-auto mt-4 text-secondary text-lg md:text-xl">
+              Are you a 
+              <span className="ml-2 text-accent font-bold text-xl md:text-2xl hover:underline">
+                <NavLink to="/parentLogin">Parent </NavLink>
+              </span>
+              or
+              <span className="ml-2 text-accent font-bold text-xl md:text-2xl hover:underline">
+                <NavLink to="/signup">Visitor</NavLink>
+              </span>
+            </div>
           </form>
         </div>
       </div>

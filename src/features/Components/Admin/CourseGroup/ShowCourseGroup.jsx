@@ -1,48 +1,67 @@
 import React from "react";
-import UsersIcon from "@heroicons/react/24/outline/UsersIcon";
 import ShowCourseGroupRow from "./ShowCourseGroupRow";
+import { useState, useEffect } from "react";
 
-const ShowCourseGroup = ({ selectedGroup }) => {
-  console.log(selectedGroup.courses);
-  const courses = selectedGroup.courses;
-  console.log("courses are", courses);
+const ShowCourseGroup = ({ selectedGroup, handleCourseDelete,isShown,setIsShown }) => {
+
+  const handleClick = (course) => {
+    var newCourses = selectedGroup.subjectGroup.filter(
+      (c) =>
+        c.courseid !== course.courseid && c.coursename !== course.coursename
+    );
+    let group={...selectedGroup,subjectGroup:newCourses}
+    handleCourseDelete(group)
+  };
+  // const handleDoneClick = () => {
+  //   console.log("Done Clicked", courses);
+  // };
+  // const handleCancelClick = () => {
+  //   console.log("Cancelled");
+  //   // setCourses(selectedGroup)
+  // };
+  // useEffect(() => {
+  //   setCourses(selectedGroup.subjectGroup);
+  // }, [selectedGroup]);
+
+  console.log(selectedGroup);
   return (
     <>
       <input
         type="checkbox"
         id="showcoursegroupmodal"
         className="modal-toggle"
+        checked={isShown | false}
+        onChange={setIsShown}
       />
       <label
         className="modal modal-bottom sm:modal-middle"
         htmlFor="showcoursegroupmodal"
       >
-        <div className="modal-box ">
+        <label className="modal-box relative" htmlFor="">
           <h3 className="font-bold text-lg text-start">Courses in Group are</h3>
+          <div className="items-end text-end">
+          <label
+            htmlFor="addcoursetogroup"
+            className="btn btn-circle btn-accent"
+          >
+            +
+          </label>
+        </div>
           <div className=" flex flex-col gap-3 ">
             {
               // selectedGroup.courses.map(item=>ShowCourseGroupRow(item))
-              courses?.map((course) => (
-                <div className="p-2 px-4 rounded shadow-md mt-2 w-full bg-primary text-accent flex items-center justify-between">
-                  <p className="flex-1">{course}</p>
+              selectedGroup.subjectGroup?.map((course) => (
+                <div
+                  className="p-2 px-4 rounded shadow-md mt-2 w-full bg-primary text-accent flex items-center justify-between"
+                  key={course.courseid}
+                >
+                  <p className="flex-1">{course.coursename}</p>
                   <div className="flex">
-                    <div className="w-5 h-5 mr-3 text-green-600">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                        />
-                      </svg>
-                    </div>
-                    <div className="w-5 h-5 text-red-500">
+                    
+                    <div
+                      className="w-5 h-5 text-red-500 "
+                      onClick={() => handleClick(course)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -63,7 +82,7 @@ const ShowCourseGroup = ({ selectedGroup }) => {
               ))
             }
           </div>
-        </div>
+        </label>
       </label>
     </>
   );

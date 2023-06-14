@@ -1,30 +1,30 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isTutor:false,
-    notifications:[],
-    notificationlength:0
-}
+  notifications: [],
+  notificationlength: 0,
+};
 
 const notificationSlice = createSlice({
-    name: 'drawer',
-    initialState,
-    reducers: {
-        setModal:(state)=>{
-            state.modal=!state.modal
-        },
-        setNotifications:(state,action)=>{
-            state.notifications=action.payload.notifications
-            state.notificationlength=action.payload.notifications.length
-        },
-        setIsTutor:(state)=>{
-            state.isTutor=false
-        },
-        setTutor:(state)=>{
-            state.isTutor=true
-        }
-    }
-})
+  name: "drawer",
+  initialState,
+  reducers: {
+    setModal: (state) => {
+      state.modal = !state.modal;
+    },
+    setNotifications: (state, action) => {
+      state.notifications = action.payload.notifications;
+      state.notificationlength = action.payload.notifications.length;
+    },
+    setTutorNotifications: (state, action) => {
+      state.notifications = action.payload.notifications;
+      state.notificationlength =
+        action.payload.notifications.notifications.length +
+        action.payload.notifications.request.length;
+    },
+  },
+});
 
-export default notificationSlice.reducer
-export const {setModal,setNotifications,setIsTutor,setTutor}=notificationSlice.actions
+export default notificationSlice.reducer;
+export const { setModal, setNotifications, setTutorNotifications } =
+  notificationSlice.actions;

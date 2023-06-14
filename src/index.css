@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.cshadow{
-    -webkit-box-shadow: 10px 11px 36px -17px rgba(0,0,0,1);
--moz-box-shadow: 10px 11px 36px -17px rgba(0,0,0,1);
-box-shadow: 10px 11px 36px -17px rgba(0,0,0,1);
+.cshadow {
+  -webkit-box-shadow: 10px 11px 36px -17px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 10px 11px 36px -17px rgba(0, 0, 0, 1);
+  box-shadow: 10px 11px 36px -17px rgba(0, 0, 0, 1);
 }
-.loader{
-    background:
-        url("./assests/loader.svg") center
-        no-repeat;
+.loader {
+  background: url("./assests/loader.svg") center no-repeat;
+}
+
+
+/* Removing checkbox tick */
+[type="checkbox"]:checked {
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 16 16" fill="transparent" xmlns="http://www.w3.org/2000/svg"><path d="M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z"/></svg>');
 }

@@ -10,9 +10,12 @@ const Welcome = () => {
         dispatch(setPageTitle({ title : "Welcome"}))
       }, [])
   return (
-    <div className='flex  w-full '>
-        <div className='w-full bg-accent'>
-          Welcome
+    <div className='flex items-center w-full '>
+        <div className='w-[80%] mx-auto'>
+          <div className='text-center mt-16'>
+            <p className='text-3xl  text-accent '>Welcome To </p>
+            <p className='text-5xl mt-4 font-bold text-accent'>House of Tutor</p>
+          </div>
         </div>
     </div>
   )

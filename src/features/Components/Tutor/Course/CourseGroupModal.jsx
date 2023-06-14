@@ -1,34 +1,39 @@
-import React, { useState,useEffect } from "react";
-
-import {toast} from 'react-toastify'
-const CourseGroupModal = ({ group, groupModal, setGroupModal ,AddCourseGroup,selectedCourse}) => {
-    const [courses, setCourse] = useState(group|[])
-    const onClick = () => {
-        const courseT=courses.find(item=>item.courseid===selectedCourse.courseid)
-        console.log('courseT', courseT)
-        if(courseT.coursegrade===''){
-            toast.warning( `must enter grade for ${courseT.coursename}`,{
-                position: "top-right",
-                theme:'colored'
-            })
-          return
-        }else{
-          AddCourseGroup(courses)
-          setGroupModal(false)
-        }
-      }
-      const handleCourseGrade=(item,grade)=>{
-        var matchedCourse=courses.find(course=>course.courseid===item.courseid)
-        console.log(matchedCourse);
-        matchedCourse.coursegrade=grade
-        var filteredCourse=courses.filter(course=>course.courseid!=item.courseid)
-        setCourse([...filteredCourse,matchedCourse])
-      }
-
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+const CourseGroupModal = ({
+  group,
+  groupModal,
+  setGroupModal,
+  AddCourseGroup,
+  selectedCourse,
+}) => {
+  const [courses, setCourse] = useState(group | []);
+  const onClick = () => {
+      AddCourseGroup(courses);
+      setGroupModal(false);
+  };
+  // const handleCourseGrade = (item) => {
+  //   console.log("item after clickiing", item);
+  //   var matchedCourse = courses.find(
+  //     (course) => course.courseid === item.courseid
+  //   );
+  //   console.log(matchedCourse);
+  //   matchedCourse.isSelected = item.isSelected;
+  //   var filteredCourse = courses.filter(
+  //     (course) => course.courseid != item.courseid
+  //   );
+  //   // setCourse([...filteredCourse, matchedCourse]);
+  // };
+  const handleCheckboxChange = (index) => {
+    const updatedData = [...courses];
+    updatedData[index].isSelected = !updatedData[index].isSelected;
+    setCourse(updatedData);
+  };
   useEffect(() => {
-    setCourse(group)
+    setCourse(group);
     return () => {
       setGroupModal(false);
+      setCourse([]);
     };
   }, [group]);
   return (
@@ -45,25 +50,31 @@ const CourseGroupModal = ({ group, groupModal, setGroupModal ,AddCourseGroup,sel
         htmlFor="coursegroupmodal"
       >
         <div className="modal-box ">
-          <h3 className="font-bold text-lg text-start">
+          <h3 className="font-bold text-lg text-center">
             Enter Grade of Course
           </h3>
           <div className="flex flex-col items-center justify-center gap-2 pt-3">
-            {group.map((item) => (
+            {group.map((item, index) => (
               <div key={item.courseid}>
-                <span className="mr-4 font-bold">{item.coursename}</span>
-                <input
-                  type="text"
-                  placeholder="Enter your Grade"
-                  className="w-full max-w-xs input input-bordered sm:w-9/12"
-                  value={item.coursegrade}
-                  onChange={(e) => handleCourseGrade(item, e.target.value)}
-                />
+                <label className="flex items-center justify-between w-72 md:w-60 rounded-md px-8 md:px-4 bg-neutral py-1"
+                key={item.courseid}>
+                  <span className="text-secondary font-bold text-lg">
+                    {item.coursename}
+                  </span>
+                  <input
+                    type="checkbox"
+                    value={item.isSelected}
+                    onChange={() => handleCheckboxChange(index)}
+                    checked={item.isSelected}
+                    disabled={item.type === 1 ? true : false}
+                    className="border-0 rounded focus:ring-0 w-4 h-4 cursor-pointer"
+                  />
+                </label>
               </div>
             ))}
             <button
               onClick={onClick}
-              className="btn btn-accent group-hover:bg-base-100 group-hover:text-accent btn-sm md:btn-md"
+              className="btn btn-accent group-hover:bg-base-100 group-hover:text-accent btn-wide"
             >
               Add
             </button>

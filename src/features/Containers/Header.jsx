@@ -1,11 +1,14 @@
 import { themeChange } from "theme-change";
 import React, { Suspense, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import BellIcon from "@heroicons/react/24/outline/BellIcon";
-import Bars3Icon from "@heroicons/react/24/outline/Bars3Icon";
+import {BsBellFill} from 'react-icons/bs'
+import{FaBars} from 'react-icons/fa'
+
 import { openRightDrawer } from "../../app/Slices/Dashboard/RightDrawerSlice";
 import { RIGHT_DRAWER_TYPES } from "../Utils/GlobalUtilConstant";
-import ProfileImg from '../../assests/pp.jpeg'
+import ProfileImg from '../../assests/saud.jpeg'
+import Avatar from '../../assests/avatar.jpg'
+
 import { NavLink, Routes, Link, useNavigate } from "react-router-dom";
 
 function Header() {
@@ -57,7 +60,7 @@ function Header() {
             htmlFor="left-sidebar-drawer"
             className="btn btn-primary drawer-button lg:hidden"
           >
-            <Bars3Icon className="h-5 inline-block w-5" />
+            <FaBars className="h-5 inline-block w-5" />
           </label>
           <h1 className="text-2xl font-semibold ml-2">{pageTitle}</h1>
         </div>
@@ -65,8 +68,7 @@ function Header() {
         <div className="order-last">
           {/* Multiple theme selection, uncomment this if you want to enable multiple themes selection, 
                 also includes corporate and retro themes in tailwind.config file */}
-{/* 
-          <select
+          {/* <select
             className="select mr-4 border-2 border-accent"
             data-choose-theme
           >
@@ -74,6 +76,7 @@ function Header() {
               Theme
             </option>
             <option value="customTheme">Default</option>
+            <option value="darkcustom">Custom Dark</option>
             <option value="dark">Dark</option>
             <option value="cupcake">Cupcake</option>
             <option value="dracula">Dracula</option>
@@ -82,7 +85,7 @@ function Header() {
             <option value="aqua">Aqua</option>
             <option value="luxury">Luxury</option>
             <option value="lofi">Lofi</option>
-          </select> */}
+          </select>  */}
 
           {/* Light and dark theme selection toogle **/}
           {/* <label className="swap ">
@@ -97,7 +100,7 @@ function Header() {
             onClick={() => openNotification()}
           >
             <div className="indicator">
-              <BellIcon className="h-6 w-6" />
+              <BsBellFill className="h-6 w-6" />
               {notificationlength > 0 ? (
                 <span className="indicator-item badge badge-secondary badge-sm">
                   {notificationlength}
@@ -110,7 +113,7 @@ function Header() {
           <div className="dropdown dropdown-end ml-4">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={ProfileImg} alt="profile" />
+                <img src={Avatar} alt="profile" />
               </div>
             </label>
             <ul

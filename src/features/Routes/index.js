@@ -18,19 +18,36 @@ import TutorCourses from '../Pages/Protected/Tutor/TutorCourses'
 // ADMIN IMPORTS
 import CoursesAdmin from '../Pages/Protected/Admin/Courses' 
 import CourseGroup from '../Pages/Protected/Admin/CourseGroup'
+import ParentsFee from '../Pages/Protected/Parents/ParentsFee'
+import Teaching from '../Pages/Protected/Tutor/Teaching'
+import StudentFee from '../Pages/Protected/Student/StudentFee'
+import Scheduling from '../Pages/Protected/Tutor/Scheduling'
+import FeeGroups from '../Pages/Protected/Admin/FeeGroups'
+import ScheduleOptions from '../Pages/Protected/Tutor/ScheduleOptions'
+import MultipleScheduling from '../Pages/Protected/Tutor/MultipleScheduling'
+import TutorFee from '../Pages/Protected/Tutor/TutorFee'
+import Settings from '../Pages/Protected/Student/Settings'
+import AllTutors from '../Pages/Protected/Admin/AllTutors'
+import UpdatingSchedule from '../Pages/Protected/Tutor/UpdatingSchedule'
+import UpdatingEnrollSchedule from '../Pages/Protected/Tutor/UpdatingEnrollSchedule'
+import TimeTable from '../Pages/Protected/TimeTable'
 const routes = [
   {
     path:'/schedule',//the url
     component:Schedule,//view rendered
   },
   {
+    path:'/timetable',//the url
+    component:TimeTable,//view rendered
+  },
+  {
     path: '/dashboard', // the url
     component: Dashboard, // view rendered
   },
-  // {
-  //   path: '/welcome', // the url
-  //   component: Welcome, // view rendered
-  // },
+  {
+    path: '/welcome', // the url
+    component: Welcome, // view rendered
+  },
   {
     path:'/profile', //the url
     component:Profile , //view rendered
@@ -48,6 +65,14 @@ const routes = [
     path:'/studentLearning',//url
     component:Learning
   },
+  {
+    path:'/studentfee',
+    component:StudentFee
+  },
+  {
+    path:'/profile/studentsettings',
+    component:Settings
+  },
   // tutor routes
   {
     path:'/tutorClasses',
@@ -56,6 +81,34 @@ const routes = [
   {
     path:'/tutorcourses',
     component:TutorCourses
+  },
+  {
+    path:'/teaching',
+    component:Teaching
+  },
+  {
+    path:'/tutorschedulingoptions',
+    component:ScheduleOptions
+  },
+  {
+    path:'/tutorschedulingoptions/tutormultirescheduling',
+    component:MultipleScheduling
+  },
+  {
+    path:'/tutorschedulingoptions/tutorscheduling',
+    component:Scheduling
+  },
+  {
+    path:'/tutorfee',
+    component:TutorFee
+  },
+  {
+    path:'/updateschedule',
+    component:UpdatingSchedule
+  },
+  {
+    path:'/updateenrollschedule/:enrollId',
+    component:UpdatingEnrollSchedule
   },
   // Admin routes
   {
@@ -67,10 +120,22 @@ const routes = [
     component:CourseGroup
   },
   {
+    path:'/adminFeeGroups',
+    component:FeeGroups
+  },
+  {
+    path:'/adminBlockTutor',
+    component:AllTutors
+  },
+  // Parents Routes
+  {
+    path:'/parentsfee',
+    component:ParentsFee
+  },
+  {
     path: '/*',
     component: Page404,
-  },
-  
+  }
 ]
 
 export default routes

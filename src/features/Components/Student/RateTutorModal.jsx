@@ -1,29 +1,34 @@
-import React from "react";
-import Rating from 'react-rating'
-
-const RateTutorModal = () => {
-  const starIcon=()=>(
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-</svg>
-
-  )
+import React,{useState} from "react";
+import Rating from "react-rating";
+import { FaStar } from 'react-icons/fa';
+const RateTutorModal = ({ selectedCourse,RatingTutor }) => {
+  const [rating, setRating] = useState(0)
+  const handleRatingChange = (value) => {
+    setRating(value)
+  };
+  const rateTutor=()=>{
+    RatingTutor(selectedCourse,rating)
+  }
   return (
     <>
       <input type="checkbox" id="ratetutor" className="modal-toggle" />
-      <label
-        className="modal modal-bottom sm:modal-middle"
-        htmlFor="ratetutor"
-      >
-        <div className="modal-box ">
-          <h3 className="font-bold text-lg text-start">Rate Tutor</h3>
-          <div className=" flex flex-col gap-3 ">
-            <div>
-                <Rating
-                  emptySymbol={starIcon}
-                />
-            </div>
-            <button className="btn btn-accent">Rate Tutor</button>
+      <label className="modal" htmlFor="ratetutor">
+        <div className="modal-box max-w-sm">
+          <h3 className="font-bold text-xl text-center">Rate Tutor</h3>
+          <div className=" flex  gap-8 my-4 container mx-auto items-center justify-center">
+          <p className="text-base text-start font-semibold">
+            {selectedCourse.coursename}
+          </p>
+              <Rating
+                initialRating={0}
+                fractions={2}
+                emptySymbol={<FaStar size={24} color="#ddd" />}
+                fullSymbol={<FaStar size={24} color="#ffc107 " />}
+                onChange={handleRatingChange}
+              />
+          </div>
+          <div className="w-full flex justify-center items-center">
+          <label htmlFor="ratetutor" className="btn btn-accent mb-2 btn-wide" onClick={rateTutor}>Rate Tutor</label>
           </div>
         </div>
       </label>

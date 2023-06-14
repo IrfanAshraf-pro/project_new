@@ -10,7 +10,10 @@ import {
 } from "react-router-dom";
 // importing toast styles
 import "react-toastify/dist/ReactToastify.css";
-import Signup from "./features/Pages/Signup/Signup";
+// Datepicker
+import "react-datepicker/dist/react-datepicker.css";
+import ParentLogin from "./features/Pages/Protected/ParentLogin";
+import NSignUp from "./features/Pages/Signup/NSignUp";
 
 // Importing pages
 const Layout = lazy(() => import("./features/Containers/Layout"));
@@ -19,6 +22,7 @@ function App() {
   const { user } = useSelector((state) => state.auth);
   const themeValues = [
     "customTheme",
+    "darkcustom",
     "cupcake",
     "dark",
     "dracula",
@@ -36,7 +40,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path='/signup' element={<Signup/>}/>
+          <Route path="/parentLogin" element={<ParentLogin />} />
+
+          <Route path='/signup' element={<NSignUp/>}/>
           {/* Place new routes over this */}
           <Route path="/app/*" element={<Layout />} />
 
