@@ -14,7 +14,7 @@ import { setSchedule } from "../../../app/Slices/ScheduleSlice";
 const TutorReplyAbleNotification = ({ notification }) => {
   const { role, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  console.log('student request is',notification);
   const slots = slotsToStringSlot(notification.slot);
   var tutorrepo = RepositoryFactory.get("tutor");
   var schedulerepo = RepositoryFactory.get("schedule");
@@ -24,7 +24,8 @@ const TutorReplyAbleNotification = ({ notification }) => {
       notification.tutoremail,
       notification.studentemail,
       notification.courseid,
-      notification.slot
+      notification.slot,
+      notification.enrollDate
     );
     if (data.match(RequestAcceptedSuccessfully)) {
       toast.success(data, {

@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import TutorsModal from "../../../Components/Student/Course/TutorsModal";
 import EnterSlotsToMatch from "../../../Components/Student/Course/EnterSlotsToMatch";
 import EmptyImg from "../../../../assests/empty.png";
+import AddFailedCoursesModal from "../../../Components/Student/Course/AddFailedCoursesModal";
 var course = RepositoryFactory.get("course");
 const Courses = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState({});
   const [enrolledCourseSelected, setEnrolledCourseSelected] = useState({});
   const [showSlotModal, setShowSlotModal] = useState(false);
+  const [showFailedModal, setShowFailedModal] = useState(false);
+
   // for Enter no of slots modal
   const [noOfSlots, setnoOfSlots] = useState(1);
 
@@ -115,7 +118,17 @@ const Courses = () => {
           >
             +
           </label>
-          <CourseModal courses={courses} addCourse={addCourse} />
+          <CourseModal
+            courses={courses}
+            addCourse={addCourse}
+            setShowFailedModal={setShowFailedModal}
+          />
+          <AddFailedCoursesModal
+            showFailedModal={showFailedModal}
+            setShowFailedModal={setShowFailedModal}
+            addCourse={addCourse}
+
+          />
         </div>
         {enrolledCourses.length > 0 ? (
           <div

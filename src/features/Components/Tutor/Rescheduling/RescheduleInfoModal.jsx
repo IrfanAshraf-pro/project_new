@@ -125,15 +125,18 @@ const RescheduleInfoModal = ({
         id="rescheduleinfomodal"
         className="modal-toggle"
       />
-      <label className="modal modal-bottom sm:modal-middle" htmlFor="rescheduleinfomodal">
-        <div className="modal-box  w-full px-8 ">
+      <label className="modal modal-bottom sm:modal-middle" >
+        <div className="modal-box  w-full px-8 h-40">
+          <div className="flex justify-between px-3">
           <h3 className="font-bold text-lg">Reschedule</h3>
+          <label className="text-end font-bold cursor-pointer hover:text-accent" htmlFor="rescheduleinfomodal">X</label>
+          </div>
           <p className="py-1">Select date</p>
           <div className="mt-1 w-full max-w-lg flex flex-col md:flex-row gap-2 ">
             <DatePicker
               selected={date}
               onChange={(date) => setDate(date)}
-              className="mx-auto w-56 text-white bg-accent"
+              className="mx-auto text-white bg-accent"
             />
             <button
               className="btn btn-outline btn-outline-accent hover:btn-accent text-accent hover:text-white"

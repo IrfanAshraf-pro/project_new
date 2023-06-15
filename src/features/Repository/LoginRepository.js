@@ -3,6 +3,8 @@ const Login="Login/Login"
 const loginParent="Login/ParentLogin"
 const GetStudentSettings="student/GetStudentSettings"
 const UpdateStudentSettings="student/updateStudentSettings"
+const StudentSignup="student/StudentSignup"
+const TutorSignup="tutor/TutorSignup"
 export default{
     loginUser(email,password){
         const url=`${Login}?email=${email}&password=${password}`
@@ -19,5 +21,14 @@ export default{
     saveSettings(settings){
         const url=`${UpdateStudentSettings}`
         return Repository.post(url,settings)
+    },
+    signUpStudent(student){
+        const url=`${StudentSignup}`
+        return Repository.post(url,student)
+    },
+    signUpTutor(tutor){
+        const url=`${TutorSignup}`
+        return Repository.post(url,tutor)
+
     }
 }

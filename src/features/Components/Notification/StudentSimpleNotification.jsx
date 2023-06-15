@@ -46,9 +46,6 @@ const StudentSimpleNotification = ({ notification }) => {
   //getting user schedule
   const getUserSchedule = async () => {
     const { data } = await schedulerepo.getStudentSchedule(user.email);
-    dispatchingSchedule(data);
-  };
-  const dispatchingSchedule = (data) => {
     if (data.length > 100) {
       dispatch(setSchedule({ schedule: data }));
     } else if (data.match(ScheduleNotSet)) {

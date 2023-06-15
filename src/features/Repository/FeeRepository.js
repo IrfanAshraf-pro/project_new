@@ -4,6 +4,7 @@ const getFeeGroups="admin/GetSubjectGroupFeeName"
 const saveGroupFee="admin/SaveSubjectFeeGroupName"
 const TutorFeeRecord="tutor/TutorFeeRecord"
 const ParentFeeRecord="student/GetFeeDetailOfStudent"
+const PayFee="student/PayFee"
 export default{
     GetStudentFeeDetails(semail){
         const url=`${StudentFeeDetails}?semail=${semail}`
@@ -25,6 +26,9 @@ export default{
     getFeeDetailsForParent(semail){
         const url=`${ParentFeeRecord}?semail=${semail}`
         return Repository.get(url)
+    },
+    payFee(semail,temail,courseid,amount){
+        const url=`${PayFee}?semail=${semail}&temail=${temail}&courseid=${courseid}&amount=${amount}`
+        return Repository.post(url)
     }
-    
 }

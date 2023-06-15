@@ -16,8 +16,8 @@ const Settings = () => {
   const getSettings = async () => {
     let { data } = await loginrepo.getStudentSettings(user.email);
     if (typeof data === "object") {
-      setSetting(data);
       console.log("settings are", data);
+      setSetting(data);
     } else {
       console.log("settings error is", data);
     }
@@ -43,6 +43,9 @@ const Settings = () => {
   useEffect(() => {
     getSettings();
   }, []);
+  useEffect(() => {
+    console.info(setting);
+  }, [setting]);
   return (
     <div className="overflow-hidden flex flex-col h-full p-2 md:p-4 mt-4 md:mt-2  w-full sm:w-[90%] md:w-[80%] mx-auto ">
       <div className="flex flex-col items-center">
@@ -65,10 +68,11 @@ const Settings = () => {
                     showAbsents: +setting.showAbsents === 1 ? 0 : 1,
                   })
                 }
-                defaultChecked={setting.showAbsents !== 0 && "checked"}
+                checked={setting.showAbsents === 1}
                 type="checkbox"
-                className={`w-4 h-4 cursor-pointer text-indigo-700  border-0 rounded focus:ring-0 `}
+                className={`w-4 h-4 cursor-pointer text-red-400  border-0 rounded focus:ring-0 `}
               />
+              {console.info(setting.showAbsents === 1 && "checked")}
             </label>
           </div>
           <div className="form-control bg-gray-400  rounded-md shadow-md  w-60">
@@ -86,9 +90,9 @@ const Settings = () => {
                     showClassReport: +setting.showClassReport === 1 ? 0 : 1,
                   })
                 }
-                defaultChecked={setting.showClassReport !== 0 && "checked"}
+                checked={setting.showClassReport === 1}
                 type="checkbox"
-                className={`w-4 h-4 cursor-pointer text-indigo-700  border-0 rounded focus:ring-0 `}
+                className={`w-4 h-4 cursor-pointer text-red-400  border-0 rounded focus:ring-0 `}
               />
             </label>
           </div>
@@ -110,11 +114,9 @@ const Settings = () => {
                       +setting.showRescheduleStudent === 1 ? 0 : 1,
                   })
                 }
-                defaultChecked={
-                  setting.showRescheduleStudent !== 0 && "checked"
-                }
+                checked={setting.showRescheduleStudent === 1}
                 type="checkbox"
-                className={`w-4 h-4 cursor-pointer text-indigo-700  border-0 rounded focus:ring-0 `}
+                className={`w-4 h-4 cursor-pointer text-red-400  border-0 rounded focus:ring-0 `}
               />
             </label>
           </div>
@@ -136,13 +138,16 @@ const Settings = () => {
                       +setting.showRescheduleTutor === 1 ? 0 : 1,
                   })
                 }
-                defaultChecked={setting.showRescheduleTutor !== 0 && "checked"}
+                checked={setting.showRescheduleTutor === 1}
                 type="checkbox"
-                className={`w-4 h-4 cursor-pointer text-indigo-700  border-0 rounded focus:ring-0 `}
+                className={`w-4 h-4 cursor-pointer text-red-400  border-0 rounded focus:ring-0 `}
               />
             </label>
           </div>
-          <button className="px-3 py-1.5 text-white bg-accent shadow-lg rounded-md flex-1 font-thin max-w-md hover:bg-indigo-600 hover:text-primary" onClick={onClick}>
+          <button
+            className="px-3 py-1.5 text-white bg-accent shadow-lg rounded-md flex-1 font-thin max-w-md hover:bg-indigo-600 hover:text-primary"
+            onClick={onClick}
+          >
             Change Settings
           </button>
         </div>

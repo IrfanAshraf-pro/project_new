@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 const Collapse = ({ name, coursename, noOfLectures, totalFee, report }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("report is ", report);
   const toggleCollapse = () => {
     setIsOpen(!isOpen);
   };
 
   return (
     <>
-      <div className="w-full bg-indigo-500 rounded-md">
+      <div className="w-full bg-indigo-500 rounded-md mt-2">
         <div
           className="flex justify-between  p-2  items-center text-white"
           onClick={toggleCollapse}
         >
-          <span>{name}</span>
+          <span className="w-20">{name}</span>
           <span>{coursename}</span>
           <span>{noOfLectures}</span>
           <span>{totalFee}</span>

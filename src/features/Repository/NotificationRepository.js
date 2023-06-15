@@ -6,6 +6,7 @@ const TutorNotification = "notification/TutorNotification";
 const MarkTutorNotificationAsRead = "notification/MarkTutorNotificationAsRead";
 const AddTutorNotification="notification/AddTutorNotification"
 const AddStudentNotification="notification/AddStudentNotification"
+const FeeAcknowledgement="notification/FeeAcknowledgement"
 export default {
   getStudentNotifications(email) {
     const url = `${StudentNotification}?email=${email}`;
@@ -31,5 +32,9 @@ export default {
   sendStudentNotification(notification){
     const url = `${AddStudentNotification}`;
     return Repository.post(url, notification);
-  }
+  },
+  sendFeeAcknowledgement(notification){
+    const url = `${FeeAcknowledgement}`;
+    return Repository.post(url, notification);
+  },
 };

@@ -42,7 +42,7 @@ const StudentFee = () => {
           {fee.length > 0 ? (
             <>
               <div className="flex items-center justify-between w-[95%] mx-auto p-2 rounded-md bg-secondary text-white">
-                <p>Tutor</p>
+              <p className="w-20 mr-4">Student</p>
                 <p>Course</p>
                 <p>No.of Lectures</p>
                 <p>Total</p>
@@ -50,18 +50,18 @@ const StudentFee = () => {
               <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl  shadow-primary bg-neutral">
                 {fee.map((item) => (
                   <div className="flex bg-white items-center justify-between w-full mx-auto p-2 rounded-md  text-secondary" key={item.courseid}>
-                    <span>{item.name}</span>
-                    <span>{item.coursename}</span>
-                    <span>{item.reportList.length}</span>
-                    <span>{item.totalFee}</span>
+                    <p className="w-20">{item.name}</p>
+                    <p className="w-20">{item.coursename}</p>
+                    <p className="w-12">{item.reportList.length}</p>
+                    <p className="w-12">{item.totalFee}</p>
                   </div>
                 ))}
               </div>
-              <div className="flex mt-4 justify-between bg-accent p-2 px-4 rounded-md ">
+              <div className="flex mt-4 justify-between bg-accent p-2 px-8 rounded-md ">
                 <span className="font-bold text-lg text-white">Totol Fee</span>
-                <span className="font-semibold text-lg text-white">
+                <p className="font-semibold text-lg text-white">
                   {totalFee}
-                </span>
+                </p>
               </div>
             </>
           ) : (

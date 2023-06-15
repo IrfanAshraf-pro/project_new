@@ -15,9 +15,14 @@ const ParentsFee = () => {
   const [childSelected, setChildSelected] = useState({});
   const [details, setDetails] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
-
+  const [isFeePaid,setIsFeepaid]=useState(false)
+  const [selected, setSelected] = useState({});
   const feerepo = RepositoryFactory.get("fee");
   const getDetails = async (email) => {
+    setIsFeepaid(false)
+    setChildSelected({})
+    setDetails([])
+    setSelected({})
     console.log("inside details");
     let { data } = await feerepo.getFeeDetailsForParent(email);
     if (typeof data === "object") {
@@ -36,6 +41,9 @@ const ParentsFee = () => {
     getDetails();
   }, []);
 
+useEffect(() => {
+    isFeePaid && getDetails();
+  }, [isFeePaid]);
   const searchChild = (child) => {
     getDetails(child.email);
     setChildSelected(child);
@@ -65,6 +73,10 @@ const ParentsFee = () => {
         details={details}
         showDetails={showDetails}
         setShowDetails={setShowDetails}
+        isFeePaid={isFeePaid}
+        setIsFeepaid={setIsFeepaid}
+        selected={selected}
+        setSelected={setSelected}
       />
     </>
   );

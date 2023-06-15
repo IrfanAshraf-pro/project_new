@@ -5,7 +5,6 @@ import Saud from "../../../../assests/saud.jpeg";
 const ParentFeeRow = ({ child,searchChild,setShowDetails }) => {
   const onClick=()=>{
     searchChild(child)
-    // setShowDetails(true)
   }
   console.log(child);
   return (

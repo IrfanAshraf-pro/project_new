@@ -6,21 +6,22 @@ import { toast } from "react-toastify";
 import PreRescheduleInfoRow from "./PreScheduleInfoRow";
 import { dateChecker } from "../../../Utils/DateFunctions";
 import { PrescheduleSuccessful } from "../../../Utils/MatchTypes";
+import RequestSlots from "./RequestSlots";
 const PreScheduleModal = ({
   isPreschedule,
   setIsPreschedule,
   selected,
   tdata,
-  setIsDone
+  setIsDone,
 }) => {
   const [date, setDate] = useState(new Date());
   const [selectedSlot, setSelectedSlot] = useState({});
   const [classes, setClasses] = useState([]);
+  const [isRequestSlots, setIsRequestSlots] = useState(false)
   const reschedulerepo = RepositoryFactory.get("reschedule");
   const { user } = useSelector((state) => state.auth);
   // getting free classes
   const searchClasses = async () => {
-    console.log("searching classes");
     setClasses([]);
     let dateJoined = dateChecker(date);
     const day = getDayCustom(date.getDay());
@@ -42,7 +43,6 @@ const PreScheduleModal = ({
   };
   // Suggested classes
   const SuggestedClasses = async () => {
-    console.log("inside sugested classs preschedule");
     const { data } = await reschedulerepo.getSuggestedClasesForRescheduling(
       user.email,
       selected.email,
@@ -51,7 +51,6 @@ const PreScheduleModal = ({
       selected.coursename
     );
     if (typeof data === "object") {
-      console.log("Suggested Classes are preschedule", data);
       setClasses(data);
     } else {
       toast.info(data, {
@@ -73,13 +72,12 @@ const PreScheduleModal = ({
       tdate: selectedSlot.classDate,
       tslotno: selectedSlot.slotno,
     };
-    console.log('pescheduel object is ',preSchedule);
     const { data } = await reschedulerepo.preScheduleClass(preSchedule);
     if (data.match(PrescheduleSuccessful)) {
       toast.success(data, {
         theme: "colored",
       });
-      setIsDone(true)
+      setIsDone(true);
     } else {
       console.log("Preschedule ", data);
     }
@@ -122,9 +120,14 @@ const PreScheduleModal = ({
         id="preschedulemodal"
         className="modal-toggle"
       />
-      <div className="modal modal-bottom sm:modal-middle">
+      <div
+        className="modal modal-bottom sm:modal-middle"
+      >
         <div className="modal-box">
+          <div className="flex items-center justify-between px-4">
           <h3 className="font-bold text-lg">Preschedule</h3>
+          <label htmlFor="preschedulemodal" className="font-bold text-lg cursor-pointer hover:text-accent">X</label>
+          </div>
           <div className="mt-1 w-full max-w-lg flex flex-col md:flex-row gap-2 ">
             <DatePicker
               selected={date}
@@ -138,31 +141,43 @@ const PreScheduleModal = ({
               Search Classes
             </button>
           </div>
-          <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral w-full md:max-w-lg">
-            {classes.length > 0 ? (
-              classes?.map((classs) => (
+          {classes.length > 0 ? (
+            <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral w-full md:max-w-lg">
+              {classes?.map((classs) => (
                 <PreRescheduleInfoRow
                   item={classs}
                   setSelectedSlot={setSelectedSlot}
                   selectedSlot={selectedSlot}
                   key={classs.slot}
                 />
-              ))
-            ) : (
-              <p className="font-bold text-lg">No Free Slot</p>
-            )}
-          </div>
-          <div className="mt-2 flex items-center justify-end mb-16 md:mb-2">
-            <label
-              htmlFor="rescheduleinfomodal"
-              className="btn btn-accent hover:btn-primary text-white hover:text-accent"
-              onClick={PrescheduleClass}
-            >
-              PreSchedule
-            </label>
-          </div>
+              ))}
+              <div className="mt-2 flex items-center justify-end mb-16 md:mb-2">
+                <label
+                  htmlFor="rescheduleinfomodal"
+                  className="btn btn-accent hover:btn-primary text-white hover:text-accent"
+                  onClick={PrescheduleClass}
+                >
+                  PreSchedule
+                </label>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-4 my-3 mt-4">
+              <p className="font-bold text-3xl">No Free Slot</p>
+              {/* The button to open modal */}
+              <label
+                htmlFor="requestingslots"
+                className="px-4 py-2 text-white bg-accent shadow-lg rounded-md flex-1 font-thin max-w-md hover:bg-indigo-600 hover:text-primary"
+                onClick={()=>setIsRequestSlots(true)}
+              >
+                Request Free Slot
+              </label>
+            </div>
+          )}
         </div>
       </div>
+
+      <RequestSlots isRequestSlots={isRequestSlots} selected={selected}/>
     </div>
   );
 };

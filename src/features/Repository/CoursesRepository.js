@@ -17,6 +17,9 @@ const AdminSaveCourseGroup = "admin/SaveCourseGroup";
 const GetCoursesForGroup="admin/GetCoursesForGroup"
 const GetStudentLearning="student/GetStudentLearningCourses"
 const GetTeachingStudents="tutor/GetTeachingStudents"
+const GetEnrolledClasses="tutor/GetEnrolledClasses"
+const GetUpdatedMatchedSlots="tutor/GetUpdatedMatchedSlots"
+const GettingFailedCoursesAll="student/GettingFailedCoursesAll"
 export default {
   studentEnrolledCourses(email) {
     const url = `${studentEnlisted}?semail=${email}`;
@@ -48,6 +51,11 @@ export default {
     const url=`${rateTutor}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&rating=${rating}`
     return Repository.post(url)
   },
+  gettingFailedCoursesAll(email){
+    const url=`${GettingFailedCoursesAll}?email=${email}`
+    return Repository.get(url)
+
+  },
   // tutor functions
   tutorAllCourses(email) {
     const url = `${allcoursesTutor}?email=${email}`;
@@ -72,6 +80,14 @@ export default {
   },
   getTeachingStudents(temail){
     const url=`${GetTeachingStudents}?temail=${temail}`
+    return Repository.get(url)
+  },
+  getEnrolledClasses(enrollId){
+    const url=`${GetEnrolledClasses}?enrollId=${enrollId}`
+    return Repository.get(url)
+  },
+  getUpdatedMatchedSlots(enrollId){
+    const url=`${GetUpdatedMatchedSlots}?enrollId=${enrollId}`
     return Repository.get(url)
   },
   // Admin functions
@@ -106,17 +122,3 @@ export default {
     return Repository.get(url)
   }
 };
-// if (role === 'Student') {
-//     console.log('getting all courses');
-//     const url = `${baseURl}${funcCallStudentCourses}?email=${email}`
-//     const response = await axios.get(url)
-//     const data = response.data
-//     return data
-// }else{
-//     console.log('getting all courses tutor');
-//     const url = `${baseURl}${funcCallTutorCourse}?email=${email}`
-//     console.log(url);
-//     const response = await axios.get(url)
-//     const data = response.data
-//     return data
-// }

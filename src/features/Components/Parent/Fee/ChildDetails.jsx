@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import Collapse from "../../Custom/Collapse";
+import PayFeeModal from "./PayFeeModal";
 const ChildDetails = ({
   childSelected,
   details,
   showDetails,
   setShowDetails,
+  isFeePaid,
+  setIsFeepaid,
+  selected,
+  setSelected,
 }) => {
-  const [selected, setSelected] = useState({});
   // const [isLoading, setIsLoading] = useState(false);
+  const [showPayFeeModal, setPayFeeModal] = useState(false);
   const PayFee = () => {
+    setPayFeeModal(true);
+
     console.log("paying feeeeee");
-    console.log('selected is ',selected);
+    console.log("selected is ", selected);
   };
   const setttingSelected = (item) => {
     setSelected(item);
@@ -33,23 +40,25 @@ const ChildDetails = ({
             Fee Details of {childSelected.email}
           </h3>
 
-          <div className="flex items-center justify-between w-full mx-auto p-2 px-4 rounded-md bg-accent text-white">
-            <p>Tutor</p>
-            <p>Course</p>
-            <p>No.of Lectures</p>
-            <p>Total</p>
+          <div className="w-full mx-auto p-2 px-4 rounded-md bg-accent text-white">
+            <div className="flex items-center justify-between w-[90%]">
+              <p className="flex-1">Tutor</p>
+              <p className="mr-12">Course</p>
+              <p className="ml-2">Lectures</p>
+              <p className="ml-6">Remaining</p>
+            </div>
           </div>
           <div className="mt-1">
             {details.length > 0 ? (
               details.map((report) => (
-                <div onClick={()=>setttingSelected(report)}>
+                <div onClick={() => setttingSelected(report)}>
                   <Collapse
-                  name={report.name}
-                  coursename={report.coursename}
-                  noOfLectures={report.noOfLectures}
-                  totalFee={report.totalFee}
-                  report={report}
-                />
+                    name={report.name}
+                    coursename={report.coursename}
+                    noOfLectures={report.noOfLectures}
+                    totalFee={report.remainingamount}
+                    report={report}
+                  />
                 </div>
               ))
             ) : (
@@ -58,15 +67,22 @@ const ChildDetails = ({
           </div>
           <div
             className="px-3 py-1.5 text-white bg-accent duration-150 shadow-lg rounded-md  font-thin w-full mt-2 hover:bg-indigo-600 hover:text-primary text-center"
-            onClick={PayFee}
+            onClick={() => setPayFeeModal(true)}
           >
             Pay fee {selected.name === undefined ? "" : "to " + selected.name}
           </div>
         </label>
       </label>
+      <PayFeeModal
+        showPayFeeModal={showPayFeeModal}
+        setPayFeeModal={setPayFeeModal}
+        selected={selected}
+        details={details}
+        isFeePaid={isFeePaid}
+        setIsFeepaid={setIsFeepaid}
+      />
     </>
   );
 };
 
 export default ChildDetails;
-

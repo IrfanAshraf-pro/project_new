@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
+import {Link,useNavigate} from 'react-router-dom'
 import { toast } from "react-toastify";
 import { setPageTitle } from "../../../app/Slices/Dashboard/HeaderSlice";
 import { setSchedule } from "../../../app/Slices/ScheduleSlice";
@@ -16,9 +17,10 @@ import {
 const scheduleRepo=RepositoryFactory.get('schedule')
 const ScheduleMain = () => {
   const { schedule } = useSelector((state) => state.schedule);
-  console.log('Schedule from store is ',schedule);
   const {role,user}=useSelector(state=>state.auth)
   const dispatch = useDispatch();
+  const navigation=useNavigate()
+
   const [schedulee, setSchedulee] = useState(SplitingSchedule(schedule));
   // updating schedulee state
   const handleScheduleUpdate = (schedules) => {
@@ -29,7 +31,6 @@ const ScheduleMain = () => {
   };
   // saving schedule to db
   const saveSchedule=async()=>{
-    console.log('inside saveSchedule');
     const newScheduleCombined = JoiningSchedule(schedulee);
     if(role==="Student"){
       const {data}=await scheduleRepo.postStudentSchedule(user.email,newScheduleCombined)
@@ -42,7 +43,6 @@ const ScheduleMain = () => {
 
   }
   const handlingScheduleSave=(data)=>{
-    console.log("data is ",data);
     if(data.match(ScheduleSetSuccessfully)){
       toast.success(data,{
         theme:'colored'
@@ -55,13 +55,10 @@ const ScheduleMain = () => {
   }
   // changing schedule in store
   const changeScheduleInstore = () => {
-    console.log("inside update schedule in store");
     const newScheduleCombined = JoiningSchedule(schedulee);
-    console.log("combined schedule is ", newScheduleCombined);
     dispatch(setSchedule({ schedule: newScheduleCombined }));
   };
   useEffect(()=>{
-    console.log('inside checking of change schedule');
     setSchedulee(SplitingSchedule(schedule))
   },[schedule])
   // dispatching schedule when component is unmounted
@@ -74,12 +71,14 @@ const ScheduleMain = () => {
   // setting page title
   useEffect(() => {
     dispatch(setPageTitle({ title: "Schedule" }));
-    console.log(schedulee,'is schedule');
   }, []);
   return (
     <div className="flex flex-col ">
-      <div className="my-2 flex justify-end w-[90%]   ">
+      <div className="my-2 flex justify-end w-[90%]  gap-4 ">
         <button className="btn btn-circle btn-accent btn-sm" onClick={saveSchedule}>✔</button>
+        {
+          role==='Tutor' && <Link  className="px-6 py-1.5 text-accent bg-white shadow-lg rounded-md  font-thin  hover:bg-indigo-600 hover:text-primary" to="/app/updateschedule">Update</Link>
+        }
       </div>
       <div className="mx-auto w-[95%]  sm:w-[85%] ">
       <div className="flex  rounded-lg cshadow">

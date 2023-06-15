@@ -28,10 +28,17 @@ import MultipleScheduling from '../Pages/Protected/Tutor/MultipleScheduling'
 import TutorFee from '../Pages/Protected/Tutor/TutorFee'
 import Settings from '../Pages/Protected/Student/Settings'
 import AllTutors from '../Pages/Protected/Admin/AllTutors'
+import UpdatingSchedule from '../Pages/Protected/Tutor/UpdatingSchedule'
+import UpdatingEnrollSchedule from '../Pages/Protected/Tutor/UpdatingEnrollSchedule'
+import TimeTable from '../Pages/Protected/TimeTable'
 const routes = [
   {
     path:'/schedule',//the url
     component:Schedule,//view rendered
+  },
+  {
+    path:'/timetable',//the url
+    component:TimeTable,//view rendered
   },
   {
     path: '/dashboard', // the url
@@ -94,6 +101,14 @@ const routes = [
   {
     path:'/tutorfee',
     component:TutorFee
+  },
+  {
+    path:'/updateschedule',
+    component:UpdatingSchedule
+  },
+  {
+    path:'/updateenrollschedule/:enrollId',
+    component:UpdatingEnrollSchedule
   },
   // Admin routes
   {

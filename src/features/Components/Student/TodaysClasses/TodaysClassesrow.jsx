@@ -45,7 +45,7 @@ const TodaysClassesrow = ({ classes }) => {
             className={`${
               classes.isReschedule | classes.isPreSchedule && "btn-disabled"
             }
-            px-3 py-1.5 text-white font-semibold shadow-lg rounded-md flex-1  w-[95%] sm:w-40 bg-indigo-700  hover:bg-white hover:text-indigo-600 duration-75  mx-auto`}
+            px-3 py-1.5 text-white font-semibold shadow-lg rounded-md flex-1  w-[95%] sm:w-40 bg-indigo-700  hover:bg-white hover:text-indigo-600 duration-75  mx-auto hover:cursor-pointer`}
             onClick={onClick}
           >
             Reschedule

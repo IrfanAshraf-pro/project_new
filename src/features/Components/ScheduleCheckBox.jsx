@@ -36,10 +36,10 @@ const ScheduleCheckBox = ({
           value === 1
             ? "text-green-700 "
             : value === 2
-            ? "text-red-700 opacity-70 cursor-default"
+            ? "text-gray-900 opacity-70 cursor-default"
             : value === 3
-            ? "text-yellow-700 opacity-70 cursor-default"
-            : "text-purple-700 opacity-70 cursor-default"
+            ? "text-blue-700 opacity-70 cursor-default"
+            : "text-red-700 opacity-70 cursor-default"
         } border-0 rounded focus:ring-0 `}
       />
     </>

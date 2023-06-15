@@ -6,16 +6,16 @@ const GetStudentRequest = "tutor/GetStudentRequests";
 const GetAllTutors = "admin/GetAllTutors";
 const BlockTutor = "admin/BlockTutors";
 export default {
-  requestingTutor(email, temail, cid, slot) {
-    const url = `${RequestTutor}?semail=${email}&temail=${temail}&cid=${cid}&slot=${slot}`;
+  requestingTutor(email, temail, cid, slot,enrolledDate) {
+    const url = `${RequestTutor}?semail=${email}&temail=${temail}&cid=${cid}&slot=${slot}&dateToBeEnrolled=${enrolledDate}`;
     return Repository.post(url);
   },
   GetStudentRequests(email) {
     const url = `${GetStudentRequest}?email=${email}`;
     return Repository.get(url);
   },
-  AcceptRequest(tutoremail, studentemail, courseid, slot) {
-    const url = `${AcceptStudentRequest}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&slot=${slot}`;
+  AcceptRequest(tutoremail, studentemail, courseid, slot,enrollDate) {
+    const url = `${AcceptStudentRequest}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&slot=${slot}&enrollDate=${enrollDate}`;
     return Repository.post(url);
   },
   RejectRequest(tutoremail, studentemail, courseid, slot) {

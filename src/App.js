@@ -12,8 +12,8 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 // Datepicker
 import "react-datepicker/dist/react-datepicker.css";
-import Signup from "./features/Pages/Signup/Signup";
 import ParentLogin from "./features/Pages/Protected/ParentLogin";
+import NSignUp from "./features/Pages/Signup/NSignUp";
 
 // Importing pages
 const Layout = lazy(() => import("./features/Containers/Layout"));
@@ -42,7 +42,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/parentLogin" element={<ParentLogin />} />
 
-          <Route path='/signup' element={<Signup/>}/>
+          <Route path='/signup' element={<NSignUp/>}/>
           {/* Place new routes over this */}
           <Route path="/app/*" element={<Layout />} />
 

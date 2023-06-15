@@ -17,6 +17,7 @@ export const FindTutorNoSchedule = "Schedule not set";
 export const ScheduleNotSet = "Schedule not set";
 export const ScheduleSetSuccessfully = "Schedule Set successfully";
 export const ScheduleUpdatedSuccessfully = "Schedule Updated successfully";
+export const ScheduleDoesnotExist="Schedule Doesnot Exist"
 
 // Reschedule
 export const RescheduleSuccessful = "Class is Rescheduled";
@@ -63,11 +64,33 @@ export const CourseGroupAdded = "Course Group Added";
 // Admin Fee Group
 export const FeeGroupAdded = "Fee Group Added Successfully";
 export const FeeGroupUpdated = "Fee Group Updated Successfully";
+export const FeePaid="Fee paid"
+export const noFeeTobePaid="No Fee to be paid"
+export const NoCourseFound="No course Found"
+
 //admin bloc tutor
 export const AdminBloackTutor="No Tutor Available"
 // Parent fee
 export const StudentNotEnrolled = "Student Has Not Enrolled Any course";
+
 // Tutor block
 
 export const TutorIsBlocked="Tutor is Blocked"
 export const TutorIsUnblocked="Tutor is Unblocked"
+
+//Getting tutor free classes
+export const TutorNotFoundOrDoesnotExist="Tutor not found or doesnot exist."
+export const NoEnrolledClasssesFound="No Enrolled Classes Found"
+
+
+
+//
+export const CannotChangeSchedule="Cannot change schedule."
+export const CourseScheduleUpdated="Course Schedule Updated"
+export const RequestAcceptedButScheduleChangeLater="Request accepted successfully. Your schedule will change on "
+
+//signup
+export const SignedUpSuccessful="Signed up successfully"
+export const AlreadyExist="Already Exist"
+export const AlreadyTutor="You Can't Sign Up as Student Because You're already Tutor"
+export const AlreadyStudent="You Can't Sign Up as Tutor Because You're already Student"
