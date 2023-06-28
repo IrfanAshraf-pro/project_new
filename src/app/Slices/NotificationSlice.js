@@ -20,7 +20,7 @@ const notificationSlice = createSlice({
       state.notifications = action.payload.notifications;
       state.notificationlength =
         action.payload.notifications.notifications.length +
-        action.payload.notifications.request.length;
+        action.payload.notifications.request.length+action.payload.notifications.tempRequest.length;
     },
   },
 });

@@ -33,7 +33,15 @@ const TutorTodayClasses = () => {
   // calling take class
   const takeClass = async (classs) => {
     console.log("taking class ", classs);
-    const { data } = await todayclasses.takeTodayClass(
+    if(classs.isTemp){
+      TakeTempClass(classs)
+    }else{
+      RegularClassesTake(classs)
+    }
+   
+  };
+  const TakeTempClass=async(classs)=>{
+     const { data } = await todayclasses.takeTodayClassTemp(
       user.email,
       classs.coursename,
       classs.semail,
@@ -61,7 +69,37 @@ const TutorTodayClasses = () => {
     } else {
       console.log(data);
     }
-  };
+  }
+  const RegularClassesTake=async(classs)=>{
+ const { data } = await todayclasses.takeTodayClass(
+      user.email,
+      classs.coursename,
+      classs.semail,
+      classs.slot.toString(),
+      classs.isReschedule,
+      classs.isPreSchedule,
+      classs.isStudent,
+      classs.classDate
+    );
+    console.log("todays classses take responsee data is ", data);
+    if (data.match(ClassTaken)) {
+      toast.success(data, {
+        theme: "colored",
+      });
+      setClasses([]);
+      callingTodayClasses();
+    } else if (data.match(NoCourseEnrolled)) {
+      toast.info(data, {
+        theme: "colored",
+      });
+    } else if (data.match(TimeNotMatched)) {
+      toast.info(data, {
+        theme: "colored",
+      });
+    } else {
+      console.log(data);
+    }
+  }
   useEffect(() => {
     dispatch(setPageTitle({ title: "Today's Classes" }));
     callingTodayClasses();

@@ -68,7 +68,7 @@ const TutorFee = () => {
               </div>
             </>
           ) : (
-            <p>Fee Records</p>
+            <p >No Fee Records</p>
           )}
         </div>
       </div>

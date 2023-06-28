@@ -2,6 +2,7 @@ import Repository from "./Repository";
 const TodayClassesStudent = 'student/TodayClasses'
 const TodayClassesTutor = 'tutor/TodayClasses'
 const TakeClass="tutor/ClassReportTake"
+const ClassReportTakeTemp="tutor/ClassReportTakeTemp"
 
 export default {
     todayClassesStudent(email){
@@ -13,7 +14,14 @@ export default {
         return Repository.get(url)
     },
     takeTodayClass(email,coursename,semail,slot,isReschedule,isPreSchedule,isStudent,classDate){
-        const url=`${TakeClass}?email=${email}&coursename=${coursename}&semail=${semail}&slot=${slot}&isReschedule=${isReschedule}&isPreSchedule=${isPreSchedule}&isStudent=${isStudent}&classDate=${classDate}`
+        const url=`${TakeClass}?email=${email}&coursename=${coursename}&semail=${semail}&slot=${slot}&isReschedule=${isReschedule}&isPreSchedule=${isPreSchedule}&isStudent=${isStudent}&isTemp=false&classDate=${classDate}`
         return Repository.post(url)
-    }
+    },
+
+    //
+    takeTodayClassTemp(email,coursename,semail,slot,isReschedule,isPreSchedule,isStudent,classDate){
+        const url=`${ClassReportTakeTemp}?email=${email}&coursename=${coursename}&semail=${semail}&slot=${slot}&isReschedule=${isReschedule}&isPreSchedule=${isPreSchedule}&isStudent=${isStudent}&isTemp=true&classDate=${classDate}`
+        return Repository.post(url)
+    },
+
 }

@@ -5,6 +5,8 @@ const RejectStudentRequest = "tutor/RejectStudentRequest";
 const GetStudentRequest = "tutor/GetStudentRequests";
 const GetAllTutors = "admin/GetAllTutors";
 const BlockTutor = "admin/BlockTutors";
+const AcceptStudentRequestTemp="tutor/AcceptStudentRequestTemp"
+const RejectStudentRequestTemp="tutor/RejectStudentRequestTemp"
 export default {
   requestingTutor(email, temail, cid, slot,enrolledDate) {
     const url = `${RequestTutor}?semail=${email}&temail=${temail}&cid=${cid}&slot=${slot}&dateToBeEnrolled=${enrolledDate}`;
@@ -30,4 +32,16 @@ export default {
     const url = `${BlockTutor}`;
     return Repository.post(url, tutor);
   },
+  acceptStudentRequestTemp(tutoremail,studentemail,courseid,slot,enrollDate,endDate){
+    const url = `${AcceptStudentRequestTemp}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&slot=${slot}&enrollDate=${enrollDate}&endDate=${endDate}`;
+    return Repository.post(url);
+  },
+  rejectStudentRequestTemp(tutoremail,studentemail,courseid,slot,enrollDate,endDate){
+    const url = `${RejectStudentRequestTemp}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&slot=${slot}&enrollDate=${enrollDate}&endDate=${endDate}`;
+    return Repository.post(url);
+  }
+
+  //task
+//   const AcceptStudentRequestTemp="tutor/AcceptStudentRequestTemp"
+// const RejectStudentRequestTemp="tutor/RejectStudentRequestTemp"
 };

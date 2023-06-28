@@ -31,6 +31,9 @@ import AllTutors from '../Pages/Protected/Admin/AllTutors'
 import UpdatingSchedule from '../Pages/Protected/Tutor/UpdatingSchedule'
 import UpdatingEnrollSchedule from '../Pages/Protected/Tutor/UpdatingEnrollSchedule'
 import TimeTable from '../Pages/Protected/TimeTable'
+import Tutors from '../Pages/Protected/Parents/Tutors'
+import GetExtraSessions from '../Pages/Protected/Student/GetExtraSessions'
+import ExtraSessionTutor from '../Pages/Protected/Student/ExtraSessionTutor'
 const routes = [
   {
     path:'/schedule',//the url
@@ -72,6 +75,14 @@ const routes = [
   {
     path:'/profile/studentsettings',
     component:Settings
+  },
+  {
+    path:'/GetExtraSessions',
+    component:GetExtraSessions
+  },
+  { 
+    path:'/GetExtraSessionsTutors/:noOfWeek',
+    component:ExtraSessionTutor
   },
   // tutor routes
   {
@@ -131,6 +142,10 @@ const routes = [
   {
     path:'/parentsfee',
     component:ParentsFee
+  },
+  {
+    path:'/parentstutors',
+    component:Tutors
   },
   {
     path: '/*',

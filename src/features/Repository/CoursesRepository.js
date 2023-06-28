@@ -5,8 +5,8 @@ const allcoursesTutor = "tutor/GetCoursesList";
 const studentEnlisted = "student/GetStudentEnlistedCourses";
 const tutorEnlisted = "tutor/GetTutorEnlistedCourses";
 const studentAddCourses = "student/StudentCourseEnlist";
-const studentFinishCourse="student/FinishCourse"
-const rateTutor="student/RateTutor"
+const studentFinishCourse = "student/FinishCourse";
+const rateTutor = "student/RateTutor";
 const findTutor = "student/FindTutor";
 const GetCourseGroup = "tutor/GetCourseGroup";
 const SaveCourceGroup = "tutor/SaveCourseGroup";
@@ -14,12 +14,18 @@ const addNewCourse = "admin/AddCourse";
 const getAdminAllCourses = "admin/GetCourses";
 const getAllCourseGroup = "admin/GetAllCourseGroup";
 const AdminSaveCourseGroup = "admin/SaveCourseGroup";
-const GetCoursesForGroup="admin/GetCoursesForGroup"
-const GetStudentLearning="student/GetStudentLearningCourses"
-const GetTeachingStudents="tutor/GetTeachingStudents"
-const GetEnrolledClasses="tutor/GetEnrolledClasses"
-const GetUpdatedMatchedSlots="tutor/GetUpdatedMatchedSlots"
-const GettingFailedCoursesAll="student/GettingFailedCoursesAll"
+const GetCoursesForGroup = "admin/GetCoursesForGroup";
+const GetStudentLearning = "student/GetStudentLearningCourses";
+const GetTeachingStudents = "tutor/GetTeachingStudents";
+const GetEnrolledClasses = "tutor/GetEnrolledClasses";
+const GetUpdatedMatchedSlots = "tutor/GetUpdatedMatchedSlots";
+const GettingFailedCoursesAll = "student/GettingFailedCoursesAll";
+const GetTutorsLearning = "student/GetTutorsLearning";
+//Task
+const GetCourses = "student/GetCourses";
+const FindTutorParent = "student/FindTutorParent";
+const GetTutorsForExtraSession = "student/GetTutorsForExtraSession";
+const SendRequestToTutorTemporary = "student/SendRequestToTutorTemporary";
 export default {
   studentEnrolledCourses(email) {
     const url = `${studentEnlisted}?semail=${email}`;
@@ -37,24 +43,38 @@ export default {
     const url = `${findTutor}?semail=${email}&cid=${courseid}&noOfSlots=${noOfSlots}`;
     return Repository.get(url);
   },
-  getStudentLearning(semail){
-    const url=`${GetStudentLearning}?semail=${semail}`
-    return Repository.get(url)
+  getTutorsForExtraSession(courseenrollid, courseid) {
+    const url = `${GetTutorsForExtraSession}?courseenrollid=${courseenrollid}&courseid=${courseid}`;
+    return Repository.get(url);
+  },
+  //Task
+
+  getStudentLearning(semail) {
+    const url = `${GetStudentLearning}?semail=${semail}`;
+    return Repository.get(url);
+  },
+  getTutorsLearning(semail) {
+    const url = `${GetTutorsLearning}?semail=${semail}`;
+    return Repository.get(url);
+  },
+  sendRequestToTutorTemporary(semail, temail, cid, slot, noOfWeek) {
+    const url = `${SendRequestToTutorTemporary}?semail=${semail}&temail=${temail}&cid=${cid}&slot=${slot}&noOfWeek=${noOfWeek}`;
+    console.log('urkl is ',url);
+    return Repository.post(url);
   },
   // Student Finish Course
-  finishCourse(course){
-    const url=`${studentFinishCourse}`
-    console.log('Finishing course url',url);
-    return Repository.post(url,course)
+  finishCourse(course) {
+    const url = `${studentFinishCourse}`;
+    console.log("Finishing course url", url);
+    return Repository.post(url, course);
   },
-  RateTutor(tutoremail,studentemail,courseid,rating){
-    const url=`${rateTutor}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&rating=${rating}`
-    return Repository.post(url)
+  RateTutor(tutoremail, studentemail, courseid, rating) {
+    const url = `${rateTutor}?tutoremail=${tutoremail}&studentemail=${studentemail}&courseid=${courseid}&rating=${rating}`;
+    return Repository.post(url);
   },
-  gettingFailedCoursesAll(email){
-    const url=`${GettingFailedCoursesAll}?email=${email}`
-    return Repository.get(url)
-
+  gettingFailedCoursesAll(email) {
+    const url = `${GettingFailedCoursesAll}?email=${email}`;
+    return Repository.get(url);
   },
   // tutor functions
   tutorAllCourses(email) {
@@ -78,17 +98,17 @@ export default {
     });
     return data;
   },
-  getTeachingStudents(temail){
-    const url=`${GetTeachingStudents}?temail=${temail}`
-    return Repository.get(url)
+  getTeachingStudents(temail) {
+    const url = `${GetTeachingStudents}?temail=${temail}`;
+    return Repository.get(url);
   },
-  getEnrolledClasses(enrollId){
-    const url=`${GetEnrolledClasses}?enrollId=${enrollId}`
-    return Repository.get(url)
+  getEnrolledClasses(enrollId) {
+    const url = `${GetEnrolledClasses}?enrollId=${enrollId}`;
+    return Repository.get(url);
   },
-  getUpdatedMatchedSlots(enrollId){
-    const url=`${GetUpdatedMatchedSlots}?enrollId=${enrollId}`
-    return Repository.get(url)
+  getUpdatedMatchedSlots(enrollId) {
+    const url = `${GetUpdatedMatchedSlots}?enrollId=${enrollId}`;
+    return Repository.get(url);
   },
   // Admin functions
   addNewCourse(course) {
@@ -105,7 +125,7 @@ export default {
     return Repository.get(url);
   },
   SavingCourseGroup(group) {
-    console.log('saving group',group);
+    console.log("saving group", group);
     let data = "";
     group.map(async (item) => {
       const url = `${AdminSaveCourseGroup}`;
@@ -113,12 +133,23 @@ export default {
     });
     return data;
   },
-  SavingSingleCourseGroup(group){
+  SavingSingleCourseGroup(group) {
     const url = `${AdminSaveCourseGroup}`;
     return Repository.post(url, group);
   },
-  GetCoursesGroup(groupname){
-    const url=`${GetCoursesForGroup}?groupname=${groupname}`
-    return Repository.get(url)
-  }
+  GetCoursesGroup(groupname) {
+    const url = `${GetCoursesForGroup}?groupname=${groupname}`;
+    return Repository.get(url);
+  },
+  //Task
+  //Parent getAll courses
+  getCourses() {
+    const url = `${GetCourses}`;
+    return Repository.get(url);
+  },
+  //getting tutors
+  findTutorParent(cid) {
+    const url = `${FindTutorParent}?cid=${cid}`;
+    return Repository.get(url);
+  },
 };
