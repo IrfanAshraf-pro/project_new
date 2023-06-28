@@ -8,6 +8,7 @@ import TutorReplyAbleNotification from "../Notification/TutorReplyAbleNotificati
 import TutorReplyRescheduleRequest from "../Notification/TutorReplyRescheduleRequest";
 import TutorAcknowledgement from "../Notification/TutorAcknowledgement";
 import StudentAcceptChangeScheduleRequest from "../Notification/StudentAcceptChangeScheduleRequest";
+import TutorReplyTemporaryEnrollment from "../Notification/TutorReplyTemporaryEnrollment";
 function NotificationBodyRightDrawer() {
   const { notifications, notificationlength, isTutor } = useSelector(
     (state) => state.notification
@@ -26,6 +27,12 @@ function NotificationBodyRightDrawer() {
       {role === "Tutor" ? (
         notificationlength > 0 ? (
           <>
+          {notifications.tempRequest?.map((requestitem, index) => (
+              <TutorReplyTemporaryEnrollment
+                notification={requestitem}
+                key={index}
+              />
+            ))}
             {notifications.notifications?.map((notification, index) =>
               notification.notificationType === 1 ? (
                 <TutorReplyRescheduleRequest
@@ -41,12 +48,15 @@ function NotificationBodyRightDrawer() {
                 <TutorAcknowledgement notification={notification} key={index} />
               )
             )}
+            
             {notifications.request?.map((requestitem, index) => (
               <TutorReplyAbleNotification
                 notification={requestitem}
                 key={index}
               />
             ))}
+            
+            
           </>
         ) : (
           <>{<NoNotification />}</>

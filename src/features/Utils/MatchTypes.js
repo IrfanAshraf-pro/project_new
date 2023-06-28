@@ -94,3 +94,7 @@ export const SignedUpSuccessful="Signed up successfully"
 export const AlreadyExist="Already Exist"
 export const AlreadyTutor="You Can't Sign Up as Student Because You're already Tutor"
 export const AlreadyStudent="You Can't Sign Up as Tutor Because You're already Student"
+
+
+
+export const NoTutorForThisCourse="No tutor available for this course"

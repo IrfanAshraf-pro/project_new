@@ -24,11 +24,11 @@ const tutorRoutes = [
     icon: <AiFillSchedule className={iconClasses} />,
     name: "Schedule",
   },
-  {
-    path: "/app/timetable",
-    icon: <BsFillPersonFill className={iconClasses} />,
-    name: "Timetable",
-  },
+  // {
+  //   path: "/app/timetable",
+  //   icon: <BsFillPersonFill className={iconClasses} />,
+  //   name: "Timetable",
+  // },
 
   {
     path: "/app/tutorcourses",

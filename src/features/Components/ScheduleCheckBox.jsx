@@ -39,6 +39,8 @@ const ScheduleCheckBox = ({
             ? "text-gray-900 opacity-70 cursor-default"
             : value === 3
             ? "text-blue-700 opacity-70 cursor-default"
+            : value === 9
+            ? "text-error opacity-70 cursor-default"
             : "text-red-700 opacity-70 cursor-default"
         } border-0 rounded focus:ring-0 `}
       />
@@ -47,4 +49,3 @@ const ScheduleCheckBox = ({
 };
 
 export default ScheduleCheckBox;
- 
