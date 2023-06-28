@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import { useSelector } from "react-redux";
-import { RepositoryFactory } from "../../../Repository/RepositoryFactory";
+import { RepositoryFactory } from "../../Repository/RepositoryFactory";
 import { toast } from "react-toastify";
-import RescheduleInfoRow from "./RescheduleInfoRow";
-import { useEffect } from "react";
-import { dateChecker } from "../../../Utils/DateFunctions";
-import { RescheduleSuccessful } from "../../../Utils/MatchTypes";
-const RescheduleInfoModal = ({
+import { dateChecker } from "../../Utils/DateFunctions";
+import { RescheduleSuccessful } from "../../Utils/MatchTypes";
+import StudentRescheduleModalRow from "./StudentRescheduleModalRow";
+
+const StudentRescheduleRequest = ({
   isReschedule,
   setIsReschedule,
   selected,
   tdata,
-  setIsDone
+  setIsDone,
 }) => {
   const [date, setDate] = useState(new Date());
   const [selectedSlot, setSelectedSlot] = useState({});
@@ -22,7 +22,7 @@ const RescheduleInfoModal = ({
   // getting free classes
   const searchClasses = async () => {
     setClasses([]);
-    let dateJoined=dateChecker(date)
+    let dateJoined = dateChecker(date);
     const day = getDayCustom(date.getDay());
     const { data } = await reschedulerepo.getFreeClassesToRescheduleTo(
       user.email,
@@ -33,8 +33,7 @@ const RescheduleInfoModal = ({
     );
     if (data.length > 0) {
       setClasses(data);
-      console.log('Searched Classes are :',data);
-
+      console.log("Searched Classes are :", data);
     } else {
       toast.info(data, {
         theme: "colored",
@@ -51,7 +50,7 @@ const RescheduleInfoModal = ({
       selected.coursename
     );
     if (data) {
-      console.log('suggested reschedule classes are :',data);
+      console.log("suggested reschedule classes are :", data);
       setClasses(data);
     } else {
       toast.info(data, {
@@ -60,10 +59,13 @@ const RescheduleInfoModal = ({
     }
   };
   //    get both classes from db tutors and student's then populate them in options on button click
-
-  const rescheduleClass = async () => {
-    // let dateJoined=dateChecker(date)
-    // const day = getDayCustom(date.getDay());
+  //setting slot and calling reschedule
+  const settingSlot = (item) => {
+    setSelectedSlot(item);
+    rescheduleClass(item);
+  };
+  //
+  const rescheduleClass = async (item) => {
     let reschedule = {
       semail: selected.email,
       temail: user.email,
@@ -71,19 +73,18 @@ const RescheduleInfoModal = ({
       slotno: selected.slotno,
       date: tdata.date,
       day: tdata.day,
-      tday: selectedSlot.ClassDay,
-      tdate: selectedSlot.classDate,
-      tslotno: selectedSlot.slotno,
+      tday: item.ClassDay,
+      tdate: item.classDate,
+      tslotno: item.slotno,
     };
-    console.log('reschedule object is :',reschedule);
-    const { data } = await reschedulerepo.rescheduleClass(reschedule);
+    setIsDone(true);
+    const { data } = await reschedulerepo.rescheduleStudentRequest(reschedule);
     if (data.match(RescheduleSuccessful)) {
-      toast.success(data,{
-        theme:'colored'
-      })
-      setIsDone(true)
-    }else{
-      console.log('reschedule ',data);
+      toast.success(data, {
+        theme: "colored",
+      });
+    } else {
+      console.log("reschedule ", data);
     }
   };
   const getDayCustom = (day) => {
@@ -122,14 +123,22 @@ const RescheduleInfoModal = ({
         checked={isReschedule | false}
         onChange={setIsReschedule}
         type="checkbox"
-        id="rescheduleinfomodal"
+        id="rescheduleinfomodalstudentRequest"
         className="modal-toggle"
       />
-      <label className="modal modal-bottom sm:modal-middle" htmlFor="rescheduleinfomodal">
-        <div className="modal-box  w-full px-8 ">
+      <label
+        htmlFor="rescheduleinfomodalstudentRequest"
+        className="modal cursor-pointer"
+      >
+        {/* <label
+        className="modal modal-bottom sm:modal-middle"
+        htmlFor=""
+      > */}
+        <label className="modal-box relative" htmlFor="">
+          {/* <div className="modal-box  w-full "> */}
           <h3 className="font-bold text-lg">Reschedule</h3>
           <p className="py-1">Select date</p>
-          <div className="mt-1 w-full max-w-lg flex flex-col md:flex-row gap-2 ">
+          <div className="mt-1 w-full flex flex-col md:flex-row gap-2 ">
             <DatePicker
               selected={date}
               onChange={(date) => setDate(date)}
@@ -142,12 +151,12 @@ const RescheduleInfoModal = ({
               Search Classes
             </button>
           </div>
-          <div className="flex flex-col h-2/3 md:h-68  overflow-y-scroll gap-3 p-3 px-4 rounded-md mt-8 shadow-xl shadow-primary bg-neutral w-full md:max-w-lg">
+          <div className="flex flex-col h-44  py-3 px-1 overflow-y-scroll gap-3 rounded-md mt-8 shadow-xl shadow-primary bg-neutral w-full">
             {classes.length > 0 ? (
               classes.map((classs) => (
-                <RescheduleInfoRow
+                <StudentRescheduleModalRow
                   item={classs}
-                  setSelectedSlot={setSelectedSlot}
+                  settingSlot={settingSlot}
                   selectedSlot={selectedSlot}
                   key={classs.slot}
                 />
@@ -156,19 +165,11 @@ const RescheduleInfoModal = ({
               <p className="font-bold text-lg">No Free Slot</p>
             )}
           </div>
-          <div className="mt-2 flex items-center justify-end mb-16 md:mb-2">
-            <label
-              htmlFor="rescheduleinfomodal"
-              className="btn btn-accent hover:btn-primary text-white hover:text-accent"
-              onClick={rescheduleClass}
-            >
-              Reschedule
-            </label>
-          </div>
-        </div>
+          {/* </div> */}
+        </label>
       </label>
     </div>
   );
 };
 
-export default RescheduleInfoModal;
+export default StudentRescheduleRequest;

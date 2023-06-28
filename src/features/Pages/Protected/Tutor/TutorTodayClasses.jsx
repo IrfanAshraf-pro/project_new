@@ -36,10 +36,11 @@ const TutorTodayClasses = () => {
     const { data } = await todayclasses.takeTodayClass(
       user.email,
       classs.coursename,
-      classs.name,
+      classs.semail,
       classs.slot.toString(),
       classs.isReschedule,
       classs.isPreSchedule,
+      classs.isStudent,
       classs.classDate
     );
     console.log("todays classses take responsee data is ", data);

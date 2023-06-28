@@ -12,8 +12,8 @@ export default {
         const url=`${TodayClassesTutor}?email=${email}`
         return Repository.get(url)
     },
-    takeTodayClass(email,coursename,studentname,slot,isReschedule,isPreSchedule,classDate){
-        const url=`${TakeClass}?email=${email}&coursename=${coursename}&studentname=${studentname}&slot=${slot}&isReschedule=${isReschedule}&isPreSchedule=${isPreSchedule}&classDate=${classDate}`
+    takeTodayClass(email,coursename,semail,slot,isReschedule,isPreSchedule,isStudent,classDate){
+        const url=`${TakeClass}?email=${email}&coursename=${coursename}&semail=${semail}&slot=${slot}&isReschedule=${isReschedule}&isPreSchedule=${isPreSchedule}&isStudent=${isStudent}&classDate=${classDate}`
         return Repository.post(url)
     }
 }

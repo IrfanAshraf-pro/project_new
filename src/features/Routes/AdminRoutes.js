@@ -1,7 +1,8 @@
 import {BsFillPersonFill} from 'react-icons/bs'
 import {BiBookAlt} from 'react-icons/bi'
 import {AiFillSetting} from 'react-icons/ai'
-import {GiMoneyStack } from 'react-icons/gi'
+import {GiTeacher,GiMoneyStack} from 'react-icons/gi'
+
 const iconClasses = `h-6 w-6`
 const submenuIconClasses = `h-5 w-5`
 const adminroutes = [
@@ -29,6 +30,11 @@ const adminroutes = [
         path:'/app/adminFeeGroups',
         icon:<GiMoneyStack className={iconClasses}/>,
         name:'Fee Structure'
+    },
+    {
+        path:'/app/adminBlockTutor',
+        icon:<GiTeacher className={iconClasses}/>,
+        name:'Tutors'
     },
     
 ]

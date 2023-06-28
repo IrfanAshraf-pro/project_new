@@ -34,6 +34,11 @@ export const settingStudentNotExist="Student Doesnot Exist"
 //Notifcation
 export const ReplyToNotification = "Please reply to the notification";
 export const NotifcationRead = "Notification Read";
+
+// Notification from student for reschedule
+export const NotificationSent="Notification Sent"
+export const NotificationTutorNotExist="Tutor Doesnot Exist"
+export const NotificationStudentNotExist="Student Doesnot Exist"
 // Accepting Request
 export const RequestAcceptedSuccessfully = "Request Accepted Successfully";
 export const NoRequests = "No Requests";
@@ -58,5 +63,11 @@ export const CourseGroupAdded = "Course Group Added";
 // Admin Fee Group
 export const FeeGroupAdded = "Fee Group Added Successfully";
 export const FeeGroupUpdated = "Fee Group Updated Successfully";
+//admin bloc tutor
+export const AdminBloackTutor="No Tutor Available"
 // Parent fee
 export const StudentNotEnrolled = "Student Has Not Enrolled Any course";
+// Tutor block
+
+export const TutorIsBlocked="Tutor is Blocked"
+export const TutorIsUnblocked="Tutor is Unblocked"

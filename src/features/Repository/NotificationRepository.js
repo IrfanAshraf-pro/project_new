@@ -4,6 +4,8 @@ const MarkStudentNotificationAsRead =
   "notification/MarkStudentNotificationAsRead";
 const TutorNotification = "notification/TutorNotification";
 const MarkTutorNotificationAsRead = "notification/MarkTutorNotificationAsRead";
+const AddTutorNotification="notification/AddTutorNotification"
+const AddStudentNotification="notification/AddStudentNotification"
 export default {
   getStudentNotifications(email) {
     const url = `${StudentNotification}?email=${email}`;
@@ -22,4 +24,12 @@ export default {
     const url = `${MarkTutorNotificationAsRead}`;
     return Repository.post(url, notification);
   },
+  sendTutorNotification(notification){
+    const url = `${AddTutorNotification}`;
+    return Repository.post(url, notification);
+  },
+  sendStudentNotification(notification){
+    const url = `${AddStudentNotification}`;
+    return Repository.post(url, notification);
+  }
 };

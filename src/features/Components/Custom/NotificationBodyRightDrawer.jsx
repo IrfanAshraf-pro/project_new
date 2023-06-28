@@ -5,6 +5,7 @@ import StudentSimpleNotification from "../Notification/StudentSimpleNotification
 import ReplyableNotification from "../Notification/ReplyableNotification";
 import TutorSimpleNotification from "../Notification/TutorSimpleNotification";
 import TutorReplyAbleNotification from "../Notification/TutorReplyAbleNotification";
+import TutorReplyRescheduleRequest from "../Notification/TutorReplyRescheduleRequest";
 function NotificationBodyRightDrawer() {
   const { notifications, notificationlength, isTutor } = useSelector(
     (state) => state.notification
@@ -23,12 +24,19 @@ function NotificationBodyRightDrawer() {
       {role === "Tutor" ? (
         notificationlength > 0 ? (
           <>
-            {notifications.notifications?.map((notification, index) => {
-              <TutorSimpleNotification
-                notification={notification}
-                key={index}
-              />;
-            })}
+            {notifications.notifications?.map((notification, index) =>
+              notification.notificationType === 1 ? (
+                <TutorReplyRescheduleRequest
+                  notification={notification}
+                  key={index}
+                />
+              ) : (
+                <TutorSimpleNotification
+                  notification={notification}
+                  key={index}
+                />
+              )
+            )}
             {notifications.request?.map((requestitem, index) => (
               <TutorReplyAbleNotification
                 notification={requestitem}

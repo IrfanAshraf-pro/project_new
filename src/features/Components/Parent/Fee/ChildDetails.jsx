@@ -1,43 +1,66 @@
-import React from "react";
-const ChildDetails = ({ childSelected,details }) => {
-  // const [details, setDetails] = useState([]);
+import React, { useState } from "react";
+import Collapse from "../../Custom/Collapse";
+const ChildDetails = ({
+  childSelected,
+  details,
+  showDetails,
+  setShowDetails,
+}) => {
+  const [selected, setSelected] = useState({});
   // const [isLoading, setIsLoading] = useState(false);
-console.log(details);
+  const PayFee = () => {
+    console.log("paying feeeeee");
+    console.log('selected is ',selected);
+  };
+  const setttingSelected = (item) => {
+    setSelected(item);
+  };
   return (
     <>
-      <input type="checkbox" id="childDetails" className="modal-toggle" />
-      <label htmlFor="childDetails" className="modal modal-bottom sm:modal-middle cursor-pointer">
-        <label className="modal-box  relative" htmlFor="">
-          <h3 className="font-bold text-lg mb-4">
+      <input
+        // checked={showDetails | false}
+        // onChange={setShowDetails}
+        type="checkbox"
+        id="childDetails"
+        className="modal-toggle"
+      />
+      <label
+        htmlFor="childDetails"
+        className="modal modal-bottom sm:modal-middle cursor-pointer"
+      >
+        <label className="modal-box  relative">
+          <h3 className="font-bold text-lg mb-2 ">
             Fee Details of {childSelected.email}
           </h3>
-          <div className="">
-              {
-                details.length>0 ? (details.map((report) => (
-                  <div
-                    tabIndex={0}
-                    className="collapse collapse-arrow bg-accent text-white mt-1  rounded-box"
-                  >
-                    <div className="collapse-title text-base font-medium">
-                      <div className="flex justify-between">
-                        <span>{report.tutoremail}</span>
-                        <span>{report.courseid}</span>
-                        <span>{report.totalFee}</span>
-  
-                      </div>
-                    </div>
-                    <div className="collapse-content bg-primary text-secondary">
-                      {report.reportList.map((item) => (
-                        <div className="flex justify-between gap-2 p-2 rounded-md bg-base-300 mt-2" key={item.classslot}>
-                          <span className="mr-2">{item.classesstatus}</span>
-                          <span>{item.classdate}</span>
-                          <span>{item.classslot}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))):<p>No detials at the moment</p>
-              }
+
+          <div className="flex items-center justify-between w-full mx-auto p-2 px-4 rounded-md bg-accent text-white">
+            <p>Tutor</p>
+            <p>Course</p>
+            <p>No.of Lectures</p>
+            <p>Total</p>
+          </div>
+          <div className="mt-1">
+            {details.length > 0 ? (
+              details.map((report) => (
+                <div onClick={()=>setttingSelected(report)}>
+                  <Collapse
+                  name={report.name}
+                  coursename={report.coursename}
+                  noOfLectures={report.noOfLectures}
+                  totalFee={report.totalFee}
+                  report={report}
+                />
+                </div>
+              ))
+            ) : (
+              <p>No detials at the moment</p>
+            )}
+          </div>
+          <div
+            className="px-3 py-1.5 text-white bg-accent duration-150 shadow-lg rounded-md  font-thin w-full mt-2 hover:bg-indigo-600 hover:text-primary text-center"
+            onClick={PayFee}
+          >
+            Pay fee {selected.name === undefined ? "" : "to " + selected.name}
           </div>
         </label>
       </label>
@@ -46,3 +69,4 @@ console.log(details);
 };
 
 export default ChildDetails;
+

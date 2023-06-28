@@ -7,9 +7,7 @@ import { toast } from "react-toastify";
 const TutorSimpleNotification = ({ notification }) => {
   const notificationrepo = RepositoryFactory.get("notification");
   const markAsRead = async () => {
-    const { data } = await notificationrepo.markTutorNotificationAsRead(
-      notification.id
-    );
+    const { data } = await notificationrepo.markTutorNotificationAsRead(notification);
     if (data.match(ReplyToNotification)) {
       toast.info(data, {
         theme: "colored",
